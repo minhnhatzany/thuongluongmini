@@ -1,0 +1,23 @@
+{
+  "name": "Thuồng Luồng Mini",
+  "short_name": "TL Mini",
+  "description": "Nền tảng khám phá lifestyle địa phương tại Tuyên Quang",
+  "start_url": "/#/",
+  "display": "standalone",
+  "background_color": "#FFFAF5",
+  "theme_color": "#F4A261",
+  "icons": [
+    {
+      "src": "assets/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

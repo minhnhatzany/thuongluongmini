@@ -1,0 +1,814 @@
+/* ==========================================================================
+   THUỒNG LUỒNG MINI — Animations & Keyframes
+   Bộ sưu tập hiệu ứng chuyển động cho toàn bộ ứng dụng
+   ========================================================================== */
+
+/* ========================================================================
+   FADE ANIMATIONS — Hiệu ứng mờ dần
+   ======================================================================== */
+
+/* --- Fade In --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Fade In từ dưới lên --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Fade In từ trên xuống --- */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Fade In từ trái qua --- */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- Fade In từ phải qua --- */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- Fade Out --- */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --- Fade Out xuống dưới --- */
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* --- Fade Out lên trên --- */
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+/* ========================================================================
+   SLIDE ANIMATIONS — Hiệu ứng trượt
+   ======================================================================== */
+
+/* --- Slide In từ phải --- */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* --- Slide Out sang phải --- */
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* --- Slide In từ dưới --- */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Slide Out xuống dưới --- */
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* --- Slide In từ trái --- */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* --- Slide In từ trên --- */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ========================================================================
+   SHIMMER — Hiệu ứng lấp lánh (skeleton loading)
+   ======================================================================== */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ========================================================================
+   PULSE — Hiệu ứng nhịp đập (yêu thích/tim)
+   ======================================================================== */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.3);
+  }
+  30% {
+    transform: scale(0.95);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+/* Pulse nhẹ (cho notifications, badges) */
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* Pulse glow (cho nút CTA) */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 162, 97, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(244, 162, 97, 0);
+  }
+}
+
+/* ========================================================================
+   BOUNCE — Hiệu ứng nảy (icon danh mục)
+   ======================================================================== */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-12px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* Bounce nhẹ */
+@keyframes bounceSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-6px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Bounce In (phóng to + nảy) */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================================================
+   SCALE — Hiệu ứng phóng to (modal, popup)
+   ======================================================================== */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Scale nhẹ (hover effects) */
+@keyframes scaleInSoft {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================================================
+   FLOAT — Hiệu ứng lơ lửng (hero elements)
+   ======================================================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+/* Float chậm hơn, biên độ lớn */
+@keyframes floatLarge {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+}
+
+/* Float ngang */
+@keyframes floatHorizontal {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* ========================================================================
+   GRADIENT SHIFT — Hiệu ứng gradient chuyển động (hero background)
+   ======================================================================== */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Gradient xoay tròn */
+@keyframes gradientRotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(30deg);
+  }
+}
+
+/* ========================================================================
+   SHAKE — Hiệu ứng rung (lỗi form)
+   ======================================================================== */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Shake nhẹ */
+@keyframes shakeSoft {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+/* ========================================================================
+   RIPPLE — Hiệu ứng gợn sóng (nút bấm)
+   ======================================================================== */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Ripple nhỏ hơn (cho icon buttons) */
+@keyframes rippleSmall {
+  0% {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ========================================================================
+   SPIN — Hiệu ứng xoay (loading)
+   ======================================================================== */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spin với pause */
+@keyframes spinPulse {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* ========================================================================
+   DOTS — Hiệu ứng dấu chấm (đang tải...)
+   ======================================================================== */
+@keyframes dotFlashing {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ========================================================================
+   TYPEWRITER — Hiệu ứng đánh máy
+   ======================================================================== */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    border-right-color: var(--color-primary);
+  }
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+/* ========================================================================
+   CONFETTI — Hiệu ứng pháo hoa (thành công)
+   ======================================================================== */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ========================================================================
+   NOTIFICATION DOT — Chấm thông báo
+   ======================================================================== */
+@keyframes notificationPing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ========================================================================
+   ANIMATION UTILITY CLASSES — Lớp tiện ích cho animation
+   ======================================================================== */
+
+/* --- Các class animation sẵn dùng --- */
+.animate-fadeIn { animation: fadeIn var(--duration-normal) var(--ease-out) both; }
+.animate-fadeInUp { animation: fadeInUp var(--duration-normal) var(--ease-out) both; }
+.animate-fadeInDown { animation: fadeInDown var(--duration-normal) var(--ease-out) both; }
+.animate-fadeInLeft { animation: fadeInLeft var(--duration-normal) var(--ease-out) both; }
+.animate-fadeInRight { animation: fadeInRight var(--duration-normal) var(--ease-out) both; }
+.animate-fadeOut { animation: fadeOut var(--duration-normal) var(--ease-in) both; }
+
+.animate-slideIn { animation: slideIn var(--duration-normal) var(--ease-out) both; }
+.animate-slideOut { animation: slideOut var(--duration-normal) var(--ease-in) both; }
+.animate-slideInUp { animation: slideInUp var(--duration-slow) var(--ease-out) both; }
+.animate-slideInDown { animation: slideInDown var(--duration-normal) var(--ease-out) both; }
+
+.animate-scaleIn { animation: scaleIn var(--duration-normal) var(--ease-bounce) both; }
+.animate-scaleOut { animation: scaleOut var(--duration-fast) var(--ease-in) both; }
+.animate-bounceIn { animation: bounceIn var(--duration-slow) var(--ease-bounce) both; }
+
+.animate-pulse { animation: pulseSoft 2s var(--ease-in-out) infinite; }
+.animate-bounce { animation: bounce 1s infinite; }
+.animate-float { animation: float 6s var(--ease-in-out) infinite; }
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-shake { animation: shake 0.5s var(--ease-default); }
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-bg-tertiary) 37%,
+    var(--color-bg-secondary) 63%
+  );
+  background-size: 200% 100%;
+}
+
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease infinite;
+}
+
+.animate-pulseGlow { animation: pulseGlow 2s ease-in-out infinite; }
+
+/* --- Delay classes --- */
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+.animation-delay-1000 { animation-delay: 1000ms; }
+
+/* --- Duration overrides --- */
+.animation-fast { animation-duration: var(--duration-fast) !important; }
+.animation-normal { animation-duration: var(--duration-normal) !important; }
+.animation-slow { animation-duration: var(--duration-slow) !important; }
+.animation-slower { animation-duration: var(--duration-slower) !important; }
+.animation-slowest { animation-duration: var(--duration-slowest) !important; }
+
+/* --- Fill mode --- */
+.animation-fill-both { animation-fill-mode: both; }
+.animation-fill-forwards { animation-fill-mode: forwards; }
+.animation-fill-backwards { animation-fill-mode: backwards; }
+
+/* --- Iteration --- */
+.animation-infinite { animation-iteration-count: infinite; }
+.animation-once { animation-iteration-count: 1; }
+.animation-twice { animation-iteration-count: 2; }
+
+/* ========================================================================
+   SCROLL ANIMATION — Hiệu ứng khi cuộn trang
+   ======================================================================== */
+
+/* Phần tử chờ kích hoạt bởi IntersectionObserver */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Biến thể cho scroll animation */
+.animate-on-scroll--left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.animate-on-scroll--left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll--right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.animate-on-scroll--right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll--scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.animate-on-scroll--scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delay cho danh sách */
+.animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.animate-on-scroll:nth-child(2) { transition-delay: 80ms; }
+.animate-on-scroll:nth-child(3) { transition-delay: 160ms; }
+.animate-on-scroll:nth-child(4) { transition-delay: 240ms; }
+.animate-on-scroll:nth-child(5) { transition-delay: 320ms; }
+.animate-on-scroll:nth-child(6) { transition-delay: 400ms; }
+.animate-on-scroll:nth-child(7) { transition-delay: 480ms; }
+.animate-on-scroll:nth-child(8) { transition-delay: 560ms; }
+
+/* ========================================================================
+   INTERACTIVE TRANSITIONS — Chuyển động tương tác
+   ======================================================================== */
+
+/* Hover lift (nâng lên khi hover) */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-warm-lg);
+}
+
+/* Hover scale */
+.hover-scale {
+  transition: transform var(--duration-fast) var(--ease-bounce);
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* Hover glow */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-default);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-warm-lg);
+}
+
+/* Active press */
+.active-press {
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.active-press:active {
+  transform: scale(0.97);
+}
+
+/* ========================================================================
+   LOADING STATES — Trạng thái tải
+   ======================================================================== */
+
+/* Spinner tròn */
+.spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2.5px solid var(--color-primary-light);
+  border-top-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner--sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.spinner--lg {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-width: 3px;
+}
+
+/* Loading dots */
+.loading-dots {
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: dotFlashing 1.4s infinite both;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ========================================================================
+   PREFERS REDUCED MOTION — Giảm chuyển động cho accessibility
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-on-scroll--left,
+  .animate-on-scroll--right,
+  .animate-on-scroll--scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-fadeIn,
+  .animate-fadeInUp,
+  .animate-fadeInDown,
+  .animate-fadeInLeft,
+  .animate-fadeInRight,
+  .animate-slideIn,
+  .animate-slideInUp,
+  .animate-slideInDown,
+  .animate-scaleIn,
+  .animate-bounceIn {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-pulse,
+  .animate-bounce,
+  .animate-float,
+  .animate-gradient,
+  .animate-pulseGlow {
+    animation: none;
+  }
+
+  .animate-spin {
+    animation-duration: 1.5s;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  .hover-scale:hover {
+    transform: none;
+  }
+}

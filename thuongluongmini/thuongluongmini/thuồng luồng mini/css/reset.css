@@ -1,0 +1,207 @@
+/* ==========================================================================
+   THUỒNG LUỒNG MINI — Modern CSS Reset
+   Reset toàn bộ styles mặc định của trình duyệt
+   ========================================================================== */
+
+/* --- Box sizing cho toàn bộ phần tử --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* --- Loại bỏ margin và padding mặc định --- */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Thiết lập cơ bản cho html --- */
+html {
+  /* Ngăn điều chỉnh font size trên iOS */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Cuộn mượt mà */
+  scroll-behavior: smooth;
+
+  /* Tối ưu hiển thị font */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* Ngăn cuộn ngang */
+  overflow-x: hidden;
+
+  /* Tab size chuẩn */
+  tab-size: 4;
+}
+
+/* --- Body mặc định --- */
+body {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height cho mobile */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Ảnh và media responsive --- */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Ảnh object-fit --- */
+img {
+  height: auto;
+  font-style: italic; /* Alt text đẹp hơn */
+}
+
+/* --- Kế thừa font cho form elements --- */
+input,
+button,
+textarea,
+select,
+optgroup {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+/* --- Textarea chỉ resize dọc --- */
+textarea {
+  resize: vertical;
+}
+
+/* --- Loại bỏ style mặc định của nút --- */
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* --- Loại bỏ style mặc định link --- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Danh sách không có bullet --- */
+ul,
+ol {
+  list-style: none;
+}
+
+/* --- Heading & paragraph tối ưu --- */
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+p {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+/* --- Bảng border-collapse --- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* --- Fieldset không có border --- */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Legend inline --- */
+legend {
+  padding: 0;
+}
+
+/* --- Summary cursor --- */
+summary {
+  cursor: pointer;
+}
+
+/* --- Dialog reset --- */
+dialog {
+  padding: 0;
+  border: none;
+}
+
+/* --- Loại bỏ animation cho number input spinner --- */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* --- Loại bỏ clear button trên IE/Edge --- */
+input::-ms-clear {
+  display: none;
+}
+
+/* --- Search input reset --- */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* --- Tạo stacking context mới cho root --- */
+#root,
+#__next,
+#app {
+  isolation: isolate;
+}
+
+/* --- Ẩn phần tử có attribute hidden --- */
+[hidden] {
+  display: none !important;
+}
+
+/* --- Focus visible mặc định --- */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary, #F4A261);
+  outline-offset: 2px;
+}
+
+/* --- Loại bỏ highlight tap trên mobile --- */
+@media (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* --- Giảm animation cho người dùng yêu cầu --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
