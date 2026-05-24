@@ -137,7 +137,7 @@ export function renderHomePage() {
                     ${ITINERARIES.slice(0, 2).map(it => `
                         <a href="#/lo-trinh/${it.id}" class="card animate-on-scroll" style="text-decoration: none;">
                             <div class="card__image-wrapper" style="padding-bottom: 56.25%;">
-                                <img src="${it.image}" alt="${it.title}" class="card__image" style="object-fit: cover; width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                                <img src="${it.image}" alt="${it.title}" loading="lazy" class="card__image" style="object-fit: cover; width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
                                 <div class="card__badges" style="position: absolute; top: 10px; left: 10px;">
                                     <span class="badge" style="background: var(--color-primary); color: white;">${it.duration}</span>
                                 </div>

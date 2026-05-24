@@ -12,6 +12,7 @@ import { renderSearchPage } from './pages/search.js';
 import { renderItineraryList, renderItineraryDetail } from './pages/itinerary.js';
 import { renderAdminPage } from './pages/admin.js';
 import { renderProfilePage } from './pages/profile.js';
+import { initAuth } from './auth.js';
 
 // ============================================
 // Global State
@@ -422,6 +423,7 @@ function initFilters() {
 // ============================================
 async function init() {
     if (window.lucide) window.lucide.createIcons();
+    initAuth();
     
     try {
         const { database } = await import('./firebase-config.js');
@@ -536,7 +538,11 @@ window.sendChatMessage = async function() {
     
     try {
         // Try backend API first
-        const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: window.chatHistory, contextData }) });
+        const apiUrl = window.location.hostname === 'localhost' || window.location.protocol === 'file:' 
+            ? 'https://thuongluongmini.pages.dev/api/chat' 
+            : '/api/chat';
+        
+        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: window.chatHistory, contextData }) });
         const data = await response.json();
         document.getElementById('chat-typing')?.remove();
         
