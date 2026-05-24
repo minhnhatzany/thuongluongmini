@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Thuồng Luồng Mini - Khám phá Tuyên Quang</title>
+    
+    <!-- Google Fonts - Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header" id="main-header">
+            <div class="header__inner container">
+                <a href="#/" class="header__logo">
+                    <img src="assets/logo.jpg" alt="Thuồng Luồng Mini" class="header__logo-img" onerror="this.src='https://placehold.co/40x40/F4A261/FFF?text=TL'">
+                    <span class="header__logo-text">Thuồng Luồng Mini</span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#/" class="nav__link active" data-page="home">Trang chủ</a></li>
+                        <li class="nav__item"><a href="#/danh-muc/an-uong" class="nav__link" data-category="an-uong">Ăn uống</a></li>
+                        <li class="nav__item"><a href="#/danh-muc/vui-choi" class="nav__link" data-category="vui-choi">Vui chơi</a></li>
+                        <li class="nav__item"><a href="#/danh-muc/du-lich" class="nav__link" data-category="du-lich">Du lịch</a></li>
+                        <li class="nav__item"><a href="#/danh-muc/trang-phuc" class="nav__link" data-category="trang-phuc">Trang phục</a></li>
+                        <li class="nav__item"><a href="#/lo-trinh" class="nav__link" data-page="itineraryList">Lộ trình</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header__search">
+                    <div class="search-bar">
+                        <i data-lucide="search" class="search-bar__icon"></i>
+                        <input type="text" class="search-bar__input" id="search-input" placeholder="Tìm quán ăn, cafe, điểm du lịch..." autocomplete="off">
+                        <button class="search-bar__clear" id="search-clear" aria-label="Xóa">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="header__actions">
+                    <!-- Mobile only search toggle -->
+                    <button class="header__action-btn" id="search-toggle" aria-label="Tìm kiếm" style="display: none;">
+                        <i data-lucide="search"></i>
+                    </button>
+                    
+                    <!-- Auth UI -->
+                    <button class="btn btn--outline btn--sm" id="header-auth-btn" onclick="window.openAuthModal()">
+                        <i data-lucide="user"></i>
+                        <span>Đăng nhập / Đăng ký</span>
+                    </button>
+                    
+                    <!-- User Menu (Hidden by default) -->
+                    <div class="header__user-menu" id="header-user-menu" style="display: none;">
+                        <button class="user-avatar" onclick="this.nextElementSibling.classList.toggle('active')">
+                            <img src="" alt="User Avatar" />
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="#/ho-so" class="user-dropdown__item">
+                                <i data-lucide="user"></i> Hồ sơ của tôi
+                            </a>
+                            <a href="#/admin" class="user-dropdown__item" id="admin-link" style="display: none;">
+                                <i data-lucide="shield"></i> Quản trị (Admin)
+                            </a>
+                            <button class="user-dropdown__item" onclick="window.logOut()">
+                                <i data-lucide="log-out"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="header__hamburger" id="menu-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Search Results Dropdown -->
+            <div id="search-results-container" style="position: absolute; width: 100%; top: var(--header-height); z-index: 99; display: none; background: white; box-shadow: var(--shadow-md);">
+                <div class="container">
+                    <div id="search-results" style="padding: var(--space-4) 0;"></div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Mobile Sidebar / Menu -->
+        <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+        <aside class="mobile-menu" id="mobile-sidebar">
+            <div class="mobile-menu__header">
+                <span style="font-weight: bold; font-size: 1.2rem; color: var(--color-primary);">Thuồng Luồng Mini</span>
+                <button class="mobile-menu__close" id="sidebar-close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="mobile-menu__body">
+                <ul class="mobile-menu__nav-list">
+                    <li><a href="#/" class="mobile-menu__link active" data-page="home"><i data-lucide="home" class="mobile-menu__link-icon"></i>Trang chủ</a></li>
+                    <li><a href="#/danh-muc/an-uong" class="mobile-menu__link" data-category="an-uong"><i data-lucide="utensils" class="mobile-menu__link-icon"></i>Ăn uống</a></li>
+                    <li><a href="#/danh-muc/vui-choi" class="mobile-menu__link" data-category="vui-choi"><i data-lucide="gamepad-2" class="mobile-menu__link-icon"></i>Vui chơi</a></li>
+                    <li><a href="#/danh-muc/du-lich" class="mobile-menu__link" data-category="du-lich"><i data-lucide="map-pin" class="mobile-menu__link-icon"></i>Du lịch</a></li>
+                    <li><a href="#/danh-muc/trang-phuc" class="mobile-menu__link" data-category="trang-phuc"><i data-lucide="shirt" class="mobile-menu__link-icon"></i>Trang phục</a></li>
+                    <li><a href="#/lo-trinh" class="mobile-menu__link" data-page="itineraryList"><i data-lucide="route" class="mobile-menu__link-icon"></i>Lộ trình</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="page-container" id="main-content" style="min-height: 80vh; padding-top: var(--header-height);">
+            <!-- Pages will be rendered here -->
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer" id="main-footer">
+            <div class="footer__inner container">
+                <div class="footer__grid">
+                    <div class="footer__brand">
+                        <div class="footer__brand-logo" style="margin-bottom: 15px;">
+                            <img src="assets/logo.jpg" alt="Thuồng Luồng Mini" style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover;">
+                        </div>
+                        <h3 class="footer__brand-name">Thuồng Luồng Mini</h3>
+                        <p class="footer__brand-description">Nền tảng khám phá ẩm thực, vui chơi, du lịch và thời trang tại Tuyên Quang.</p>
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/ThuongLuongMini" target="_blank" class="footer__social-link" aria-label="Facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="https://www.tiktok.com/@ThuongLuongMini" target="_blank" class="footer__social-link" aria-label="TikTok">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer__column">
+                        <h4 class="footer__column-title">Danh mục</h4>
+                        <a href="#/danh-muc/an-uong" class="footer__link">Ăn uống</a>
+                        <a href="#/danh-muc/vui-choi" class="footer__link">Vui chơi</a>
+                        <a href="#/danh-muc/du-lich" class="footer__link">Du lịch</a>
+                        <a href="#/danh-muc/trang-phuc" class="footer__link">Trang phục</a>
+                    </div>
+                    
+                    <div class="footer__column">
+                        <h4 class="footer__column-title">Liên hệ</h4>
+                        <span class="footer__link" style="pointer-events: none;"><i data-lucide="map-pin" style="width:16px; margin-right:8px;"></i> TP. Tuyên Quang</span>
+                        <span class="footer__link" style="pointer-events: none;"><i data-lucide="mail" style="width:16px; margin-right:8px;"></i> thuongluongmini@gmail.com</span>
+                    </div>
+                </div>
+                
+                <div class="footer__bottom">
+                    <p class="footer__copyright">© 2026 Thuồng Luồng Mini. Tất cả quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-nav" id="mobile-bottom-nav">
+            <ul class="mobile-nav__list">
+                <li class="mobile-nav__item active" id="mob-nav-home">
+                    <a href="#/" style="display: flex; flex-direction: column; align-items: center; color: inherit; text-decoration: none;">
+                        <i data-lucide="home" class="mobile-nav__icon"></i>
+                        <span class="mobile-nav__label">Trang chủ</span>
+                    </a>
+                </li>
+                <li class="mobile-nav__item" id="mob-nav-explore">
+                    <a href="#/danh-muc/an-uong" style="display: flex; flex-direction: column; align-items: center; color: inherit; text-decoration: none;">
+                        <i data-lucide="compass" class="mobile-nav__icon"></i>
+                        <span class="mobile-nav__label">Khám phá</span>
+                    </a>
+                </li>
+                <li class="mobile-nav__item" id="mob-nav-search">
+                    <a href="#/tim-kiem" style="display: flex; flex-direction: column; align-items: center; color: inherit; text-decoration: none;">
+                        <i data-lucide="search" class="mobile-nav__icon"></i>
+                        <span class="mobile-nav__label">Tìm kiếm</span>
+                    </a>
+                </li>
+                <li class="mobile-nav__item" id="mob-nav-favs">
+                    <a href="#/yeu-thich" style="display: flex; flex-direction: column; align-items: center; color: inherit; text-decoration: none;">
+                        <i data-lucide="heart" class="mobile-nav__icon"></i>
+                        <span class="mobile-nav__label">Yêu thích</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+    
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="auth-modal-overlay">
+        <div class="modal auth-modal" id="auth-modal">
+            <button class="modal__close" onclick="window.closeAuthModal()">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="auth-modal__header">
+                <img src="assets/logo.jpg" alt="Thuồng Luồng Mini" class="auth-modal__logo" onerror="this.style.display='none'" style="width: 60px; height: 60px; border-radius: 12px; margin: 0 auto 15px; display: block;">
+                <h2 class="auth-modal__title">Đăng nhập / Đăng ký</h2>
+                <p class="auth-modal__desc">Tài khoản sẽ được tự động tạo mới nếu bạn chưa có đăng ký. Hãy đăng nhập để lưu địa điểm yêu thích và chia sẻ trải nghiệm của bạn!</p>
+            </div>
+            <div class="auth-modal__body">
+                <button class="btn auth-btn auth-btn--google" onclick="window.signInWithGoogle()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                    Tiếp tục với Google
+                </button>
+                <button class="btn auth-btn auth-btn--facebook" onclick="window.signInWithFacebook()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg" alt="Facebook">
+                    Tiếp tục với Facebook
+                </button>
+                <p class="auth-modal__terms">Bằng việc đăng nhập, bạn đồng ý với Điều khoản sử dụng của chúng tôi.</p>
+            </div>
+        </div>
+    </div>
+    
+    <button class="back-to-top" id="back-to-top" aria-label="Lên đầu trang">
+        <i data-lucide="chevron-up"></i>
+    </button>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        // Modal logic (defined directly so it always works regardless of Firebase config errors)
+        window.openAuthModal = () => {
+            const overlay = document.getElementById('auth-modal-overlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        };
+        window.closeAuthModal = () => {
+            const overlay = document.getElementById('auth-modal-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        };
+        document.getElementById('auth-modal-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) window.closeAuthModal();
+        });
+    </script>
+    <script type="module">
+        import { initAuth } from './js/auth.js';
+        
+        // Initialize Auth system
+        try {
+            initAuth();
+        } catch (err) {
+            console.error("Auth init failed", err);
+        }
+    </script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
