@@ -180,20 +180,20 @@ window.renderAdminTable = function() {
     places.sort((a, b) => a.id - b.id);
     
     places.forEach(place => {
-        html += \`
+        html += `
         <tr>
-            <td>\${place.id}</td>
+            <td>${place.id}</td>
             <td>
-                <div style="font-weight: 600; color: var(--text-main);">\${place.name}</div>
+                <div style="font-weight: 600; color: var(--text-main);">${place.name}</div>
             </td>
-            <td><span class="badge" style="background: var(--color-primary); color: white; font-size: 0.8rem;">\${place.category}</span></td>
-            <td><div style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">\${place.address}</div></td>
+            <td><span class="badge" style="background: var(--color-primary); color: white; font-size: 0.8rem;">${place.category}</span></td>
+            <td><div style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${place.address}</div></td>
             <td>
-                <button class="btn btn--icon btn--sm" aria-label="Sửa" onclick="window.editPlace('\${place.id}')"><i data-lucide="edit-2"></i></button>
-                <button class="btn btn--icon btn--sm" aria-label="Xóa" onclick="window.deletePlace('\${place.id}')"><i data-lucide="trash-2"></i></button>
+                <button class="btn btn--icon btn--sm" aria-label="Sửa" onclick="window.editPlace('${place.id}')"><i data-lucide="edit-2"></i></button>
+                <button class="btn btn--icon btn--sm" aria-label="Xóa" onclick="window.deletePlace('${place.id}')"><i data-lucide="trash-2"></i></button>
             </td>
         </tr>
-        \`;
+        `;
     });
     
     tbody.innerHTML = html;
@@ -312,5 +312,26 @@ window.deletePlace = async function(id) {
             console.error(error);
             alert('Lỗi xóa dữ liệu: ' + error.message);
         }
+    }
+};
+
+window.migrateDataToFirebase = async function() {
+    if (!confirm('Đồng bộ toàn bộ dữ liệu địa điểm lên Firebase?\n\nDữ liệu trên Firebase sẽ được ghi đè bởi dữ liệu trong file data.js.')) return;
+    
+    try {
+        const { database } = await import('../firebase-config.js');
+        const { ref, set } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+        
+        const placesObj = {};
+        PLACES.forEach(place => {
+            placesObj[place.id] = place;
+        });
+        
+        await set(ref(database, 'places'), placesObj);
+        window.showToast(`Đã đồng bộ ${PLACES.length} địa điểm lên Firebase!`, 'success');
+        window.loadAdminData();
+    } catch (error) {
+        console.error(error);
+        alert('Lỗi đồng bộ: ' + error.message);
     }
 };

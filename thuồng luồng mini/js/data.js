@@ -99,44 +99,7 @@ const BASE_PLACES = [
       { name: 'Nước xương hầm (thêm)', price: '10.000đ' },
       { name: 'Quẩy (3 cái)', price: '10.000đ' }
     ],
-    reviews: [
-      {
-        id: 101,
-        userName: 'Nguyễn Thị Hương',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-10',
-        text: 'Phở ở đây ngon nhất Tuyên Quang luôn! Nước dùng trong, ngọt tự nhiên từ xương, không dùng bột ngọt nhiều. Bánh phở mỏng, thịt bò tươi. Mỗi sáng mình đều ghé, ăn hoài không chán. Chỉ tiếc là quán đông quá, có hôm phải chờ 15 phút mới có chỗ ngồi.',
-        images: [],
-        helpful: 34,
-        reply: {
-          text: 'Cảm ơn chị đã ủng hộ quán suốt thời gian qua ạ! Quán sẽ cố gắng sắp xếp chỗ ngồi tốt hơn ạ.',
-          date: '2026-05-11'
-        }
-      },
-      {
-        id: 102,
-        userName: 'Trần Văn Đức',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-28',
-        text: 'Mình từ Hà Nội lên Tuyên Quang công tác, được đồng nghiệp giới thiệu quán này. Phải nói là phở ngon đặc biệt, đậm vị miền Bắc chính hiệu. Bát phở đặc biệt 55k mà thịt bò đầy ắp, rất hời. Sẽ quay lại lần sau!',
-        images: [],
-        helpful: 18,
-        reply: null
-      },
-      {
-        id: 103,
-        userName: 'Lê Minh Châu',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-15',
-        text: 'Phở ngon, nước dùng đậm đà. Tuy nhiên buổi sáng hơi đông, phải chờ khá lâu. Quán nên mở rộng thêm chỗ ngồi. Giá cả thì hợp lý cho chất lượng này.',
-        images: [],
-        helpful: 9,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 2 ── Cafe Sông Lô ───────────────────────────────────────
@@ -178,44 +141,7 @@ const BASE_PLACES = [
       { name: 'Sinh tố bơ', price: '40.000đ' },
       { name: 'Nước ép cam tươi', price: '35.000đ' }
     ],
-    reviews: [
-      {
-        id: 201,
-        userName: 'Phạm Thùy Linh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-18',
-        text: 'View sông Lô đẹp mê ly! Chiều chiều ra đây ngồi uống cafe, ngắm hoàng hôn thì tuyệt vời lắm. Cà phê rang xay tại quán, vị đậm vừa phải, thơm. Nhân viên phục vụ nhiệt tình, không gian thoáng đãng. Giá hơi cao hơn mặt bằng chung ở Tuyên Quang nhưng xứng đáng với view này.',
-        images: [],
-        helpful: 27,
-        reply: null
-      },
-      {
-        id: 202,
-        userName: 'Hoàng Minh Tuấn',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-22',
-        text: 'Không gian rất chill, thích hợp để đi với bạn bè hoặc hẹn hò. Trà đào cam sả ngon, cà phê thì mình thấy khá ổn. Buổi tối cuối tuần có nhạc acoustic hay lắm. Điểm trừ nhỏ là cuối tuần hơi đông, nên đặt bàn trước.',
-        images: [],
-        helpful: 15,
-        reply: {
-          text: 'Cảm ơn bạn đã ghé quán! Cuối tuần bạn có thể nhắn Zalo để đặt bàn trước nhé ạ.',
-          date: '2026-04-23'
-        }
-      },
-      {
-        id: 203,
-        userName: 'Đỗ Ngọc Anh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-03-30',
-        text: 'Quán cafe yêu thích nhất của mình ở Tuyên Quang. Mỗi lần từ Hà Nội về quê là phải ghé. View sông Lô lúc chiều tà đẹp lắm, chụp ảnh rất ảo. Recommend trà đào cam sả và sinh tố bơ nhé mọi người!',
-        images: [],
-        helpful: 22,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 3 ── Nhà hàng Hương Việt ─────────────────────────────────
@@ -257,44 +183,7 @@ const BASE_PLACES = [
       { name: 'Rau muống xào tỏi', price: '45.000đ' },
       { name: 'Cơm chiên Dương Châu', price: '75.000đ' }
     ],
-    reviews: [
-      {
-        id: 301,
-        userName: 'Vũ Thành Nam',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-05',
-        text: 'Nhà hàng rộng rãi, phục vụ chuyên nghiệp. Món bò lúc lắc ngon, thịt bò mềm, gia vị vừa ăn. Cá chép om dưa cũng rất đậm đà. Giá hơi cao nhưng chất lượng tương xứng. Phù hợp cho các buổi tiệc, đãi khách.',
-        images: [],
-        helpful: 11,
-        reply: null
-      },
-      {
-        id: 302,
-        userName: 'Bùi Thị Mai',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-12',
-        text: 'Mình tổ chức sinh nhật cho bé ở đây, rất hài lòng. Phòng VIP rộng, trang trí đẹp. Nhân viên hỗ trợ setup từ A đến Z. Đồ ăn ngon, đặc biệt là gà đồi hấp muối — thịt ngọt, da giòn. Sẽ giới thiệu cho bạn bè.',
-        images: [],
-        helpful: 19,
-        reply: {
-          text: 'Nhà hàng rất vui vì đã đem lại trải nghiệm tốt cho gia đình chị ạ! Hẹn gặp lại chị lần sau!',
-          date: '2026-04-13'
-        }
-      },
-      {
-        id: 303,
-        userName: 'Đặng Quốc Huy',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-02-20',
-        text: 'Chất lượng món ăn tốt, không gian đẹp. Tuy nhiên thời gian chờ đồ ăn hơi lâu, khoảng 30 phút mới lên món đầu tiên. Nên cải thiện tốc độ phục vụ. Bù lại, lẩu thập cẩm rất tươi và ngon.',
-        images: [],
-        helpful: 7,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 4 ── Bún riêu cô Hà ──────────────────────────────────────
@@ -333,41 +222,7 @@ const BASE_PLACES = [
       { name: 'Thêm chả cua', price: '10.000đ' },
       { name: 'Thêm đậu hũ chiên', price: '5.000đ' }
     ],
-    reviews: [
-      {
-        id: 401,
-        userName: 'Trịnh Hoàng Anh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-12',
-        text: 'Bún riêu cô Hà bán đã mấy chục năm rồi, ngon vẫn ngon! Nước dùng chua chua, ngọt thanh, cua đồng thơm lừng. 25k một bát to bự, ăn no căng bụng. Đến Tuyên Quang mà không ăn bún riêu cô Hà là chưa đến Tuyên Quang.',
-        images: [],
-        helpful: 45,
-        reply: null
-      },
-      {
-        id: 402,
-        userName: 'Ngô Quỳnh Trang',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-08',
-        text: 'Hồi nhỏ mình hay được mẹ dẫn đi ăn ở đây, giờ lớn rồi vẫn ghiền. Bát bún riêu đặc biệt đầy ắp topping, mắm tôm pha chua cay ngon xuất sắc. Nhớ đi sớm nhé, 8 giờ là hết hàng rồi!',
-        images: [],
-        helpful: 31,
-        reply: null
-      },
-      {
-        id: 403,
-        userName: 'Lý Thanh Hải',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-22',
-        text: 'Bún ngon, giá rẻ, nhưng chỗ ngồi hơi chật vì là quán vỉa hè. Nếu chấp nhận được điều đó thì đây là lựa chọn ăn sáng số 1 ở Tuyên Quang. Mình thường gọi mang về cho tiện.',
-        images: [],
-        helpful: 12,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 5 ── Trà chanh Thanh Xuân ─────────────────────────────────
@@ -408,30 +263,7 @@ const BASE_PLACES = [
       { name: 'Khoai tây chiên', price: '25.000đ' },
       { name: 'Xúc xích nướng', price: '20.000đ' }
     ],
-    reviews: [
-      {
-        id: 501,
-        userName: 'Nguyễn Bảo Ngọc',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-15',
-        text: 'Chỗ ngồi tâm sự buổi tối cùng bạn bè rất tuyệt. Trà chanh đúng vị, mát lạnh. Nem chua rán giòn, ăn kèm tương ớt ngon lắm. Giá sinh viên, 50k ngồi cả tối được.',
-        images: [],
-        helpful: 14,
-        reply: null
-      },
-      {
-        id: 502,
-        userName: 'Phan Đức Minh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-30',
-        text: 'Quán đơn giản nhưng có cái hồn, kiểu trà chanh phố Hà Nội ấy. Buổi tối ngồi ngoài vỉa hè, gió mát, nhâm nhi trà chanh, tám chuyện với bạn — cuộc sống giản dị mà vui.',
-        images: [],
-        helpful: 8,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 6 ── Nhà hàng Tùng Lâm ───────────────────────────────────
@@ -471,33 +303,7 @@ const BASE_PLACES = [
       { name: 'Tôm sú nướng muối ớt', price: '320.000đ' },
       { name: 'Bò bít tết', price: '180.000đ' }
     ],
-    reviews: [
-      {
-        id: 601,
-        userName: 'Nguyễn Hữu Toàn',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-20',
-        text: 'Tổ chức tiệc cưới ở đây, set B khá ổn, đồ ăn ngon và đủ lượng cho 10 người/bàn. MC vui nhộn, nhạc sống hay. Bãi đỗ xe rộng, khách mời không phải lo chỗ gửi xe. Tổng thể hài lòng.',
-        images: [],
-        helpful: 15,
-        reply: {
-          text: 'Cảm ơn anh Toàn! Chúc anh chị trăm năm hạnh phúc ạ!',
-          date: '2026-04-21'
-        }
-      },
-      {
-        id: 602,
-        userName: 'Trương Thị Phương',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-10',
-        text: 'Liên hoan công ty ở đây, phòng VIP đẹp, cách âm tốt. Thức ăn tươi, đặc biệt là gà luộc lá chanh rất ngon. Nhân viên nhanh nhẹn. Sẽ quay lại cho buổi liên hoan tiếp theo.',
-        images: [],
-        helpful: 6,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 7 ── Bánh cuốn Phương ─────────────────────────────────────
@@ -536,30 +342,7 @@ const BASE_PLACES = [
       { name: 'Thêm chả quế', price: '10.000đ' },
       { name: 'Thêm giò lụa', price: '10.000đ' }
     ],
-    reviews: [
-      {
-        id: 701,
-        userName: 'Cao Thị Loan',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-08',
-        text: 'Bánh cuốn tráng tay mỏng tang, nhân thịt thơm, nước mắm pha chua ngọt vừa miệng. 20k một đĩa to, ăn no mà rẻ. Chả quế ở đây cũng ngon lắm, giòn bên ngoài, mềm bên trong. Nhất định phải thử!',
-        images: [],
-        helpful: 28,
-        reply: null
-      },
-      {
-        id: 702,
-        userName: 'Đinh Văn Thắng',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-15',
-        text: 'Quán nhỏ, bình dân nhưng bánh cuốn cực ngon. Lá bánh trong veo, nhìn thấy nhân bên trong luôn. Nhược điểm là buổi sáng khá đông, chỗ ngồi hạn chế. Gợi ý là nên gọi mang về nếu không muốn chờ.',
-        images: [],
-        helpful: 16,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 8 ── Cafe Tuyên Phố ──────────────────────────────────────
@@ -601,33 +384,7 @@ const BASE_PLACES = [
       { name: 'Cheesecake', price: '60.000đ' },
       { name: 'Cookies (3 cái)', price: '35.000đ' }
     ],
-    reviews: [
-      {
-        id: 801,
-        userName: 'Lê Hà My',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-20',
-        text: 'Quán decor xinh quá trời! Chụp ảnh ở góc nào cũng đẹp. Matcha Latte vị đậm, không quá ngọt, đúng gu mình. Tiramisu handmade mềm mịn, vị cà phê thấm vừa đủ. Sẽ mang laptop ra đây ngồi làm việc thường xuyên.',
-        images: [],
-        helpful: 21,
-        reply: {
-          text: 'Cảm ơn bạn nhiều! Mong được đón bạn thường xuyên tại quán nhé!',
-          date: '2026-05-20'
-        }
-      },
-      {
-        id: 802,
-        userName: 'Trần Quang Khải',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-25',
-        text: 'Không gian đẹp, yên tĩnh, có ổ cắm điện nhiều nên ngồi làm việc thoải mái. Cà phê ngon, giá hơi nhỉnh so với các quán khác ở Tuyên Quang nhưng chấp nhận được vì decor và không gian tốt.',
-        images: [],
-        helpful: 13,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 9 ── Lẩu Hùng Béo ────────────────────────────────────────
@@ -669,44 +426,7 @@ const BASE_PLACES = [
       { name: 'Mỳ tôm (gói)', price: '10.000đ' },
       { name: 'Rau nhúng lẩu', price: '25.000đ' }
     ],
-    reviews: [
-      {
-        id: 901,
-        userName: 'Phùng Thế Anh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-14',
-        text: 'Lẩu tomyum ở đây cay nồng, chua chua, đúng vị Thái luôn. Set 199k cho 2-3 người mà hải sản tươi roi rói, tôm to bự. Nước lẩu uống được luôn, không cần gọi thêm nước. Quán sân vườn thoáng, ngồi buổi tối mát mẻ.',
-        images: [],
-        helpful: 22,
-        reply: null
-      },
-      {
-        id: 902,
-        userName: 'Đỗ Thanh Hà',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-10',
-        text: 'Nhóm mình 5 người gọi set lớn, ăn no nê mà mới hết 360k thôi. Chất lượng tốt so với giá tiền. Chỉ tiếc là cuối tuần đông quá, phải chờ bàn khoảng 20 phút. Nên đặt trước nhé.',
-        images: [],
-        helpful: 14,
-        reply: {
-          text: 'Cảm ơn nhóm bạn! Cuối tuần các bạn nhắn Zalo trước để anh giữ bàn nhé!',
-          date: '2026-04-11'
-        }
-      },
-      {
-        id: 903,
-        userName: 'Mai Hồng Ngọc',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-05',
-        text: 'Lẩu ngon, hải sản tươi. Nước lẩu riêu cua bắp bò cũng rất đặc biệt, nước dùng đậm vị cua đồng. Không gian quán ổn, phục vụ nhanh. Sẽ quay lại.',
-        images: [],
-        helpful: 9,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 10 ── Kem & Trà sữa Chill ────────────────────────────────
@@ -748,44 +468,7 @@ const BASE_PLACES = [
       { name: 'Socola đá xay', price: '40.000đ' },
       { name: 'Sinh tố dâu tây', price: '40.000đ' }
     ],
-    reviews: [
-      {
-        id: 1001,
-        userName: 'Trần Thúy Hằng',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-18',
-        text: 'Quán xinh quá đi! Kem gelato vị matcha ngon lắm, béo vừa, vị trà xanh đậm. Trà sữa trân châu đường đen cũng không thua kém các hãng lớn. Góc check-in dễ thương, chụp ảnh đẹp lung linh. Con gái chắc chắn sẽ thích quán này!',
-        images: [],
-        helpful: 19,
-        reply: null
-      },
-      {
-        id: 1002,
-        userName: 'Nguyễn Thanh Tùng',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-30',
-        text: 'Đưa em gái đi ăn kem, bé thích mê luôn. Kem cuộn Thái làm trước mặt, nhìn rất thú vị. Vị kem thì ngon, giá ok. Chỉ là quán hơi nhỏ, buổi tối cuối tuần khá chật.',
-        images: [],
-        helpful: 11,
-        reply: null
-      },
-      {
-        id: 1003,
-        userName: 'Vũ Khánh Linh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-25',
-        text: 'Trà sữa khoai môn ngon nhất Tuyên Quang! Vị khoai môn thơm, ngọt vừa, trân châu dẻo. Quán decor pastel dễ thương. Wifi nhanh nữa, ngồi học bài cũng được.',
-        images: [],
-        helpful: 8,
-        reply: {
-          text: 'Cảm ơn bạn! Quán luôn cố gắng mang đến những ly trà sữa ngon nhất. Chúc bạn học tốt nhé!',
-          date: '2026-03-26'
-        }
-      }
-    ]
+    reviews: []
   },
 
   /* ═══════════════════════════════════════════════════════════
@@ -822,44 +505,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1101,
-        userName: 'Phạm Công Danh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-09',
-        text: 'Phòng VIP rộng rãi, âm thanh tốt, mic bắt giọng rõ. Hệ thống bài hát cập nhật khá nhiều bài mới. Nhân viên phục vụ nhanh. Giá phòng VIP 200k/giờ ở Tuyên Quang thì hơi cao nhưng chấp nhận được.',
-        images: [],
-        helpful: 8,
-        reply: null
-      },
-      {
-        id: 1102,
-        userName: 'Hoàng Thị Yến',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-18',
-        text: 'Hay đi karaoke ở đây. Phòng thường 80k/giờ, chất lượng ổn cho nhóm 4-5 người. Cách âm tốt, không sợ ồn hàng xóm. Menu đồ uống giá hợp lý.',
-        images: [],
-        helpful: 5,
-        reply: null
-      },
-      {
-        id: 1103,
-        userName: 'Lê Đình Phong',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-03-28',
-        text: 'Tổ chức sinh nhật cho bạn ở đây, phòng VVIP rất xịn. Có đèn laser, bàn DJ, màn hình to. Nhân viên hỗ trợ trang trí phòng nữa. Sẽ quay lại!',
-        images: [],
-        helpful: 12,
-        reply: {
-          text: 'Cảm ơn bạn! Rất vui vì buổi sinh nhật đã thành công. Hẹn gặp lại bạn!',
-          date: '2026-03-29'
-        }
-      }
-    ]
+    reviews: []
   },
 
   // 12 ── Rạp chiếu phim Tuyên Quang ─────────────────────────
@@ -892,30 +538,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1201,
-        userName: 'Nguyễn Hải Đăng',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-16',
-        text: 'Cuối cùng Tuyên Quang cũng có rạp phim xịn! Âm thanh tốt, ghế ngồi êm. Phim chiếu đồng bộ với Hà Nội, không phải chờ lâu nữa. Giá vé 55k suất thường, hợp lý. Chỉ tiếc là rạp chỉ có 3 phòng nên lịch chiếu hơi ít.',
-        images: [],
-        helpful: 14,
-        reply: null
-      },
-      {
-        id: 1202,
-        userName: 'Trần Thị Bích Ngọc',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-08',
-        text: 'Đưa bạn trai đi xem phim cuối tuần, ghế đôi rất thoải mái. Bỏng ngô vị caramel ngon. Rạp sạch sẽ, nhân viên thân thiện. Mong rạp có thêm nhiều suất chiếu hơn.',
-        images: [],
-        helpful: 7,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 13 ── Khu vui chơi trẻ em Thiên Đường Nhỏ ────────────────
@@ -948,30 +571,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1301,
-        userName: 'Nguyễn Thị Thu Hà',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-11',
-        text: 'Con mình 5 tuổi chơi ở đây mê lắm, phải kéo về mới chịu đi. Khu vực sạch sẽ, nhân viên trông nom cẩn thận. Phụ huynh ngồi ngoài uống cafe, có WiFi, rất tiện. Giá 100k/lượt 2 tiếng, hợp lý.',
-        images: [],
-        helpful: 16,
-        reply: null
-      },
-      {
-        id: 1302,
-        userName: 'Lê Văn Trung',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-15',
-        text: 'Cuối tuần đưa 2 bé đi chơi, bé nào cũng thích. Khu nhà bóng rộng, cầu trượt an toàn. Chỉ tiếc là cuối tuần khá đông, nên đi ngày thường thoải mái hơn.',
-        images: [],
-        helpful: 8,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 14 ── Billiards Club 68 ───────────────────────────────────
@@ -1004,30 +604,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1401,
-        userName: 'Đỗ Mạnh Cường',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-25',
-        text: 'Bàn bi-a chuẩn, mặt bàn phẳng, gậy tốt. Giá 30k/giờ buổi sáng, 50k/giờ buổi tối, hợp lý. Không gian sạch sẽ, có điều hòa mát. Thỉnh thoảng có giải đấu nhỏ rất vui.',
-        images: [],
-        helpful: 6,
-        reply: null
-      },
-      {
-        id: 1402,
-        userName: 'Trần Minh Quân',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-10',
-        text: 'CLB bi-a tốt nhất Tuyên Quang rồi. Bàn pool 9 bi chuẩn, cơ carbon có cho thuê. Nhân viên vui vẻ. Cuối tuần đông hơn, nên đi đầu tuần nếu muốn yên tĩnh tập trung.',
-        images: [],
-        helpful: 4,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 15 ── Game Center TQ ──────────────────────────────────────
@@ -1060,33 +637,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1501,
-        userName: 'Nguyễn Hoàng Sơn',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-06',
-        text: 'Máy PC cấu hình mạnh, chơi game mượt. Ghế gaming êm, tai nghe tốt. Giá 20k/giờ cho PC, hợp lý lắm. Khu arcade cũng vui, đặc biệt là máy đua xe và máy nhảy. Sẽ đến thường xuyên hơn.',
-        images: [],
-        helpful: 9,
-        reply: null
-      },
-      {
-        id: 1502,
-        userName: 'Vũ Đức Huy',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-15',
-        text: 'Thuê PS5 chơi FIFA với bạn bè, rất vui. 80k/giờ cho PS5 + TV to. Khu gắp thú bông cũng hay, bạn gái mình gắp được 2 con gấu. Không gian thoáng, sạch.',
-        images: [],
-        helpful: 7,
-        reply: {
-          text: 'Cảm ơn bạn đã ghé chơi! Tuần này có event giảm giá 20% cho PS5, ghé lại nhé!',
-          date: '2026-04-16'
-        }
-      }
-    ]
+    reviews: []
   },
 
   /* ═══════════════════════════════════════════════════════════
@@ -1123,52 +674,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1601,
-        userName: 'Trần Anh Tuấn',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-01',
-        text: 'Thác Bản Ba đẹp mê hồn! Nước trong xanh, không khí mát lạnh, phong cảnh hoang sơ. Trek khoảng 3km qua rừng, hơi mệt nhưng xứng đáng lắm. Tầng 1 tắm được, nước mát sảng khoái. Nhớ mang giày trekking và chống muỗi nhé.',
-        images: [],
-        helpful: 42,
-        reply: null
-      },
-      {
-        id: 1602,
-        userName: 'Lê Thị Ngọc Mai',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-18',
-        text: 'Một trong những thác nước đẹp nhất miền Bắc mà mình từng đi. 3 tầng thác hùng vĩ, chụp ảnh góc nào cũng xuất sắc. Nên đi vào mùa hè, nước nhiều và xanh đẹp. Hướng dẫn viên địa phương rất nhiệt tình.',
-        images: [],
-        helpful: 35,
-        reply: null
-      },
-      {
-        id: 1603,
-        userName: 'Phạm Quốc Bảo',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-25',
-        text: 'Phong cảnh tuyệt đẹp, đường đi hơi khó nhưng thú vị. Vé vào chỉ 30k, rất rẻ. Tuy nhiên cơ sở vật chất ở đây còn hạn chế, nhà vệ sinh ít, không có nhiều hàng quán. Nên mang theo đồ ăn nhẹ và nước.',
-        images: [],
-        helpful: 18,
-        reply: null
-      },
-      {
-        id: 1604,
-        userName: 'Nguyễn Phương Thảo',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-02-14',
-        text: 'Đi cùng nhóm 8 người, thuê hướng dẫn viên 200k/nhóm. Anh hướng dẫn dẫn đường rất tận tình, kể chuyện về rừng, về bản địa. Thác đẹp ngoài sức tưởng tượng. Chắc chắn sẽ quay lại mùa hè này!',
-        images: [],
-        helpful: 26,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 17 ── Na Hang – Lâm Bình ─────────────────────────────────
@@ -1201,52 +707,7 @@ const BASE_PLACES = [
       instagram: 'https://instagram.com/nahanglambinh'
     },
     menu: [],
-    reviews: [
-      {
-        id: 1701,
-        userName: 'Hoàng Đức Thịnh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-20',
-        text: 'Na Hang đẹp quá! Mình đi thuyền trên hồ, hai bên là núi đá vôi xanh mướt, nước hồ trong vắt. Buổi sáng sương mù giăng trên mặt hồ, đẹp như tranh vẽ. Ở homestay bản Tày, ăn cơm lam, gà đồi — tuyệt vời. Chắc chắn phải đi ít nhất một lần trong đời!',
-        images: [],
-        helpful: 56,
-        reply: null
-      },
-      {
-        id: 1702,
-        userName: 'Nguyễn Thị Tâm',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-30',
-        text: 'Xứng đáng là "Hạ Long trên cạn"! Phong cảnh hoang sơ, hùng vĩ, yên bình. Đi thuyền 2 tiếng khám phá các đảo nhỏ, hang động, rất thú vị. Người dân địa phương hiếu khách, thức ăn ngon và rẻ. Nhất định sẽ quay lại.',
-        images: [],
-        helpful: 43,
-        reply: null
-      },
-      {
-        id: 1703,
-        userName: 'Phan Minh Đức',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-03-18',
-        text: 'Đi từ Hà Nội lên mất khoảng 5 tiếng xe, nhưng đáng lắm! Cảnh đẹp lung linh, không khí trong lành. Nên đi 2 ngày 1 đêm để trải nghiệm hết. Giá vé thuyền 150k/người, đi khoảng 2-3 tiếng. Nhớ mang áo khoác nhé, sáng sớm lạnh.',
-        images: [],
-        helpful: 31,
-        reply: null
-      },
-      {
-        id: 1704,
-        userName: 'Vũ Thanh Nga',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-02-05',
-        text: 'Mình đi mùa đông, hơi se lạnh nhưng cảnh vẫn đẹp. Nước hồ xanh ngọc, núi non hùng vĩ. Chỉ tiếc là mùa này sương mù ít hơn mùa hè. Cơ sở homestay sạch sẽ nhưng còn đơn giản. Hy vọng sẽ được đầu tư thêm.',
-        images: [],
-        helpful: 19,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 18 ── Tân Trào – Khu di tích lịch sử ─────────────────────
@@ -1279,41 +740,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1801,
-        userName: 'Bùi Thành Công',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-19',
-        text: 'Đưa con đi tham quan khu di tích Tân Trào, rất ý nghĩa. Các cháu được nghe hướng dẫn viên kể chuyện lịch sử, xem lán Nà Nưa, đình Tân Trào, cây đa lịch sử. Không gian rộng rãi, xanh mát, phong cảnh đẹp. Miễn phí tham quan, hướng dẫn viên nhiệt tình.',
-        images: [],
-        helpful: 24,
-        reply: null
-      },
-      {
-        id: 1802,
-        userName: 'Đặng Phương Linh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-02',
-        text: 'Nơi đây thiêng liêng lắm. Đứng dưới cây đa Tân Trào, cảm giác xúc động khi nghĩ về lịch sử dân tộc. Hướng dẫn viên kể chuyện hay, chi tiết, dễ hiểu. Nên đi 1 ngày để thăm hết các điểm di tích.',
-        images: [],
-        helpful: 20,
-        reply: null
-      },
-      {
-        id: 1803,
-        userName: 'Lý Hồng Quân',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-02-28',
-        text: 'Điểm du lịch lịch sử rất đáng đến. Không gian yên bình, cây cối xanh mát. Tuy nhiên đường từ trung tâm Tuyên Quang vào hơi xa (khoảng 40km), nên chuẩn bị xe máy hoặc ô tô riêng.',
-        images: [],
-        helpful: 12,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 19 ── Suối khoáng Mỹ Lâm ─────────────────────────────────
@@ -1346,41 +773,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 1901,
-        userName: 'Nguyễn Thị Lan',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-03',
-        text: 'Ngâm nước khoáng nóng sướng lắm! Nước nóng tự nhiên, cảm giác thư giãn toàn thân. Vợ chồng mình bị đau khớp, ngâm xong thấy nhẹ hẳn. Dịch vụ massage cũng tốt. 150k/người cho gói ngâm + massage 30 phút, rất đáng.',
-        images: [],
-        helpful: 21,
-        reply: null
-      },
-      {
-        id: 1902,
-        userName: 'Hoàng Văn Tùng',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-12',
-        text: 'Suối khoáng nóng tự nhiên, nước có mùi lưu huỳnh nhẹ, tốt cho da và xương khớp. Bể ngoài trời view đồi chè xanh, đẹp lắm. Chỉ là cơ sở vật chất một số chỗ hơi cũ, cần nâng cấp thêm.',
-        images: [],
-        helpful: 14,
-        reply: null
-      },
-      {
-        id: 1903,
-        userName: 'Đinh Thị Hạnh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-08',
-        text: 'Cuối tuần đưa gia đình lên nghỉ dưỡng, phòng nghỉ sạch sẽ, có bể nước nóng riêng. Trẻ con rất thích tắm nước nóng. Buffet sáng ở nhà hàng cũng ngon. Đường từ trung tâm thành phố lên khoảng 30 phút, dễ đi.',
-        images: [],
-        helpful: 10,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 20 ── Thành phố Tuyên Quang – City Tour ───────────────────
@@ -1413,30 +806,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 2001,
-        userName: 'Lê Quang Vinh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-15',
-        text: 'Tuyên Quang buổi tối đẹp lắm! Bờ kè sông Lô lung linh đèn LED, đi dạo rất lãng mạn. Phố đi bộ có nhiều quầy đồ ăn vặt ngon. Thành phố nhỏ nhưng sạch đẹp, yên bình, con người thân thiện.',
-        images: [],
-        helpful: 18,
-        reply: null
-      },
-      {
-        id: 2002,
-        userName: 'Trần Hồng Nhung',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-20',
-        text: 'Mình là dân Tuyên Quang nhưng mỗi lần đi xa về vẫn thấy thành phố đẹp. Bờ kè mới được làm lại rất đẹp, sạch sẽ. Quảng trường rộng, buổi tối người dân ra tập thể dục, trẻ em chơi đùa — không khí rất vui.',
-        images: [],
-        helpful: 15,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 21 ── Lễ hội Thành Tuyên ─────────────────────────────────
@@ -1469,52 +839,7 @@ const BASE_PLACES = [
       instagram: 'https://instagram.com/lehoithanhtuyen'
     },
     menu: [],
-    reviews: [
-      {
-        id: 2101,
-        userName: 'Nguyễn Minh Hải',
-        userAvatar: '',
-        rating: 5,
-        date: '2025-10-08',
-        text: 'Lễ hội Thành Tuyên năm nay hoành tráng quá! Đèn lồng năm nay đẹp hơn mọi năm, có mô hình rồng dài 20 mét, mắt biết chuyển động, tuyệt vời. Diễu hành kéo dài 3 tiếng, người dân đứng kín hai bên đường. Pháo hoa đẹp ngất. Năm sau chắc chắn phải lên lại!',
-        images: [],
-        helpful: 78,
-        reply: null
-      },
-      {
-        id: 2102,
-        userName: 'Phạm Thị Thu Trang',
-        userAvatar: '',
-        rating: 5,
-        date: '2025-10-07',
-        text: 'Đây là lễ hội Trung thu đẹp nhất Việt Nam mà mình từng đến! Mô hình đèn lồng sáng tạo, lung linh, mỗi tổ dân phố làm mỗi kiểu khác nhau. Không khí lễ hội vui tươi, ai cũng cười. Con mình mê lắm, cứ đòi đi xem mãi. Nhớ đặt khách sạn sớm vì Trung thu rất đông!',
-        images: [],
-        helpful: 65,
-        reply: null
-      },
-      {
-        id: 2103,
-        userName: 'Đỗ Anh Khoa',
-        userAvatar: '',
-        rating: 5,
-        date: '2025-10-06',
-        text: 'Mình từ Sài Gòn bay ra chỉ để xem Lễ hội Thành Tuyên. Không thất vọng! Quy mô lớn, mô hình đèn lồng cực kỳ công phu. Ẩm thực đường phố ngon và rẻ. Người dân Tuyên Quang hiếu khách lắm. Đã thêm vào bucket list hàng năm!',
-        images: [],
-        helpful: 52,
-        reply: null
-      },
-      {
-        id: 2104,
-        userName: 'Lê Bảo Trân',
-        userAvatar: '',
-        rating: 4,
-        date: '2025-10-05',
-        text: 'Lễ hội rất đẹp và vui, nhưng đông người kinh khủng! Nên đến sớm để có chỗ đứng xem diễu hành tốt. Khách sạn cháy phòng trước 1 tháng, nên book sớm. Giao thông hơi tắc vào đêm hội. Nhưng nhìn chung, trải nghiệm rất đáng nhớ!',
-        images: [],
-        helpful: 38,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   /* ═══════════════════════════════════════════════════════════
@@ -1551,44 +876,7 @@ const BASE_PLACES = [
       instagram: 'https://instagram.com/shophuongtuyen'
     },
     menu: [],
-    reviews: [
-      {
-        id: 2201,
-        userName: 'Trần Thu Hương',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-17',
-        text: 'Shop váy đẹp nhất Tuyên Quang! Mẫu mã cập nhật liên tục, tuần nào cũng có hàng mới. Giá rất hợp lý, váy 200-300k mà chất lượng ổn. Chị chủ shop tư vấn nhiệt tình, biết cách mix đồ. Mua hoài không chán!',
-        images: [],
-        helpful: 13,
-        reply: {
-          text: 'Cảm ơn em Hương! Tuần này shop về nhiều mẫu váy hoa mới, ghé xem nhé em!',
-          date: '2026-05-17'
-        }
-      },
-      {
-        id: 2202,
-        userName: 'Nguyễn Thùy Dương',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-22',
-        text: 'Mình hay mua đồ công sở ở đây. Áo sơ mi, quần tây chất vải tốt, form đẹp, giá 150-250k. Đổi trả trong 7 ngày nếu không vừa, rất thuận tiện. Có ship COD nữa nên lười ra shop cũng được.',
-        images: [],
-        helpful: 9,
-        reply: null
-      },
-      {
-        id: 2203,
-        userName: 'Phạm Ngọc Bích',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-30',
-        text: 'Quần jean ở đây dày dặn, form chuẩn, giá 250k thôi. Mình mua 3 cái mặc vẫn đẹp sau nhiều lần giặt. Shop nhỏ nhưng đồ trưng bày gọn gàng, dễ chọn.',
-        images: [],
-        helpful: 6,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 23 ── Áo dài Thanh Hằng ──────────────────────────────────
@@ -1621,44 +909,7 @@ const BASE_PLACES = [
       instagram: 'https://instagram.com/aodaithanhhang'
     },
     menu: [],
-    reviews: [
-      {
-        id: 2301,
-        userName: 'Lê Thị Phương Anh',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-10',
-        text: 'Thuê áo dài chụp kỷ yếu ở đây, rất đẹp! Chị Hằng tư vấn màu và kiểu dáng phù hợp với từng người, nhóm mình 10 bạn ai cũng hài lòng. Áo dài sạch sẽ, mới tinh, giá thuê 200k/bộ/ngày, rất hợp lý.',
-        images: [],
-        helpful: 17,
-        reply: {
-          text: 'Cảm ơn các em! Ảnh kỷ yếu đẹp lắm, chị xem trên Facebook rồi. Chúc các em tốt nghiệp thành công!',
-          date: '2026-05-11'
-        }
-      },
-      {
-        id: 2302,
-        userName: 'Vũ Thị Hồng Nhung',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-04-05',
-        text: 'Mình may áo dài cưới ở đây, chị Hằng may rất đẹp, tỉ mỉ từng đường kim mũi chỉ. Vải gấm đỏ sang trọng, thêu hoa sen tinh tế. Từ lúc đo đến khi nhận chỉ 5 ngày. Giá 1.5 triệu cho một bộ áo dài cưới, quá hời!',
-        images: [],
-        helpful: 22,
-        reply: null
-      },
-      {
-        id: 2303,
-        userName: 'Đặng Thế Phong',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-02-15',
-        text: 'Thuê áo dài nam cho đám cưới bạn, chất lượng ổn. Áo dài nam ở đây có nhiều mẫu, đặc biệt là mẫu áo dài cách tân trông rất lịch lãm. Giá thuê 150k/ngày, hợp lý.',
-        images: [],
-        helpful: 8,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 24 ── Phụ kiện Xinh Xinh ─────────────────────────────────
@@ -1691,30 +942,7 @@ const BASE_PLACES = [
       instagram: 'https://instagram.com/phukienxinhxinh'
     },
     menu: [],
-    reviews: [
-      {
-        id: 2401,
-        userName: 'Hoàng Mai Phương',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-12',
-        text: 'Shop phụ kiện đa dạng nhất Tuyên Quang! Bông tai nhiều mẫu xinh, giá từ 30-80k thôi. Mình hay mua combo mua 3 tặng 1, rất hời. Chất lượng ổn, đeo mấy tháng không bị dị ứng hay xuống màu.',
-        images: [],
-        helpful: 10,
-        reply: null
-      },
-      {
-        id: 2402,
-        userName: 'Nguyễn Hạ Vy',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-18',
-        text: 'Mua kẹp tóc và túi xách mini ở đây, xinh lắm! Kẹp tóc kiểu Hàn 25k/cái, túi xách mini 150k — giá quá hời. Gói quà đẹp nữa, mua tặng bạn rất tiện.',
-        images: [],
-        helpful: 7,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 25 ── Giày dép Tuyên Quang ────────────────────────────────
@@ -1747,30 +975,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 2501,
-        userName: 'Trần Đức Anh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-05-08',
-        text: 'Mua đôi sneaker trắng 350k, chất lượng tốt, đế êm, form đẹp. Đi mấy tháng vẫn bền. Shop đổi size nhanh, nhân viên tư vấn vui vẻ. Hài lòng!',
-        images: [],
-        helpful: 5,
-        reply: null
-      },
-      {
-        id: 2502,
-        userName: 'Lê Thị Kim Chi',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-20',
-        text: 'Mua guốc cao gót cho dự tiệc, 280k thôi mà xinh lắm. Đế chắc, đi không bị trơn. Shop có nhiều mẫu giày cho nữ, từ sandal đến boots. Giá ổn so với chất lượng.',
-        images: [],
-        helpful: 4,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 26 ── Đồ 2hand TQ ────────────────────────────────────────
@@ -1803,44 +1008,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 2601,
-        userName: 'Phan Thị Minh Tâm',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-14',
-        text: 'Yêu shop này! Hàng 2hand Nhật chất lượng cực tốt, như mới luôn. Mình mua được áo khoác Uniqlo 120k, quần jean Levi\'s 150k — quá hời! Mỗi tuần shop về hàng mới, cứ thứ 6 là mình chạy ra xem. Ủng hộ thời trang bền vững!',
-        images: [],
-        helpful: 18,
-        reply: {
-          text: 'Cảm ơn chị Tâm đã luôn ủng hộ shop! Thứ 6 tuần này về lô áo khoác mùa thu xịn lắm, ghé xem nhé chị!',
-          date: '2026-05-15'
-        }
-      },
-      {
-        id: 2602,
-        userName: 'Nguyễn Đình Khoa',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-20',
-        text: 'Lần đầu mua đồ 2hand, hơi ngại nhưng thử rồi thì ghiền luôn. Mua được đôi New Balance 80k, trông như mới, đi êm chân. Áo hoodie Champion 100k, dày dặn ấm áp. Giá quá rẻ so với chất lượng.',
-        images: [],
-        helpful: 12,
-        reply: null
-      },
-      {
-        id: 2603,
-        userName: 'Trương Hà Linh',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-03-12',
-        text: 'Shop bán hàng 2hand nhưng rất cẩn thận, đồ sạch sẽ, không có mùi. Livestream trên Facebook vui, chọn đồ online tiện lắm. Mình ở huyện ngoài, đặt ship COD về rất nhanh.',
-        images: [],
-        helpful: 9,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 27 ── Thời trang nam Đức Phát ─────────────────────────────
@@ -1873,33 +1041,7 @@ const BASE_PLACES = [
       instagram: ''
     },
     menu: [],
-    reviews: [
-      {
-        id: 2701,
-        userName: 'Nguyễn Hữu Phúc',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-06',
-        text: 'Mua bộ vest đi dự đám cưới bạn, anh Phát tư vấn rất tận tâm. Vest slim fit, chất vải mềm, form chuẩn. Giá 1.2 triệu cho cả bộ vest + sơ mi + cà vạt, quá hời so với lên Hà Nội mua. Được sửa miễn phí nếu không vừa.',
-        images: [],
-        helpful: 11,
-        reply: {
-          text: 'Cảm ơn anh Phúc! Anh mặc vest đẹp lắm ạ. Hẹn anh ghé shop dịp sau!',
-          date: '2026-05-07'
-        }
-      },
-      {
-        id: 2702,
-        userName: 'Trần Quốc Đạt',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-15',
-        text: 'Đồ casual ở đây đẹp, kiểu Hàn Quốc nam tính. Áo polo 250k, quần jogger 300k — chất lượng tốt, mặc thoải mái. Anh chủ shop vui tính, tư vấn nhiệt tình, không ép mua.',
-        images: [],
-        helpful: 7,
-        reply: null
-      }
-    ]
+    reviews: []
   },
 
   // 28 ── Cháo gà Tuyên Quang ────────────────────────────────
@@ -1938,41 +1080,7 @@ const BASE_PLACES = [
       { name: 'Quẩy (3 cái)', price: '10.000đ' },
       { name: 'Thêm trứng gà', price: '5.000đ' }
     ],
-    reviews: [
-      {
-        id: 2801,
-        userName: 'Hoàng Anh Tú',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-05-19',
-        text: 'Đêm nào cũng ghé! Cháo gà nóng hổi, thơm mùi hành phi, gà đồi ngọt thịt. Đêm mùa đông ăn bát cháo nóng thì sướng không gì bằng. 25k thôi mà no căng bụng. Quẩy giòn rụm, dầm cháo ăn phê lắm!',
-        images: [],
-        helpful: 23,
-        reply: null
-      },
-      {
-        id: 2802,
-        userName: 'Lê Ngọc Hân',
-        userAvatar: '',
-        rating: 4,
-        date: '2026-04-28',
-        text: 'Ăn khuya ở Tuyên Quang thì phải ra đây! Bát cháo gà đặc biệt 35k, nhiều thịt gà xé, thêm lòng gà ngon tuyệt. Quán bình dân, chỗ ngồi đơn giản nhưng đồ ăn thì ngon thật sự.',
-        images: [],
-        helpful: 15,
-        reply: null
-      },
-      {
-        id: 2803,
-        userName: 'Phạm Tuấn Kiệt',
-        userAvatar: '',
-        rating: 5,
-        date: '2026-03-15',
-        text: 'Cháo gà ở đây là comfort food của mình mỗi khi về Tuyên Quang. Nước cháo ngọt từ xương gà, hành phi thơm nức. Thêm chút tương ớt, vắt chanh — bát cháo hoàn hảo. Giá rẻ, ngon, ấm bụng. Recommend!',
-        images: [],
-        helpful: 12,
-        reply: null
-      }
-    ]
+    reviews: []
   }
 ];
 
@@ -2141,8 +1249,8 @@ export function getPlacesBySubCategory(subCategory) {
  */
 export function getStats() {
   const totalPlaces = PLACES.length;
-  const totalReviews = PLACES.reduce((sum, p) => sum + p.totalReviews, 0);
-  const avgRating = (PLACES.reduce((sum, p) => sum + p.rating, 0) / totalPlaces).toFixed(1);
+  const totalReviews = PLACES.reduce((sum, p) => sum + (p.totalReviews || 0), 0);
+  const avgRating = totalPlaces > 0 ? (PLACES.reduce((sum, p) => sum + (p.rating || 0), 0) / totalPlaces).toFixed(1) : '0.0';
 
   const categoryCounts = {};
   for (const cat of CATEGORIES) {

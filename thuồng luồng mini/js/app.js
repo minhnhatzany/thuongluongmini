@@ -222,17 +222,39 @@ function injectSEO(parsed) {
     if (!script) { script = document.createElement('script'); script.id = 'json-ld'; script.type = 'application/ld+json'; document.head.appendChild(script); }
     
     let title = 'Thuồng Luồng Mini - Khám phá Tuyên Quang';
+    let description = 'Tìm kiếm, đánh giá và chia sẻ những địa điểm tuyệt vời nhất tại Tuyên Quang — từ ẩm thực đường phố đến điểm du lịch xinh đẹp.';
+    let image = 'https://thuongluongmini.pages.dev/images/logo-512.png';
     let data = { "@context": "https://schema.org", "@type": "WebSite", "name": "Thuồng Luồng Mini", "url": "https://thuongluongmini.pages.dev" };
 
     if (parsed.page === 'detail' && parsed.placeId) {
         const place = getPlaceById(parsed.placeId);
         if (place) {
             title = `${place.name} - Đánh giá & Trải nghiệm | Thuồng Luồng Mini`;
-            data = { "@context": "https://schema.org", "@type": "LocalBusiness", "name": place.name, "address": { "@type": "PostalAddress", "streetAddress": place.address, "addressLocality": "Tuyên Quang", "addressCountry": "VN" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": place.rating, "reviewCount": place.totalReviews } };
+            description = place.description || description;
+            image = (place.images && place.images[0]) ? place.images[0] : image;
+            data = { "@context": "https://schema.org", "@type": "LocalBusiness", "name": place.name, "address": { "@type": "PostalAddress", "streetAddress": place.address || '', "addressLocality": "Tuyên Quang", "addressCountry": "VN" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": place.rating || 0, "reviewCount": place.totalReviews || 0 } };
         }
     }
+    
     document.title = title;
     script.textContent = JSON.stringify(data);
+    
+    // Update meta tags dynamically
+    const setMeta = (name, content, isProperty = false) => {
+        let meta = document.querySelector(`meta[${isProperty ? 'property' : 'name'}="${name}"]`);
+        if (!meta) {
+            meta = document.createElement('meta');
+            if (isProperty) meta.setAttribute('property', name);
+            else meta.setAttribute('name', name);
+            document.head.appendChild(meta);
+        }
+        meta.setAttribute('content', content);
+    };
+    
+    setMeta('description', description);
+    setMeta('og:title', title, true);
+    setMeta('og:description', description, true);
+    setMeta('og:image', image, true);
 }
 
 // ============================================
@@ -405,10 +427,31 @@ async function init() {
         const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
         const snapshot = await get(ref(database, 'places'));
         if (snapshot.exists()) {
-            const placesArray = Object.values(snapshot.val());
-            const { setPlaces } = await import('./data.js');
-            setPlaces(placesArray);
-            console.log("✅ Loaded " + placesArray.length + " places from Firebase");
+            const firebaseData = snapshot.val();
+            // Firebase might return an array or object
+            const rawArray = Array.isArray(firebaseData) ? firebaseData.filter(Boolean) : Object.values(firebaseData);
+            
+            if (rawArray.length > 0) {
+                const placesArray = rawArray.map(p => ({
+                    ...p,
+                    rating: p.rating || 0,
+                    totalReviews: p.totalReviews || 0,
+                    reviews: p.reviews ? (Array.isArray(p.reviews) ? p.reviews : Object.values(p.reviews)) : [],
+                    images: p.images || [],
+                    imageColors: p.imageColors || ['#F4A261', '#E76F51'],
+                    tags: p.tags || [],
+                    amenities: p.amenities || [],
+                    coordinates: p.coordinates || { lat: 21.82, lng: 105.21 },
+                    social: p.social || {},
+                    priceRange: p.priceRange || '$',
+                    isOpen: p.isOpen !== false,
+                }));
+                const { setPlaces } = await import('./data.js');
+                setPlaces(placesArray);
+                console.log("✅ Loaded " + placesArray.length + " places from Firebase");
+            } else {
+                console.log("📦 Firebase places empty, using static data");
+            }
         }
     } catch(e) {
         console.log("📦 Using static data:", e.message);
@@ -489,18 +532,46 @@ window.sendChatMessage = async function() {
     window.chatHistory.push({ role: 'user', content: msg });
     
     try {
+        // Try backend API first
         const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: window.chatHistory, contextData }) });
         const data = await response.json();
         document.getElementById('chat-typing')?.remove();
+        
         if (response.ok && data.reply) {
-            window.chatHistory.push({ role: 'model', content: data.reply });
+            window.chatHistory.push({ role: 'assistant', content: data.reply });
             appendMessage('ai', data.reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n\*/g, '<br>•').replace(/\n/g, '<br>'));
+        } else if (data.error) {
+            // If backend returned a specific error (e.g. missing API key, Gemini error)
+            appendMessage('ai', `⚠️ Lỗi hệ thống: ${data.error}`);
         } else {
-            appendMessage('ai', 'Xin lỗi, em đang bị lỗi. (Lỗi: ' + (data.error || 'Unknown') + ')');
+            throw new Error('API failed');
         }
     } catch (e) {
+        // Fallback to local regex-based smart bot ONLY if fetch completely fails (e.g. running locally without Wrangler or 404)
         document.getElementById('chat-typing')?.remove();
-        appendMessage('ai', 'Lỗi mạng! Không thể kết nối với server.');
+        console.log("Fallback bot activated. Error:", e);
+        
+        const text = msg.toLowerCase();
+        let reply = "Xin lỗi sếp, em đang bị mất mạng xíu. Sếp thử tìm kiếm bằng thanh công cụ ở trên nhé!";
+        
+        if (text.includes("phở") || text.includes("bún") || text.includes("cháo")) {
+            const food = PLACES.filter(p => p.category === 'an-uong');
+            reply = `Sếp thèm ăn hả? Ở Tuyên Quang có ${food.length} quán ngon lắm, sếp thử xem quán ${food[0]?.name} ở ${food[0]?.address} xem sao!`;
+        } else if (text.includes("chơi") || text.includes("karaoke") || text.includes("phim")) {
+            const fun = PLACES.filter(p => p.category === 'vui-choi');
+            reply = `Muốn đi quẩy thì em gợi ý sếp tới ${fun[0]?.name} nha. Đang được rate ${fun[0]?.rating} sao đó!`;
+        } else if (text.includes("cafe") || text.includes("trà sữa") || text.includes("uống")) {
+            const cafe = PLACES.filter(p => p.subCategory?.includes('Cafe') || p.subCategory?.includes('Trà sữa'));
+            reply = `Đi cafe chill chill thì sếp chốt ngay ${cafe[0]?.name} nhé, view đẹp đồ uống ngon!`;
+        } else if (text.includes("du lịch") || text.includes("chụp ảnh") || text.includes("đẹp")) {
+            const travel = PLACES.filter(p => p.category === 'du-lich');
+            reply = `Tuyên Quang quê em cảnh đẹp ngút ngàn! Sếp thử đi ${travel[0]?.name} xem, chụp ảnh sống ảo cháy máy luôn.`;
+        } else if (text.includes("chào") || text.includes("hi") || text.includes("hello")) {
+            reply = `Chào sếp! Sếp muốn em tư vấn chỗ ăn chơi nào hôm nay ạ?`;
+        }
+        
+        window.chatHistory.push({ role: 'assistant', content: reply });
+        appendMessage('ai', reply);
     }
 };
 

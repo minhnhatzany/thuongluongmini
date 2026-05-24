@@ -5,6 +5,7 @@ import { CATEGORIES } from './data.js';
 // Stars renderer
 // ============================================
 export function renderStars(rating) {
+    rating = rating || 0;
     let html = '';
     for (let i = 1; i <= 5; i++) {
         if (i <= Math.floor(rating)) {
@@ -59,9 +60,12 @@ export function createPlaceCard(place) {
         <article class="card animate-on-scroll" data-place-id="${place.id}">
             <a href="#/dia-diem/${place.id}/${place.slug}" class="card__link">
                 <div class="card__image" style="${placeholderStyle}">
-                    <div class="card__image-placeholder">
-                        <span>${category ? category.icon : '📍'}</span>
-                    </div>
+                    ${place.images && place.images.length > 0 && !place.images[0].includes('placeholder') ? 
+                        `<img src="${place.images[0]}" alt="${place.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">` : 
+                        `<div class="card__image-placeholder">
+                            <span>${category ? category.icon : '📍'}</span>
+                        </div>`
+                    }
                     <div class="card__badges">
                         ${place.isFeatured ? '<span class="badge badge--featured">⭐ Nổi bật</span>' : ''}
                         ${place.isNew ? '<span class="badge badge--new">Mới</span>' : ''}
@@ -83,16 +87,16 @@ export function createPlaceCard(place) {
                     <div class="card__meta">
                         <div class="card__rating">
                             ${stars}
-                            <span class="card__rating-num">${place.rating.toFixed(1)}</span>
+                            <span class="card__rating-num">${(place.rating || 0).toFixed(1)}</span>
                             <span class="card__review-count">(${place.totalReviews})</span>
                         </div>
                     </div>
                     <div class="card__footer">
                         <div class="card__location">
                             <i data-lucide="map-pin"></i>
-                            <span>${place.address.length > 35 ? place.address.substring(0, 35) + '...' : place.address}</span>
+                            <span>${(place.address || '').length > 35 ? (place.address || '').substring(0, 35) + '...' : (place.address || 'Đang cập nhật')}</span>
                         </div>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${place.coordinates.lat},${place.coordinates.lng}" 
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${place.coordinates?.lat || ''},${place.coordinates?.lng || ''}" 
                            target="_blank" 
                            class="btn btn--primary btn--sm" 
                            style="padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; flex-shrink: 0;"

@@ -26,7 +26,7 @@ export function renderDetailPage(placeId) {
     const related = getRelatedPlaces(place, 4);
     const isFav = window.isFavorite(place.id);
     const ratingBreakdown = getRatingBreakdown(place.reviews);
-    const avgRating = place.rating;
+    const avgRating = place.rating || 0;
     
     // Generate placeholder gallery colors
     const galleryColors = place.imageColors || ['#F4A261', '#E76F51', '#2A9D8F', '#264653'];
@@ -100,7 +100,7 @@ export function renderDetailPage(placeId) {
                             
                             <div class="detail-header__rating">
                                 <div class="detail-rating-big">
-                                    <span class="detail-rating-big__num">${avgRating.toFixed(1)}</span>
+                                    <span class="detail-rating-big__num">${(avgRating || 0).toFixed(1)}</span>
                                     <div class="detail-rating-big__stars">
                                         ${renderStars(avgRating)}
                                         <span class="detail-rating-big__count">${place.totalReviews} đánh giá</span>
@@ -254,7 +254,7 @@ export function renderDetailPage(placeId) {
                             <!-- Rating Summary -->
                             <div class="review-summary">
                                 <div class="review-summary__score">
-                                    <span class="review-summary__num">${avgRating.toFixed(1)}</span>
+                                    <span class="review-summary__num">${(avgRating || 0).toFixed(1)}</span>
                                     <div class="review-summary__stars">${renderStars(avgRating)}</div>
                                     <span class="review-summary__count">${place.totalReviews} đánh giá</span>
                                 </div>
@@ -369,7 +369,7 @@ export function renderDetailPage(placeId) {
             <div class="detail-mobile-cta">
                 <div class="detail-mobile-cta__info">
                     <span class="detail-mobile-cta__name">${place.name}</span>
-                    <span class="detail-mobile-cta__rating">${renderStars(avgRating)} ${avgRating.toFixed(1)}</span>
+                    <span class="detail-mobile-cta__rating">${renderStars(avgRating)} ${(avgRating || 0).toFixed(1)}</span>
                 </div>
                 <div class="detail-mobile-cta__actions">
                     <a href="tel:${place.phone}" class="btn btn--secondary btn--sm">
@@ -563,14 +563,19 @@ window.submitReview = async function(placeId) {
         return;
     }
     
-    // Process points
-    const { updateGamificationData } = await import('../gamification.js');
-    const result = await updateGamificationData(window.currentUser.uid, 'ADD_REVIEW');
+    // Process gamification points (non-blocking)
+    let result = null;
+    try {
+        const { updateGamificationData } = await import('../gamification.js');
+        result = await updateGamificationData(window.currentUser.uid, 'ADD_REVIEW');
+    } catch (e) {
+        console.warn('Gamification không khả dụng:', e.message);
+    }
     
     // Save to Realtime Database
     try {
         const { database } = await import('../firebase-config.js');
-        const { ref, push, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+        const { ref, push } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
         
         const reviewRef = ref(database, `places/${placeId}/reviews`);
         await push(reviewRef, {
@@ -579,8 +584,7 @@ window.submitReview = async function(placeId) {
             rating: currentReviewRating,
             text: text,
             date: new Date().toISOString(),
-            userId: window.currentUser.uid,
-            timestamp: serverTimestamp()
+            userId: window.currentUser.uid
         });
         
         let message = 'Đã gửi đánh giá thành công! Cảm ơn bạn 🧡';
