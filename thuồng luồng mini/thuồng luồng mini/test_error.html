@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        window.addEventListener('error', function(e) {
+            fetch('/report?err=' + encodeURIComponent('ERROR: ' + e.message + ' at ' + (e.filename || '') + ':' + e.lineno + '\nStack: ' + (e.error && e.error.stack ? e.error.stack : '')));
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+            fetch('/report?err=' + encodeURIComponent('PROMISE: ' + e.reason + '\nStack: ' + (e.reason && e.reason.stack ? e.reason.stack : '')));
+        });
+    </script>
+    <script type="module" src="js/app.js"></script>
+</head>
+<body>
+    <h1>Testing...</h1>
+</body>
+</html>
