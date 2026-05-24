@@ -1630,7 +1630,7 @@
     width: 360px;
     height: 500px;
     max-height: calc(100vh - 120px);
-    background: var(--bg-card);
+    background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-elevated);
     border: 1px solid var(--border-color);

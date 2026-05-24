@@ -1,0 +1,14 @@
+{
+  "name": "thuong-luong-mini",
+  "version": "1.0.0",
+  "description": "Thuồng Luồng Mini - Nền tảng khám phá Tuyên Quang",
+  "main": "index.html",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.57.1"
+  }
+}

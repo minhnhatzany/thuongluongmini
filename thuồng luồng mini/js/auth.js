@@ -45,42 +45,49 @@ export function initAuth() {
             updateAuthUI(null);
         }
     });
+}
 
-    // Attach to global window object for HTML onclick handlers
-    window.signInWithGoogle = async () => {
+// Attach immediately upon module load
+window.signInWithGoogle = async () => {
+    console.log("Clicked Google Sign-In");
+    try {
         const provider = new GoogleAuthProvider();
-        try {
-            await signInWithPopup(auth, provider);
-            if (window.closeAuthModal) window.closeAuthModal();
-        } catch (error) {
-            console.error("Google sign-in error:", error);
+        await signInWithPopup(auth, provider);
+        if (window.closeAuthModal) window.closeAuthModal();
+    } catch (error) {
+        console.error("Google sign-in error:", error);
+        if (error.code === 'auth/popup-blocked') {
+            alert("Trình duyệt của bạn đã chặn cửa sổ bật lên (popup). Vui lòng cho phép popup để đăng nhập.");
+        } else if (error.code === 'auth/unauthorized-domain') {
+            alert("Tên miền này chưa được cấp phép trong Firebase. Vui lòng thêm vào Authorized domains trên Firebase Console.");
+        } else {
             alert("Lỗi đăng nhập Google: " + error.message);
         }
-    };
+    }
+};
 
-    window.signInWithFacebook = async () => {
+window.signInWithFacebook = async () => {
+    console.log("Clicked Facebook Sign-In");
+    try {
         const provider = new FacebookAuthProvider();
-        try {
-            await signInWithPopup(auth, provider);
-            if (window.closeAuthModal) window.closeAuthModal();
-        } catch (error) {
-            console.error("Facebook sign-in error:", error);
-            alert("Lỗi đăng nhập Facebook: " + error.message);
-        }
-    };
+        await signInWithPopup(auth, provider);
+        if (window.closeAuthModal) window.closeAuthModal();
+    } catch (error) {
+        console.error("Facebook sign-in error:", error);
+        alert("Lỗi đăng nhập Facebook: " + error.message);
+    }
+};
 
-    window.logOut = async () => {
-        try {
-            await signOut(auth);
-            // Navigate home if on admin page
-            if (window.location.hash.startsWith('#/admin')) {
-                window.location.hash = '#/';
-            }
-        } catch (error) {
-            console.error("Logout error:", error);
+window.logOut = async () => {
+    try {
+        await signOut(auth);
+        if (window.location.hash.startsWith('#/admin') || window.location.hash.startsWith('#/ho-so')) {
+            window.location.hash = '#/';
         }
-    };
-}
+    } catch (error) {
+        console.error("Logout error:", error);
+    }
+};
 
 
 function updateAuthUI(user) {

@@ -7,12 +7,23 @@ export async function onRequestPost(context) {
 
         const apiKey = env.GEMINI_API_KEY;
 
+        const corsHeaders = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Content-Type': 'application/json'
+        };
+
+        if (request.method === "OPTIONS") {
+            return new Response(null, { headers: corsHeaders });
+        }
+
         if (!apiKey) {
             return new Response(JSON.stringify({ 
                 error: "Chưa cấu hình API Key. Vui lòng thêm biến môi trường GEMINI_API_KEY trong Cloudflare Pages." 
             }), { 
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: corsHeaders
             });
         }
 
@@ -60,20 +71,23 @@ ${contextData}
             console.error("Gemini API Error:", data);
             return new Response(JSON.stringify({ error: data.error?.message || "Lỗi khi gọi Gemini API" }), { 
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: corsHeaders
             });
         }
 
         const replyText = data.candidates[0].content.parts[0].text;
 
         return new Response(JSON.stringify({ reply: replyText }), {
-            headers: { 'Content-Type': 'application/json' }
+            headers: corsHeaders
         });
 
     } catch (error) {
         return new Response(JSON.stringify({ error: error.message }), { 
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            }
         });
     }
 }

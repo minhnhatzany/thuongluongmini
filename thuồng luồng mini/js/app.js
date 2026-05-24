@@ -12,6 +12,7 @@ import { renderSearchPage } from './pages/search.js';
 import { renderItineraryList, renderItineraryDetail } from './pages/itinerary.js';
 import { renderAdminPage } from './pages/admin.js';
 import { renderProfilePage } from './pages/profile.js';
+import { initAuth } from './auth.js';
 
 // ============================================
 // Global State
@@ -261,9 +262,10 @@ function injectSEO(parsed) {
 // Header Scroll
 // ============================================
 function initHeaderScroll() {
-    const header = document.getElementById('main-header');
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-header');
+        if (!header) return;
         const currentScroll = window.scrollY;
         header.classList.toggle('scrolled', currentScroll > 50);
         header.classList.toggle('hidden', currentScroll > lastScroll && currentScroll > 200);
@@ -421,6 +423,7 @@ function initFilters() {
 // ============================================
 async function init() {
     if (window.lucide) window.lucide.createIcons();
+    initAuth();
     
     try {
         const { database } = await import('./firebase-config.js');
@@ -429,7 +432,9 @@ async function init() {
         if (snapshot.exists()) {
             const firebaseData = snapshot.val();
             // Firebase might return an array or object
-            const rawArray = Array.isArray(firebaseData) ? firebaseData.filter(Boolean) : Object.values(firebaseData);
+            let rawArray = Array.isArray(firebaseData) ? firebaseData : Object.values(firebaseData);
+            // Strictly filter out nulls or invalid places that don't even have an ID
+            rawArray = rawArray.filter(p => p && p.id && p.category);
             
             if (rawArray.length > 0) {
                 const placesArray = rawArray.map(p => ({
@@ -533,7 +538,11 @@ window.sendChatMessage = async function() {
     
     try {
         // Try backend API first
-        const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: window.chatHistory, contextData }) });
+        const apiUrl = window.location.hostname === 'localhost' || window.location.protocol === 'file:' 
+            ? 'https://thuongluongmini.pages.dev/api/chat' 
+            : '/api/chat';
+        
+        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: window.chatHistory, contextData }) });
         const data = await response.json();
         document.getElementById('chat-typing')?.remove();
         

@@ -456,7 +456,7 @@ img { content-visibility: auto; }
 .user-avatar { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; cursor: pointer; border: 2px solid var(--color-primary-200); transition: border-color 0.2s; padding: 0; }
 .user-avatar:hover { border-color: var(--color-primary); }
 .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); min-width: 200px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 100; border: 1px solid #F3F4F6; }
+.user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--color-bg-card); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); min-width: 200px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 9999; border: 1px solid var(--border-color); }
 .user-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
 .user-dropdown__item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px; border-radius: 10px; font-weight: 600; color: #374151; transition: background 0.15s; font-size: 0.92rem; text-align: left; }
 .user-dropdown__item:hover { background: #F9FAFB; }
@@ -528,9 +528,12 @@ img { content-visibility: auto; }
 .modal-overlay.active { opacity: 1; visibility: visible; }
 .modal {
     background: white; border-radius: 20px; width: 100%; max-width: 440px;
-    padding: 32px; position: relative;
+    padding: 32px; position: relative !important;
     transform: scale(0.95) translateY(10px); transition: transform 0.3s var(--ease-bounce, ease);
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
 }
 .modal-overlay.active .modal { transform: scale(1) translateY(0); }
 .modal__close {
