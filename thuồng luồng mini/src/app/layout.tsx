@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
+import SyncManager from "@/components/SyncManager";
 
 const nunito = Nunito({
   subsets: ["vietnamese", "latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
       </head>
       <body>
         <div id="app">
+          <SyncManager />
           <Header />
           <main className="page-container" id="main-content" style={{ minHeight: "80vh", paddingTop: "var(--header-height)" }} role="main">
             {children}

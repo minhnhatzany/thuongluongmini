@@ -87,7 +87,7 @@ export default function Header() {
             
             {user ? (
               <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
-                <Link href="/yeu-thich" style={{display: "flex", alignItems: "center", gap: "5px", textDecoration: "none", color: "var(--color-text)"}}>
+                <Link href="/profile" style={{display: "flex", alignItems: "center", gap: "5px", textDecoration: "none", color: "var(--color-text)"}}>
                   {user.photoURL ? (
                     <img src={user.photoURL} alt="Avatar" style={{width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "2px solid var(--color-primary)"}} />
                   ) : (
