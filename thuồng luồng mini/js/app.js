@@ -669,6 +669,8 @@ async function init() {
     initSearch();
     initMobileMenu();
     initBackToTop();
+    initDarkModeToggle();
+    initInstallPrompt();
     registerServiceWorker();
     
     console.log('🐉 Thuồng Luồng Mini đã sẵn sàng!');
@@ -680,6 +682,108 @@ function registerServiceWorker() {
         console.warn('Service worker:', err.message);
     });
 }
+
+// ============================================
+// Dark Mode Toggle
+// ============================================
+function initDarkModeToggle() {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const stored = localStorage.getItem('tlm_dark_mode');
+    const isDark = stored !== null ? stored === 'true' : prefersDark;
+    
+    if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggleBtn.classList.add('active');
+        toggleBtn.setAttribute('aria-label', 'Chuyển sang chế độ sáng');
+    }
+    
+    toggleBtn.addEventListener('click', () => {
+        const currentlyDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (currentlyDark) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('tlm_dark_mode', 'false');
+            toggleBtn.classList.remove('active');
+            toggleBtn.setAttribute('aria-label', 'Chuyển sang chế độ tối');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('tlm_dark_mode', 'true');
+            toggleBtn.classList.add('active');
+            toggleBtn.setAttribute('aria-label', 'Chuyển sang chế độ sáng');
+        }
+    });
+}
+
+// ============================================
+// Install PWA Prompt
+// ============================================
+let deferredPrompt = null;
+
+function initInstallPrompt() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallBanner();
+    });
+    
+    window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        const banner = document.getElementById('install-banner');
+        if (banner) banner.remove();
+        console.log('✅ PWA installed successfully');
+    });
+}
+
+function showInstallBanner() {
+    if (!deferredPrompt) return;
+    // Don't show if already dismissed
+    if (localStorage.getItem('tlm_install_dismissed')) return;
+    
+    const existing = document.getElementById('install-banner');
+    if (existing) return;
+    
+    const banner = document.createElement('div');
+    banner.id = 'install-banner';
+    banner.className = 'install-banner';
+    banner.innerHTML = `
+        <div class="install-banner__content">
+            <img src="assets/logo.jpg" alt="TL Mini" width="40" height="40" style="border-radius: 10px;">
+            <div>
+                <strong>Cài đặt Thuồng Luồng Mini</strong>
+                <span style="font-size: 0.8rem; color: var(--color-text-secondary);">Trải nghiệm nhanh hơn, dùng offline</span>
+            </div>
+        </div>
+        <div class="install-banner__actions">
+            <button class="btn btn--ghost btn--sm" onclick="window.dismissInstallBanner()">Để sau</button>
+            <button class="btn btn--primary btn--sm" onclick="window.installPWA()">Cài đặt</button>
+        </div>
+    `;
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => banner.classList.add('show'));
+}
+
+window.installPWA = async function() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const result = await deferredPrompt.userChoice;
+    if (result.outcome === 'accepted') {
+        console.log('✅ User accepted install');
+    }
+    deferredPrompt = null;
+    const banner = document.getElementById('install-banner');
+    if (banner) banner.remove();
+};
+
+window.dismissInstallBanner = function() {
+    localStorage.setItem('tlm_install_dismissed', 'true');
+    const banner = document.getElementById('install-banner');
+    if (banner) {
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 300);
+    }
+};
 
 // ============================================
 // Chatbot

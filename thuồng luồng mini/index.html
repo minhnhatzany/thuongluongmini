@@ -34,9 +34,14 @@
     <link rel="preload" href="css/components.css" as="style">
     <link rel="preload" href="assets/logo.jpg" as="image">
     
-    <!-- Google Fonts - Nunito with optimized loading -->
+    <!-- Preconnect for third-party resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://thuongluongmini-default-rtdb.asia-southeast1.firebasedatabase.app" crossorigin>
+    
+    <!-- Google Fonts - Nunito with optimized loading -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Leaflet CSS -->
@@ -112,6 +117,12 @@
                     <!-- Mobile only search toggle -->
                     <button class="header__action-btn" id="search-toggle" aria-label="Mở tìm kiếm" style="display: none;">
                         <i data-lucide="search" aria-hidden="true"></i>
+                    </button>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button class="header__action-btn dark-mode-toggle" id="dark-mode-toggle" aria-label="Chuyển sang chế độ tối">
+                        <i data-lucide="moon" class="dark-mode-icon dark-mode-icon--moon" aria-hidden="true"></i>
+                        <i data-lucide="sun" class="dark-mode-icon dark-mode-icon--sun" aria-hidden="true" style="display: none;"></i>
                     </button>
                     
                     <!-- Auth UI -->

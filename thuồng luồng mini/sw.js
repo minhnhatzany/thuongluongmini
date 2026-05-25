@@ -1,4 +1,4 @@
-const CACHE = 'tlm-v2';
+const CACHE = 'tlm-v3';
 const SHELL = [
     '/',
     '/index.html',
@@ -46,7 +46,14 @@ self.addEventListener('fetch', (event) => {
                     caches.open(CACHE).then(cache => cache.put(request, clone));
                     return response;
                 })
-                .catch(() => caches.match(request).then(cached => cached || caches.match('/')))
+                .catch(() => 
+                    caches.match(request).then(cached => 
+                        cached || caches.match('/').then(homePage => 
+                            homePage || new Response(`
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Thuồng Luồng Mini - Offline</title><style>body{font-family:Nunito,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#FFFAF5;color:#2D2D2D;text-align:center;padding:20px}.offline{max-width:400px}h1{font-size:2rem;color:#F4A261}.emoji{font-size:4rem;margin-bottom:20px}p{color:#6B7280;line-height:1.6}.btn{display:inline-block;padding:12px 24px;background:linear-gradient(135deg,#F4A261,#E76F51);color:#fff;border-radius:12px;text-decoration:none;font-weight:700;margin-top:20px}</style></head><body><div class="offline"><div class="emoji">🐉</div><h1>Bé Thuồng Luồng đang offline</h1><p>Mạng yếu quá sếp ơi! Kết nối lại để khám phá Tuyên Quang nhé.</p><button class="btn" onclick="location.reload()">Thử lại</button></div></body></html>`, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } })
+                        )
+                    )
+                )
         );
         return;
     }

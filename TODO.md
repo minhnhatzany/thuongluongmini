@@ -1,31 +1,35 @@
-# 🐉 THUỒNG LUỒNG MINI — Nâng cấp khổng lồ
+# 🚀 Thuồng Luồng Mini - Nâng cấp toàn diện
 
-## Phase 1: SEO & Meta (Critical cho top Google)
-- [ ] Schema.org LocalBusiness + WebSite + BreadcrumbList
-- [ ] Meta tags động cho từng trang (title, description, og)
-- [ ] Sitemap.xml đầy đủ URLs
-- [ ] robots.txt tối ưu
-- [ ] Canonical URLs
-- [ ] JSON-LD structured data cho mọi place
+## 1. 🐛 Bug Fixes ✅
+- [x] Kiểm tra `renderStars` trong utils.js - OK
+- [x] Xoá `escapeHtml` duplicate trong search.js (import từ utils.js)
+- [x] Kiểm tra import `renderStars` trong detail.js - OK
+- [x] Kiểm tra import `escapeHtml` trong profile.js - OK
+- [x] Kiểm tra sw.js lỗi cú pháp - OK
 
-## Phase 2: Performance (Core Web Vitals)
-- [ ] Lazy loading images với loading="lazy" + decoding="async"
-- [ ] Preload critical CSS & fonts
-- [ ] Reduce CLS (Cumulative Layout Shift)
-- [ ] Optimize font loading (swap, preconnect)
-- [ ] Debounce scroll events
-- [ ] Image dimensions để tránh layout shift
+## 2. 🎨 Giao diện & UX
+- [ ] Thêm Dark Mode toggle thủ công
+- [ ] Thêm Skeleton loading cho cards
+- [ ] Cải thiện responsive cho tablet/mobile
+- [ ] Thêm animation cho page transition
 
-## Phase 3: Mobile UX & Fix lỗi
-- [ ] Safe area cho notch phones (env(safe-area-inset-*))
-- [ ] Touch events optimization (passive listeners)
-- [ ] Fix bottom nav overlap trên iOS
-- [ ] Smooth scroll behavior
-- [ ] Fix CSS variable fallbacks
-- [ ] Dark mode support
+## 3. ⚡ Performance
+- [ ] Lazy load images với placeholder
+- [ ] Tối ưu cache strategy cho SW
+- [ ] Thêm preconnect/prefetch cho critical resources
 
-## Phase 4: Accessibility
-- [ ] ARIA labels cho interactive elements
-- [ ] Keyboard navigation
-- [ ] Focus management
-- [ ] Skip to content link
+## 4. 🔥 Tính năng mới
+- [ ] Thêm nút Share native
+- [ ] Thêm Install PWA prompt
+- [ ] Cải thiện search với filter nâng cao
+- [ ] Thêm Offline page fallback
+
+## 5. 📱 PWA
+- [ ] Cập nhật manifest.json
+- [ ] Thêm push notification subscription
+- [ ] Cải thiện offline experience
+
+## 6. 🔐 Auth & Admin
+- [ ] Hoàn thiện admin page CRUD
+- [ ] Cải thiện profile page
+- [ ] Thêm realtime comments

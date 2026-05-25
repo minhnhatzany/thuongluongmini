@@ -3,7 +3,7 @@
 // ============================================
 
 import { CATEGORIES, searchPlaces } from '../data.js';
-import { createPlaceCard } from '../utils.js';
+import { createPlaceCard, escapeHtml } from '../utils.js';
 
 export function renderSearchPage(query = '') {
     const results = query ? searchPlaces(query) : [];
@@ -110,12 +110,6 @@ export function renderSearchPage(query = '') {
 // ============================================
 // Helper Functions
 // ============================================
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
 function adjustColor(hex, amount) {
     const num = parseInt(hex.replace('#', ''), 16);
     const r = Math.min(255, Math.max(0, (num >> 16) + amount));

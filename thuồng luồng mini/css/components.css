@@ -431,6 +431,92 @@
 .admin-stat-card__label { font-size: var(--text-sm); color: var(--color-text-secondary); margin-top: var(--space-1); }
 
 /* ========================================================================
+   DARK MODE TOGGLE
+   ======================================================================== */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+.dark-mode-toggle:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+}
+.dark-mode-toggle.active {
+    background: var(--color-bg-dark);
+    color: #FFD700;
+    border-color: var(--color-bg-dark);
+}
+.dark-mode-toggle.active:hover {
+    background: #2D2D44;
+}
+
+/* ========================================================================
+   INSTALL BANNER
+   ======================================================================== */
+.install-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-modal);
+    background: var(--color-bg-card);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-4) var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    transform: translateY(100%);
+    transition: transform var(--duration-normal) var(--ease-out);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.install-banner.show {
+    transform: translateY(0);
+}
+.install-banner__content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1;
+    min-width: 0;
+}
+.install-banner__content strong {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-text-heading);
+}
+.install-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .install-banner {
+        flex-direction: column;
+        padding-bottom: calc(var(--space-4) + var(--safe-area-bottom));
+    }
+    .install-banner__actions {
+        width: 100%;
+    }
+    .install-banner__actions .btn {
+        flex: 1;
+    }
+}
+
+/* ========================================================================
    ANIMATIONS
    ======================================================================== */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -1,11 +1,15 @@
 {
-  "name": "Thuồng Luồng Mini",
+  "name": "Thuồng Luồng Mini - Khám phá Tuyên Quang",
   "short_name": "TL Mini",
-  "description": "Nền tảng khám phá lifestyle địa phương tại Tuyên Quang",
+  "description": "Nền tảng khám phá ẩm thực, vui chơi, du lịch và thời trang tại Tuyên Quang. Review thật từ cộng đồng.",
   "start_url": "/#/",
   "display": "standalone",
   "background_color": "#FFFAF5",
   "theme_color": "#F4A261",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "food", "lifestyle"],
+  "lang": "vi-VN",
+  "scope": "/",
   "icons": [
     {
       "src": "assets/logo.jpg",
@@ -19,5 +23,7 @@
       "type": "image/jpeg",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
 }
