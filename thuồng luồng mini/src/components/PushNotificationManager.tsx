@@ -23,7 +23,7 @@ export default function PushNotificationManager() {
       const messaging = getMessaging(app);
       
       // Khóa công khai VAPID từ Firebase Console
-      const vapidKey = "BG-YOUR-VAPID-KEY-HERE"; 
+      const vapidKey = "BCvPQOpyU5z9aZYFftk009J3b9uc_D5Q4In7zJ6igDqXyF4z-fmGXI-35Q_lGjYWZQJRDIYhztDwNSv5RS4Nzj8"; 
       
       // Ở đây chỉ giả lập vì cần vapidKey thật từ Cloud Messaging
       const currentToken = await getToken(messaging, { vapidKey: vapidKey }).catch(e => {
