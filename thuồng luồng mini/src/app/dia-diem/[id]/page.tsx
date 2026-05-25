@@ -3,13 +3,8 @@ import { MapPin, Phone, Clock } from "lucide-react";
 import Link from "next/link";
 import ReviewSection from "@/components/ReviewSection";
 import CheckInButton from "@/components/CheckInButton";
+import PlaceMapWrapper from "@/components/PlaceMapWrapper";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const PlaceMap = dynamic(() => import("@/components/Map"), {
-  ssr: false,
-  loading: () => <div style={{ height: "300px", width: "100%", background: "var(--color-bg-secondary)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}><span className="spinner"></span> Đang tải bản đồ...</div>
-});
 
 export async function generateStaticParams() {
   return PLACES.map((p: any) => ({
@@ -110,7 +105,7 @@ export default async function PlaceDetail(props: any) {
         {place.coordinates && (
           <div className="section" style={{marginTop: "var(--space-6)"}}>
             <h2 className="section__title">Bản đồ</h2>
-            <PlaceMap 
+            <PlaceMapWrapper 
               lat={place.coordinates.lat} 
               lng={place.coordinates.lng} 
               name={place.name} 
