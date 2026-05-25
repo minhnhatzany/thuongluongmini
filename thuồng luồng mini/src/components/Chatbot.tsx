@@ -141,20 +141,26 @@ export default function Chatbot() {
                 }}>
                   {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                 </div>
-                <div style={{
-                  background: msg.role === 'user' ? "var(--color-primary)" : "var(--color-background)",
-                  color: msg.role === 'user' ? "white" : "var(--color-text)",
-                  padding: "12px 16px",
-                  borderRadius: "18px",
-                  borderTopRightRadius: msg.role === 'user' ? "4px" : "18px",
-                  borderTopLeftRadius: msg.role === 'bot' ? "4px" : "18px",
-                  maxWidth: "75%",
-                  boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
-                  fontSize: "0.95rem",
-                  lineHeight: "1.4"
-                }}>
-                  {msg.text}
-                </div>
+                <div 
+                  dangerouslySetInnerHTML={{
+                    __html: msg.text
+                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                      .replace(/\n/g, '<br />')
+                  }}
+                  style={{
+                    background: msg.role === 'user' ? "var(--color-primary)" : "var(--color-background)",
+                    color: msg.role === 'user' ? "white" : "var(--color-text)",
+                    padding: "12px 16px",
+                    borderRadius: "18px",
+                    borderTopRightRadius: msg.role === 'user' ? "4px" : "18px",
+                    borderTopLeftRadius: msg.role === 'bot' ? "4px" : "18px",
+                    maxWidth: "75%",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
+                    fontSize: "0.95rem",
+                    lineHeight: "1.4"
+                  }}
+                />
               </div>
             ))}
             {isLoading && (
