@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,11 +9,18 @@ import Chatbot from "@/components/Chatbot";
 import { Providers } from "@/components/Providers";
 import PushNotificationManager from "@/components/PushNotificationManager";
 
-const nunito = Nunito({
+const outfit = Outfit({
   subsets: ["vietnamese", "latin"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
-  variable: "--font-nunito",
+  variable: "--font-primary",
+});
+
+const inter = Inter({
+  subsets: ["vietnamese", "latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-secondary",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={nunito.variable}>
+    <html lang="vi" className={`${outfit.variable} ${inter.variable}`}>
       <head>
         <meta name="theme-color" content="#F4A261" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)" />
