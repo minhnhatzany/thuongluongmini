@@ -1,35 +1,44 @@
-# 🚀 Thuồng Luồng Mini - Nâng cấp toàn diện
+# Checklist Fix & Nâng cấp Thuồng Luồng Mini
 
-## 1. 🐛 Bug Fixes ✅
-- [x] Kiểm tra `renderStars` trong utils.js - OK
-- [x] Xoá `escapeHtml` duplicate trong search.js (import từ utils.js)
-- [x] Kiểm tra import `renderStars` trong detail.js - OK
-- [x] Kiểm tra import `escapeHtml` trong profile.js - OK
-- [x] Kiểm tra sw.js lỗi cú pháp - OK
+## 🐛 Bug Critical
+- [ ] Fix `escapeHtml` trong `utils.js` — `&` -> `&` (XSS) — ĐÃ FIX
+- [ ] Fix `getNewPlaces` — home.js gọi với limit param nhưng hàm không nhận param
+- [ ] Xoá Lotte Cinema trùng (id=10 và id=18)
+- [ ] Fix TOURISM_PLACES thiếu fields: subCategory, slug, priceText, fullDescription, phone, openHours, social, menu
+- [ ] Fix `JSON.stringify` trong data attribute category.js (XSS/injection)
 
-## 2. 🎨 Giao diện & UX
-- [ ] Thêm Dark Mode toggle thủ công
-- [ ] Thêm Skeleton loading cho cards
-- [ ] Cải thiện responsive cho tablet/mobile
-- [ ] Thêm animation cho page transition
+## 🎨 Thiếu CSS
+- [ ] Kiểm tra và thêm CSS bị thiếu cho các component
+- [ ] Thêm CSS cho `.card__desc`, `.page-transitioning`, `.page-header`, `.page-title`, `.page-subtitle`
+- [ ] Thêm CSS cho `.category-hero` styles
+- [ ] Thêm CSS cho `.hero__stats`, `.hero__stat`, `.hero__scroll-indicator`, `.hero__badge`, `.highlight`
+- [ ] Thêm CSS cho `.cta-card`, `.section__see-all`, `.section-header`, `.section-title`
+- [ ] Thêm CSS cho `.admin-dashboard`, `.admin-nav`, `.admin-main`, `.admin-user`, `.form-group`, `.form-control`
+- [ ] Thêm CSS cho `.category-map`, `.category-map-section`, `.category-card__arrow`, `.category-card__count`
+- [ ] Thêm CSS cho `.profile-card`, `.stats-grid`, `.stat-card`, `.rank-badge`
+- [ ] Thêm CSS cho `.toast__close` button style
+- [ ] Thêm CSS cho `.search-bar--lg`, `.search-page-bar`, `.search-page-header`
+- [ ] Thêm CSS cho `.itinerary-timeline`, `.timeline-item` styles
+- [ ] Thêm CSS cho `.two-col-layout` responsive styles
 
-## 3. ⚡ Performance
-- [ ] Lazy load images với placeholder
-- [ ] Tối ưu cache strategy cho SW
-- [ ] Thêm preconnect/prefetch cho critical resources
+## 📱 Mobile Fixes
+- [ ] Fix hero search button overlap trên mobile
+- [ ] Fix detail mobile CTA overlap với bottom nav
+- [ ] Touch targets tối thiểu 44px
+- [ ] Fix bottom safe area cho iOS notch
+- [ ] Thêm CSS cho `.mobile-nav` active states
+- [ ] Fix chatbot window trên mobile bị che
 
-## 4. 🔥 Tính năng mới
-- [ ] Thêm nút Share native
-- [ ] Thêm Install PWA prompt
-- [ ] Cải thiện search với filter nâng cao
-- [ ] Thêm Offline page fallback
+## ⚡ Performance & SEO
+- [ ] Thêm `preconnect` cho Google Fonts và Firebase
+- [ ] Thêm `alt` text cho ảnh thiếu
+- [ ] Thêm `loading="lazy"` cho ảnh gallery
+- [ ] PWA manifest: icons PNG thay vì JPEG
+- [ ] Sitemap cập nhật
 
-## 5. 📱 PWA
-- [ ] Cập nhật manifest.json
-- [ ] Thêm push notification subscription
-- [ ] Cải thiện offline experience
-
-## 6. 🔐 Auth & Admin
-- [ ] Hoàn thiện admin page CRUD
-- [ ] Cải thiện profile page
-- [ ] Thêm realtime comments
+## 🔧 Functional Fixes
+- [ ] Fix `openAuthModal` fallback khi chưa định nghĩa
+- [ ] Fix `checkInPlace` — kiểm tra window.openAuthModal tồn tại
+- [ ] Fix review loading race condition (Symbol loadId)
+- [ ] Fix booking form — không mở tel nếu ko có phone
+- [ ] Thêm hiệu ứng loading khi chuyển trang

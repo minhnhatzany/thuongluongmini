@@ -1,0 +1,9 @@
+@import "../styles/variables.css";
+@import "../styles/base.css";
+@import "../styles/components.css";
+
+/* Next.js specific overrides */
+html, body {
+  margin: 0;
+  padding: 0;
+}
