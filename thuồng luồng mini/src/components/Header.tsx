@@ -72,6 +72,7 @@ export default function Header() {
               <li className="nav__item"><Link href="/danh-muc/du-lich" className={`nav__link ${isActive("/danh-muc/du-lich")}`}>Du lịch</Link></li>
               <li className="nav__item"><Link href="/danh-muc/trang-phuc" className={`nav__link ${isActive("/danh-muc/trang-phuc")}`}>Trang phục</Link></li>
               <li className="nav__item"><Link href="/lo-trinh" className={`nav__link ${isActive("/lo-trinh")}`}>Lộ trình</Link></li>
+              <li className="nav__item"><Link href="/leaderboard" className={`nav__link ${isActive("/leaderboard")}`} style={{display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary)"}}>Bảng Xếp Hạng</Link></li>
             </ul>
           </nav>
           

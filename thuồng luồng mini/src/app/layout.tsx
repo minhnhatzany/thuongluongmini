@@ -45,6 +45,21 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#F4A261" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/assets/logo.jpg" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                  console.log('ServiceWorker registration successful');
+                }, function(err) {
+                  console.log('ServiceWorker registration failed: ', err);
+                });
+              });
+            }
+          `
+        }} />
       </head>
       <body>
         <div id="app">

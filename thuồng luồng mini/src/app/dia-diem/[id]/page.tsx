@@ -2,7 +2,14 @@ import { getPlaceById, PLACES } from "@/lib/data";
 import { MapPin, Phone, Clock, CreditCard, Wifi, Coffee, Wind, Car, Users, Music } from "lucide-react";
 import Link from "next/link";
 import ReviewSection from "@/components/ReviewSection";
+import CheckInButton from "@/components/CheckInButton";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const PlaceMap = dynamic(() => import("@/components/Map"), {
+  ssr: false,
+  loading: () => <div style={{ height: "300px", width: "100%", background: "var(--color-bg-secondary)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}><span className="spinner"></span> Đang tải bản đồ...</div>
+});
 
 export async function generateStaticParams() {
   return PLACES.map((p: any) => ({
@@ -51,7 +58,7 @@ export default async function PlaceDetail(props: any) {
       <div className="container" style={{marginTop: "-40px", position: "relative", zIndex: 10, paddingBottom: "var(--space-8)"}}>
         <div className="detail-header card" style={{padding: "var(--space-6)"}}>
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "flex-start"}}>
-            <div>
+            <div style={{ width: "100%" }}>
               <div className="card__badges" style={{position: "static", marginBottom: "var(--space-2)"}}>
                 <span className="badge badge--price">{place.priceRange}</span>
                 {place.isFeatured && <span className="badge badge--primary">🔥 Đang hot</span>}
@@ -63,6 +70,13 @@ export default async function PlaceDetail(props: any) {
                 <span>•</span>
                 <span>{place.subCategory}</span>
               </div>
+              
+              <CheckInButton 
+                placeId={place.id} 
+                placeName={place.name} 
+                lat={place.coordinates?.lat} 
+                lng={place.coordinates?.lng} 
+              />
             </div>
           </div>
           
@@ -92,6 +106,18 @@ export default async function PlaceDetail(props: any) {
             {(place as any).fullDescription || place.description}
           </p>
         </div>
+
+        {place.coordinates && (
+          <div className="section" style={{marginTop: "var(--space-6)"}}>
+            <h2 className="section__title">Bản đồ</h2>
+            <PlaceMap 
+              lat={place.coordinates.lat} 
+              lng={place.coordinates.lng} 
+              name={place.name} 
+              address={place.address} 
+            />
+          </div>
+        )}
         
         {place.amenities && place.amenities.length > 0 && (
           <div className="section" style={{marginTop: "var(--space-6)"}}>
