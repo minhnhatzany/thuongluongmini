@@ -25,6 +25,9 @@ export default function Header() {
     if (isDark) {
       setIsDarkMode(true);
       document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.setAttribute('data-theme', 'light');
     }
 
     // Listen to Firebase Auth state

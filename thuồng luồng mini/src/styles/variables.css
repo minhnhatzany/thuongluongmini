@@ -273,7 +273,7 @@
 
 /* Dark Mode (via system preference) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg:             #1A1A2E;
     --color-bg-secondary:   #22223B;
     --color-bg-tertiary:    #2D2D44;
