@@ -266,6 +266,9 @@
   --icon-md:                1.25rem;
   --icon-lg:                1.5rem;
   --icon-xl:                2rem;
+  --aspect-card:            16/9;
+  --aspect-square:          1/1;
+  --aspect-portrait:        3/4;
 }
 
 /* Dark Mode (via system preference) */
