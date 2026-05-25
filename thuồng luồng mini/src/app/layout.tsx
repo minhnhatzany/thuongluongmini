@@ -10,7 +10,7 @@ import { Providers } from "@/components/Providers";
 import PushNotificationManager from "@/components/PushNotificationManager";
 
 const outfit = Outfit({
-  subsets: ["vietnamese", "latin"],
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-primary",
