@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import SyncManager from "@/components/SyncManager";
+import Chatbot from "@/components/Chatbot";
 
 const nunito = Nunito({
   subsets: ["vietnamese", "latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <MobileNav />
+          <Chatbot />
         </div>
       </body>
     </html>

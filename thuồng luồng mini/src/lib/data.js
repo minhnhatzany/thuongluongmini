@@ -12,6 +12,7 @@
  */
 
 import { TOURISM_PLACES } from './tourism-data.js';
+import dynamicPlaces from './dynamic-places.json';
 
 // ─── DANH MỤC CHÍNH ─────────────────────────────────────────
 const CATEGORIES = [
@@ -892,7 +893,12 @@ const BASE_PLACES = [
 ];
 
 // ─── HỢP NHẤT DỮ LIỆU ───────────────────────────────────────
-let PLACES = [...BASE_PLACES, ...TOURISM_PLACES];
+const allStaticPlaces = [...BASE_PLACES, ...TOURISM_PLACES];
+const dynamicIds = new Set((dynamicPlaces || []).map(p => p.id));
+// Lọc bỏ những địa điểm tĩnh đã tồn tại trong dynamicPlaces (ưu tiên cloud)
+const filteredStaticPlaces = allStaticPlaces.filter(p => !dynamicIds.has(p.id) && !dynamicIds.has(p.id.toString()));
+
+let PLACES = [...filteredStaticPlaces, ...(dynamicPlaces || [])];
 
 // ─── HÀM TRUY VẤN ───────────────────────────────────────────
 function getPlacesByCategory(categoryId) {

@@ -87,6 +87,11 @@ export default function Header() {
             
             {user ? (
               <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                {["minhnhatzany@gmail.com", "minhnhat@gmail.com", "admin@thuongluongmini.com"].some(email => user.email?.includes(email.split('@')[0])) && (
+                  <Link href="/admin" className="btn btn--outline btn--sm hide-on-mobile" style={{padding: "5px 10px", borderColor: "var(--color-primary)", color: "var(--color-primary)"}}>
+                    <Shield size={16} /> Admin
+                  </Link>
+                )}
                 <Link href="/profile" style={{display: "flex", alignItems: "center", gap: "5px", textDecoration: "none", color: "var(--color-text)"}}>
                   {user.photoURL ? (
                     <img src={user.photoURL} alt="Avatar" style={{width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover", border: "2px solid var(--color-primary)"}} />
