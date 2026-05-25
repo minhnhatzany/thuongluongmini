@@ -124,16 +124,6 @@ function adjustColor(hex, amount) {
     return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 }
 
-// Search input handler
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.id === 'page-search-input') {
-        const query = e.target.value.trim();
-        if (query) {
-            window.location.hash = `#/tim-kiem?q=${encodeURIComponent(query)}`;
-        }
-    }
-});
-
 // Filter search results by category
 window.filterSearchResults = function(catId, btnEl) {
     const hash = window.location.hash;

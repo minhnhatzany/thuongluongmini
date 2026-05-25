@@ -67,6 +67,26 @@ export function renderHomePage() {
             </div>
         </section>
 
+        <!-- Visitor guide (khách ngoài tỉnh) -->
+        <section class="section section--visitor" id="visitor-section" style="padding-top: 0;">
+            <div class="container">
+                <div class="cta-card animate-on-scroll" style="background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%); color: #fff; border: none;">
+                    <div class="cta-card__content" style="max-width: 100%;">
+                        <h2 class="cta-card__title" style="color: #fff;">✈️ Lần đầu đến Tuyên Quang?</h2>
+                        <p class="cta-card__text" style="color: rgba(255,255,255,0.9);">
+                            Dù bạn ở Hà Nội, TP.HCM hay tỉnh khác — bắt đầu bằng <strong>lộ trình gợi ý</strong>, 
+                            xem review thật từ cộng đồng, và chỉ đường Google Maps một chạm.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
+                            <a href="#/lo-trinh" class="btn btn--primary">🗺️ Xem lộ trình</a>
+                            <a href="#/danh-muc/du-lich" class="btn btn--secondary" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);">🏔️ Điểm du lịch</a>
+                            <a href="#/tim-kiem?q=Na Hang" class="btn btn--secondary" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);">Na Hang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Categories Section -->
         <section class="section section--categories" id="categories-section">
             <div class="container">
@@ -266,22 +286,3 @@ function adjustColor(hex, amount) {
     const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
     return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 }
-
-// Initialize hero search after page render
-document.addEventListener('click', (e) => {
-    if (e.target.id === 'hero-search-btn' || e.target.closest('#hero-search-btn')) {
-        const input = document.getElementById('hero-search-input');
-        if (input && input.value.trim()) {
-            window.location.hash = `#/tim-kiem?q=${encodeURIComponent(input.value.trim())}`;
-        }
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.id === 'hero-search-input') {
-        const query = e.target.value.trim();
-        if (query) {
-            window.location.hash = `#/tim-kiem?q=${encodeURIComponent(query)}`;
-        }
-    }
-});

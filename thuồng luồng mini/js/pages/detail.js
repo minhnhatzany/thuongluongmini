@@ -3,7 +3,7 @@
 // ============================================
 
 import { CATEGORIES, getPlaceById, getRelatedPlaces } from '../data.js';
-import { createPlaceCard, renderStars, showToast } from '../utils.js';
+import { createPlaceCard, renderStars, showToast, escapeHtml } from '../utils.js';
 
 export function renderDetailPage(placeId) {
     const place = getPlaceById(placeId);
@@ -31,9 +31,13 @@ export function renderDetailPage(placeId) {
     // Generate placeholder gallery colors
     const galleryColors = place.imageColors || ['#F4A261', '#E76F51', '#2A9D8F', '#264653'];
 
-    // Request real reviews asynchronously
+    // Request real reviews asynchronously (cancelled if user leaves page)
+    const loadId = Symbol('detail-reviews');
+    window._detailReviewLoadId = loadId;
     setTimeout(() => {
-        if (window.loadRealReviews) window.loadRealReviews(placeId);
+        if (window._detailReviewLoadId === loadId && window.loadRealReviews) {
+            window.loadRealReviews(placeId);
+        }
     }, 500);
 
     return `
@@ -124,13 +128,19 @@ export function renderDetailPage(placeId) {
                                 </div>
                                 <span>Chỉ đường</span>
                             </a>
-                            <button class="detail-action" onclick="window.sharePlace(${place.id})">
+                            <button class="detail-action" onclick="window.sharePlace(${JSON.stringify(place.id)})">
                                 <div class="detail-action__icon">
                                     <i data-lucide="share-2"></i>
                                 </div>
                                 <span>Chia sẻ</span>
                             </button>
-                            <button class="detail-action ${isFav ? 'active' : ''}" onclick="window.toggleFavorite(${place.id}, this)">
+                            <button class="detail-action" onclick="window.checkInPlace(${JSON.stringify(place.id)})" title="Check-in tại đây">
+                                <div class="detail-action__icon">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <span>Check-in</span>
+                            </button>
+                            <button class="detail-action ${isFav ? 'active' : ''}" onclick="window.toggleFavorite(${JSON.stringify(place.id)}, this)">
                                 <div class="detail-action__icon">
                                     <i data-lucide="heart"></i>
                                 </div>
@@ -242,6 +252,54 @@ export function renderDetailPage(placeId) {
                                     </iframe>
                                 </div>
                             </a>
+                        </div>
+
+                        <!-- Booking / Contact -->
+                        <div class="detail-section animate-on-scroll" id="booking-section">
+                            <h2 class="detail-section__title">
+                                <i data-lucide="calendar"></i>
+                                Đặt chỗ / Liên hệ nhanh
+                            </h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: var(--space-4);">
+                                Bạn ở xa Tuyên Quang? Gửi yêu cầu — quán sẽ gọi lại xác nhận. Hoặc gọi / nhắn Zalo trực tiếp.
+                            </p>
+                            <form class="booking-form" id="booking-form" onsubmit="window.submitBooking(event, ${place.id})">
+                                <div class="booking-form__grid" style="display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr;">
+                                    <label>
+                                        <span style="font-size: 0.85rem; font-weight: 600;">Ngày</span>
+                                        <input type="date" id="booking-date" class="write-review__text" style="width: 100%; margin-top: 4px;" required min="${getToday()}">
+                                    </label>
+                                    <label>
+                                        <span style="font-size: 0.85rem; font-weight: 600;">Giờ</span>
+                                        <select id="booking-time" class="write-review__text" style="width: 100%; margin-top: 4px;" required>
+                                            ${generateTimeSlots().map(t => `<option value="${t}">${t}</option>`).join('')}
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span style="font-size: 0.85rem; font-weight: 600;">Họ tên</span>
+                                        <input type="text" id="booking-name" class="write-review__text" style="width: 100%; margin-top: 4px;" placeholder="Tên của bạn" required>
+                                    </label>
+                                    <label>
+                                        <span style="font-size: 0.85rem; font-weight: 600;">Số điện thoại</span>
+                                        <input type="tel" id="booking-phone" class="write-review__text" style="width: 100%; margin-top: 4px;" placeholder="09xxxxxxxx" required>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn--primary" style="margin-top: var(--space-4); width: 100%;">
+                                    Gửi yêu cầu đặt chỗ
+                                </button>
+                            </form>
+                            <div class="detail-contact" style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-color);">
+                                <a href="tel:${escapeHtml(place.phone)}" class="detail-contact__item">
+                                    <i data-lucide="phone"></i>
+                                    <span>Gọi ${escapeHtml(place.phone)}</span>
+                                </a>
+                                ${place.social?.zalo ? `
+                                <a href="https://zalo.me/${escapeHtml(place.social.zalo)}" target="_blank" rel="noopener" class="detail-contact__item">
+                                    <span>💬</span>
+                                    <span>Nhắn Zalo: ${escapeHtml(place.social.zalo)}</span>
+                                </a>
+                                ` : ''}
+                            </div>
                         </div>
 
                         <!-- Reviews -->
@@ -388,23 +446,27 @@ export function renderDetailPage(placeId) {
 // Helper Functions
 // ============================================
 function renderReview(review) {
-    const initials = review.userName.split(' ').map(w => w[0]).join('').slice(-2);
+    const userName = review.userName || review.user?.name || 'Người dùng';
+    const safeName = escapeHtml(userName);
+    const safeText = escapeHtml(review.text || '');
+    const reviewId = escapeHtml(String(review.id ?? 'r'));
+    const initials = userName.split(' ').map(w => w[0]).join('').slice(-2).toUpperCase() || 'U';
     const avatarColors = ['#F4A261', '#2A9D8F', '#E76F51', '#9B59B6', '#3498DB'];
-    const colorIndex = review.userName.length % avatarColors.length;
+    const colorIndex = userName.length % avatarColors.length;
     
     return `
         <div class="review-card">
             <div class="review-card__header">
                 <div class="avatar avatar--md" style="background: ${avatarColors[colorIndex]}">
-                    ${initials}
+                    ${escapeHtml(initials)}
                 </div>
                 <div class="review-card__user">
-                    <span class="review-card__name">${review.userName}</span>
+                    <span class="review-card__name">${safeName}</span>
                     <span class="review-card__date">${formatDate(review.date)}</span>
                 </div>
                 <div class="review-card__rating">${renderStars(review.rating)}</div>
             </div>
-            <p class="review-card__text">${review.text}</p>
+            <p class="review-card__text">${safeText}</p>
             ${review.images && review.images.length > 0 ? `
                 <div class="review-card__images">
                     ${review.images.map(img => `<div class="review-card__img" style="background: #eee;"></div>`).join('')}
@@ -415,17 +477,17 @@ function renderReview(review) {
                     <i data-lucide="thumbs-up"></i>
                     Hữu ích (<span class="helpful-count">${review.helpful || 0}</span>)
                 </button>
-                <button class="review-card__helpful" onclick="window.toggleReplyForm(${review.id})">
+                <button class="review-card__helpful" onclick="window.toggleReplyForm('${reviewId}')">
                     <i data-lucide="message-square"></i>
                     Phản hồi
                 </button>
             </div>
             
-            <div class="review-reply-form" id="reply-form-${review.id}" style="display: none; margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-color);">
-                <textarea class="write-review__text" id="reply-text-${review.id}" placeholder="Viết phản hồi của bạn..." rows="2" style="margin-bottom: var(--space-2);"></textarea>
+            <div class="review-reply-form" id="reply-form-${reviewId}" style="display: none; margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-color);">
+                <textarea class="write-review__text" id="reply-text-${reviewId}" placeholder="Viết phản hồi của bạn..." rows="2" style="margin-bottom: var(--space-2);"></textarea>
                 <div style="display: flex; justify-content: flex-end; gap: var(--space-2);">
-                    <button class="btn btn--secondary btn--sm" onclick="window.toggleReplyForm(${review.id})">Hủy</button>
-                    <button class="btn btn--primary btn--sm" onclick="window.submitReply(${review.id})">Gửi phản hồi</button>
+                    <button class="btn btn--secondary btn--sm" onclick="window.toggleReplyForm('${reviewId}')">Hủy</button>
+                    <button class="btn btn--primary btn--sm" onclick="window.submitReply('${reviewId}')">Gửi phản hồi</button>
                 </div>
             </div>
             ${review.reply ? `
@@ -435,7 +497,7 @@ function renderReview(review) {
                         <strong>Phản hồi từ quán</strong>
                         <span>${formatDate(review.reply.date)}</span>
                     </div>
-                    <p>${review.reply.text}</p>
+                    <p>${escapeHtml(review.reply.text)}</p>
                 </div>
             ` : ''}
         </div>
@@ -520,6 +582,30 @@ window.scrollToSection = function(sectionId) {
     }
 };
 
+window.checkInPlace = async function(placeId) {
+    if (!window.currentUser) {
+        showToast('Đăng nhập để check-in và tích điểm nhé!', 'warning');
+        window.openAuthModal?.();
+        return;
+    }
+    const today = new Date().toISOString().split('T')[0];
+    const key = `tlm_checkin_${placeId}_${today}`;
+    if (localStorage.getItem(key)) {
+        showToast('Bạn đã check-in địa điểm này hôm nay rồi!', 'info');
+        return;
+    }
+    localStorage.setItem(key, '1');
+    try {
+        const { updateGamificationData } = await import('../gamification.js');
+        const result = await updateGamificationData(window.currentUser.uid, 'CHECK_IN');
+        let msg = 'Check-in thành công! +5 điểm 🎉';
+        if (result?.rankChanged) msg += ` Thăng hạng ${result.newRank.name}!`;
+        showToast(msg, 'success', 4000);
+    } catch (e) {
+        showToast('Check-in thành công!', 'success');
+    }
+};
+
 window.sharePlace = function(placeId) {
     const place = getPlaceById(placeId);
     if (!place) return;
@@ -575,7 +661,8 @@ window.submitReview = async function(placeId) {
     // Save to Realtime Database
     try {
         const { database } = await import('../firebase-config.js');
-        const { ref, push } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+        const { ref, push, update } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+        const { applyNewReviewToPlace } = await import('../data.js');
         
         const reviewRef = ref(database, `places/${placeId}/reviews`);
         await push(reviewRef, {
@@ -586,12 +673,30 @@ window.submitReview = async function(placeId) {
             date: new Date().toISOString(),
             userId: window.currentUser.uid
         });
+
+        const stats = applyNewReviewToPlace(placeId, currentReviewRating);
+        if (stats) {
+            try {
+                await update(ref(database, `places/${placeId}`), {
+                    rating: stats.rating,
+                    totalReviews: stats.totalReviews
+                });
+            } catch (e) {
+                console.warn('Cập nhật rating place:', e.message);
+            }
+            document.querySelectorAll('.detail-rating-big__num, .review-summary__num').forEach(el => {
+                el.textContent = stats.rating.toFixed(1);
+            });
+            document.querySelectorAll('.detail-rating-big__count, .review-summary__count').forEach(el => {
+                el.textContent = `${stats.totalReviews} đánh giá`;
+            });
+        }
         
         let message = 'Đã gửi đánh giá thành công! Cảm ơn bạn 🧡';
         if (result) {
-            message += `<br><b>+${result.pointsAdded} điểm</b>`;
+            message += ` (+${result.pointsAdded} điểm)`;
             if (result.rankChanged) {
-                message += `<br>🎉 Chúc mừng bạn đã thăng hạng lên <b>${result.newRank.name}</b>!`;
+                message += ` — Thăng hạng ${result.newRank.name}! 🎉`;
             }
         }
         
@@ -610,7 +715,8 @@ window.submitReview = async function(placeId) {
     }
 };
 
-window.submitBooking = function(placeId) {
+window.submitBooking = function(event, placeId) {
+    if (event) event.preventDefault();
     const form = document.getElementById('booking-form');
     const date = document.getElementById('booking-date')?.value;
     const time = document.getElementById('booking-time')?.value;
@@ -621,9 +727,17 @@ window.submitBooking = function(placeId) {
         showToast('Vui lòng điền đầy đủ thông tin!', 'warning');
         return;
     }
-    
-    showToast('Đặt chỗ thành công! Chúng tôi sẽ liên hệ xác nhận. 🎉', 'success', 5000);
-    form.reset();
+
+    const place = getPlaceById(placeId);
+    const tel = place?.phone?.replace(/\s/g, '');
+    if (tel) {
+        const body = encodeURIComponent(`Xin đặt chỗ: ${name}, ${phone}, ${date} ${time}`);
+        showToast('Đã ghi nhận! Đang mở ứng dụng gọi — bạn có thể nhắn lại giờ đặt cho quán.', 'success', 5000);
+        setTimeout(() => { window.location.href = `tel:${tel}`; }, 800);
+    } else {
+        showToast('Đặt chỗ thành công! Quán sẽ liên hệ xác nhận qua SĐT bạn đã để. 🎉', 'success', 5000);
+    }
+    form?.reset();
 };
 
 window.sortReviews = function(placeId, sortBy) {
@@ -659,7 +773,8 @@ window.loadRealReviews = async function(placeId) {
             const data = snapshot.val();
             const realReviews = Object.keys(data).map(key => ({
                 id: key,
-                user: { name: data[key].userName, avatar: data[key].userAvatar },
+                userName: data[key].userName || 'Người dùng',
+                userAvatar: data[key].userAvatar,
                 rating: data[key].rating,
                 date: data[key].date,
                 text: data[key].text

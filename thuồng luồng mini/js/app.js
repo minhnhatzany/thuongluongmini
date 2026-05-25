@@ -4,7 +4,7 @@
 // ============================================
 
 import { CATEGORIES, PLACES, getPlacesByCategory, getPlaceById, getFeaturedPlaces, getTopRatedPlaces, searchPlaces, getRelatedPlaces, getNewPlaces } from './data.js';
-import { createPlaceCard, renderStars, showToast } from './utils.js';
+import { createPlaceCard, renderStars, showToast, escapeHtml, formatChatReply } from './utils.js';
 import { renderHomePage } from './pages/home.js';
 import { renderCategoryPage } from './pages/category.js';
 import { renderDetailPage } from './pages/detail.js';
@@ -13,16 +13,53 @@ import { renderItineraryList, renderItineraryDetail } from './pages/itinerary.js
 import { renderAdminPage } from './pages/admin.js';
 import { renderProfilePage } from './pages/profile.js';
 import { initAuth } from './auth.js';
+import { destroyActiveMaps, initCategoryMap, initPointMap } from './map.js';
+import { saveFavoritesToCloud } from './favorites-sync.js';
 
 // ============================================
 // Global State
 // ============================================
+function loadFavoritesFromStorage() {
+    try {
+        return JSON.parse(localStorage.getItem('tlm_favorites') || '[]');
+    } catch {
+        return [];
+    }
+}
+
 const state = {
     currentPage: 'home',
-    favorites: JSON.parse(localStorage.getItem('tlm_favorites') || '[]'),
+    favorites: loadFavoritesFromStorage(),
     searchQuery: '',
     scrollPositions: {}
 };
+
+function normalizeFavId(id) {
+    const n = Number(id);
+    return Number.isNaN(n) ? String(id) : n;
+}
+
+function favIncludes(list, placeId) {
+    const target = normalizeFavId(placeId);
+    return list.some(id => normalizeFavId(id) === target);
+}
+
+window.tlmApplyFavorites = function(ids) {
+    state.favorites = ids || [];
+    updateFavCount();
+    document.querySelectorAll('[data-place-id]').forEach(card => {
+        const pid = card.dataset.placeId;
+        const btn = card.querySelector('.card__fav-btn');
+        if (btn) btn.classList.toggle('active', favIncludes(state.favorites, pid));
+    });
+};
+
+function persistFavorites() {
+    localStorage.setItem('tlm_favorites', JSON.stringify(state.favorites));
+    if (window.currentUser?.uid) {
+        saveFavoritesToCloud(window.currentUser.uid, state.favorites);
+    }
+}
 
 // ============================================
 // Router - Pure Hash Routing
@@ -51,8 +88,12 @@ function parseRoute(path) {
     const categoryMatch = route.match(/^\/danh-muc\/([a-z-]+)$/);
     if (categoryMatch) return { page: 'category', categoryId: categoryMatch[1], params };
     
-    const detailMatch = route.match(/^\/dia-diem\/(\d+)(?:\/([a-z0-9-]+))?$/);
-    if (detailMatch) return { page: 'detail', placeId: parseInt(detailMatch[1]), slug: detailMatch[2], params };
+    const detailMatch = route.match(/^\/dia-diem\/([^/]+)(?:\/([a-z0-9-]+))?$/);
+    if (detailMatch) {
+        const rawId = detailMatch[1];
+        const placeId = /^\d+$/.test(rawId) ? parseInt(rawId, 10) : rawId;
+        return { page: 'detail', placeId, slug: detailMatch[2], params };
+    }
     
     if (route === '/tim-kiem') return { page: 'search', params };
     if (route === '/lo-trinh') return { page: 'itineraryList', params };
@@ -78,6 +119,7 @@ async function navigateTo(route) {
     
     mainContent.classList.add('page-transitioning');
     await new Promise(resolve => setTimeout(resolve, 150));
+    destroyActiveMaps();
     window.scrollTo({ top: 0, behavior: 'instant' });
     
     try {
@@ -90,7 +132,10 @@ async function navigateTo(route) {
             case 'itineraryList':   mainContent.innerHTML = renderItineraryList(); break;
             case 'itineraryDetail': mainContent.innerHTML = renderItineraryDetail(parsed.id); break;
             case 'admin':       mainContent.innerHTML = renderAdminPage(); break;
-            case 'profile':     mainContent.innerHTML = renderProfilePage(); break;
+            case 'profile':
+                mainContent.innerHTML = renderProfilePage();
+                import('./pages/profile.js').then(m => m.initProfilePage?.());
+                break;
             default:            mainContent.innerHTML = render404Page();
         }
     } catch (err) {
@@ -100,7 +145,7 @@ async function navigateTo(route) {
                 <div class="empty-state" style="min-height:60vh">
                     <div class="empty-state__icon">⚠️</div>
                     <h2>Lỗi tải trang</h2>
-                    <p style="color:red;font-size:0.85rem;max-width:600px;word-break:break-all">${err.message}</p>
+                    <p style="color:red;font-size:0.85rem;max-width:600px;word-break:break-all">${escapeHtml(err.message)}</p>
                     <a href="#/" class="btn btn--primary" style="margin-top:20px">Về trang chủ</a>
                 </div>
             </div></div>`;
@@ -158,9 +203,10 @@ function render404Page() {
 // Global Functions
 // ============================================
 window.toggleFavorite = function(placeId, btnEl) {
-    const idx = state.favorites.indexOf(placeId);
+    const normalized = normalizeFavId(placeId);
+    const idx = state.favorites.findIndex(id => normalizeFavId(id) === normalized);
     if (idx === -1) {
-        state.favorites.push(placeId);
+        state.favorites.push(normalized);
         if (btnEl) { btnEl.classList.add('active', 'pulse'); setTimeout(() => btnEl.classList.remove('pulse'), 600); }
         showToast('Đã thêm vào yêu thích! 💛', 'success');
     } else {
@@ -168,14 +214,14 @@ window.toggleFavorite = function(placeId, btnEl) {
         if (btnEl) btnEl.classList.remove('active');
         showToast('Đã bỏ yêu thích', 'info');
     }
-    localStorage.setItem('tlm_favorites', JSON.stringify(state.favorites));
+    persistFavorites();
     document.querySelectorAll(`[data-place-id="${placeId}"] .card__fav-btn`).forEach(btn => {
-        state.favorites.includes(placeId) ? btn.classList.add('active') : btn.classList.remove('active');
+        favIncludes(state.favorites, placeId) ? btn.classList.add('active') : btn.classList.remove('active');
     });
     updateFavCount();
 };
 
-window.isFavorite = function(placeId) { return state.favorites.includes(placeId); };
+window.isFavorite = function(placeId) { return favIncludes(state.favorites, placeId); };
 window.showToast = showToast;
 
 function updateFavCount() {
@@ -216,32 +262,117 @@ function updateActiveNav(parsed) {
 }
 
 // ============================================
-// SEO
+// SEO - Comprehensive Meta & Structured Data
 // ============================================
 function injectSEO(parsed) {
-    let script = document.getElementById('json-ld');
-    if (!script) { script = document.createElement('script'); script.id = 'json-ld'; script.type = 'application/ld+json'; document.head.appendChild(script); }
+    const BASE_URL = 'https://thuongluongmini.pages.dev';
     
     let title = 'Thuồng Luồng Mini - Khám phá Tuyên Quang';
-    let description = 'Tìm kiếm, đánh giá và chia sẻ những địa điểm tuyệt vời nhất tại Tuyên Quang — từ ẩm thực đường phố đến điểm du lịch xinh đẹp.';
-    let image = 'https://thuongluongmini.pages.dev/images/logo-512.png';
-    let data = { "@context": "https://schema.org", "@type": "WebSite", "name": "Thuồng Luồng Mini", "url": "https://thuongluongmini.pages.dev" };
+    let description = 'Review địa điểm ăn uống, vui chơi, du lịch tại Tuyên Quang. Lộ trình, bản đồ, đánh giá thật từ cộng đồng — dù bạn ở trong hay ngoài tỉnh.';
+    let image = 'https://thuongluongmini.pages.dev/assets/logo.jpg';
+    let canonical = BASE_URL + '/';
+    let keywords = 'Tuyên Quang, review, ăn uống, du lịch, Na Hang, Thác Bà, lộ trình, ẩm thực Tuyên Quang';
+    let jsonLd = null;
+    let breadcrumb = null;
 
     if (parsed.page === 'detail' && parsed.placeId) {
         const place = getPlaceById(parsed.placeId);
         if (place) {
-            title = `${place.name} - Đánh giá & Trải nghiệm | Thuồng Luồng Mini`;
-            description = place.description || description;
+            const cat = CATEGORIES.find(c => c.id === place.category);
+            title = `${place.name} - Review, Đánh giá & Trải nghiệm | Thuồng Luồng Mini`;
+            description = `${place.name} - ${place.description} ${place.address ? '📍 ' + place.address : ''}. ⭐ ${place.rating}/5 (${place.totalReviews} đánh giá). Xem review thật từ cộng đồng Tuyên Quang.`;
             image = (place.images && place.images[0]) ? place.images[0] : image;
-            data = { "@context": "https://schema.org", "@type": "LocalBusiness", "name": place.name, "address": { "@type": "PostalAddress", "streetAddress": place.address || '', "addressLocality": "Tuyên Quang", "addressCountry": "VN" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": place.rating || 0, "reviewCount": place.totalReviews || 0 } };
+            canonical = `${BASE_URL}/#/dia-diem/${place.id}/${place.slug || ''}`;
+            keywords = `${place.name}, ${place.subCategory}, Tuyên Quang, review ${place.name}, ${cat ? cat.name : ''} Tuyên Quang`;
+            
+            jsonLd = {
+                "@context": "https://schema.org",
+                "@type": "LocalBusiness",
+                "name": place.name,
+                "description": place.description,
+                "image": image,
+                "url": canonical,
+                "telephone": place.phone || '',
+                "priceRange": place.priceRange || '',
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": place.address || '',
+                    "addressLocality": "Tuyên Quang",
+                    "addressRegion": "Tuyên Quang",
+                    "addressCountry": "VN"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": place.rating || 0,
+                    "reviewCount": place.totalReviews || 0,
+                    "bestRating": 5
+                },
+                "geo": place.coordinates ? {
+                    "@type": "GeoCoordinates",
+                    "latitude": place.coordinates.lat,
+                    "longitude": place.coordinates.lng
+                } : undefined
+            };
+            
+            breadcrumb = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": BASE_URL + "/" },
+                    { "@type": "ListItem", "position": 2, "name": cat ? cat.name : "Danh mục", "item": BASE_URL + "/#/danh-muc/" + place.category },
+                    { "@type": "ListItem", "position": 3, "name": place.name, "item": canonical }
+                ]
+            };
         }
+    } else if (parsed.page === 'category' && parsed.categoryId) {
+        const cat = CATEGORIES.find(c => c.id === parsed.categoryId);
+        if (cat) {
+            title = `${cat.name} Tuyên Quang - Danh sách địa điểm ${cat.name.toLowerCase()} | Thuồng Luồng Mini`;
+            description = `Khám phá ${getPlacesByCategory(parsed.categoryId).length} địa điểm ${cat.name.toLowerCase()} tại Tuyên Quang. ${cat.description}`;
+            canonical = `${BASE_URL}/#/danh-muc/${parsed.categoryId}`;
+            keywords = `${cat.name} Tuyên Quang, địa điểm ${cat.name.toLowerCase()}, ${cat.name} ngon Tuyên Quang`;
+            
+            breadcrumb = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": BASE_URL + "/" },
+                    { "@type": "ListItem", "position": 2, "name": cat.name, "item": canonical }
+                ]
+            };
+        }
+    } else if (parsed.page === 'search' && parsed.params?.q) {
+        const q = parsed.params.q;
+        title = `Tìm kiếm "${q}" tại Tuyên Quang - Kết quả | Thuồng Luồng Mini`;
+        description = `Tìm thấy các địa điểm phù hợp với "${q}" tại Tuyên Quang. Khám phá review, đánh giá và địa chỉ chính xác.`;
+        canonical = `${BASE_URL}/#/tim-kiem?q=${encodeURIComponent(q)}`;
+        keywords = `${q} Tuyên Quang, tìm ${q}, ${q} ở đâu Tuyên Quang`;
+    } else if (parsed.page === 'itineraryList') {
+        title = 'Lộ trình du lịch Tuyên Quang - Gợi ý hành trình | Thuồng Luồng Mini';
+        description = 'Khám phá các lộ trình du lịch Tuyên Quang chi tiết: Na Hang, Thác Bà, Làng Văn hóa... Lịch trình, chi phí, khoảng cách.';
+        canonical = `${BASE_URL}/#/lo-trinh`;
+        keywords = 'lộ trình Tuyên Quang, du lịch Tuyên Quang, itinerary Tuyên Quang, Na Hang itinerary';
+    } else if (parsed.page === 'favorites') {
+        title = 'Địa điểm yêu thích - Thuồng Luồng Mini';
+        description = 'Danh sách địa điểm yêu thích của bạn tại Tuyên Quang.';
+        canonical = `${BASE_URL}/#/yeu-thich`;
     }
-    
+
+    // Update document title
     document.title = title;
-    script.textContent = JSON.stringify(data);
     
-    // Update meta tags dynamically
+    // Update canonical
+    let linkEl = document.querySelector('link[rel="canonical"]');
+    if (!linkEl) {
+        linkEl = document.createElement('link');
+        linkEl.setAttribute('rel', 'canonical');
+        document.head.appendChild(linkEl);
+    }
+    linkEl.setAttribute('href', canonical);
+
+    // Update meta tags
     const setMeta = (name, content, isProperty = false) => {
+        if (!content) return;
         let meta = document.querySelector(`meta[${isProperty ? 'property' : 'name'}="${name}"]`);
         if (!meta) {
             meta = document.createElement('meta');
@@ -253,9 +384,44 @@ function injectSEO(parsed) {
     };
     
     setMeta('description', description);
+    setMeta('keywords', keywords);
     setMeta('og:title', title, true);
     setMeta('og:description', description, true);
     setMeta('og:image', image, true);
+    setMeta('og:url', canonical, true);
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    setMeta('twitter:image', image);
+
+    // Update JSON-LD
+    let script = document.getElementById('json-ld');
+    if (!script) {
+        script = document.createElement('script');
+        script.id = 'json-ld';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+    }
+    
+    const schemas = [];
+    // Always include WebSite schema
+    schemas.push({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Thuồng Luồng Mini",
+        "url": BASE_URL,
+        "description": "Nền tảng review địa phương số 1 Tuyên Quang",
+        "inLanguage": "vi-VN",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": BASE_URL + "/#/tim-kiem?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    });
+    
+    if (jsonLd) schemas.push(jsonLd);
+    if (breadcrumb) schemas.push(breadcrumb);
+    
+    script.textContent = JSON.stringify(schemas.length === 1 ? schemas[0] : schemas);
 }
 
 // ============================================
@@ -295,14 +461,15 @@ function initSearch() {
         searchTimeout = setTimeout(() => {
             const found = searchPlaces(query).slice(0, 6);
             if (!results) return;
+            const safeQuery = escapeHtml(query);
             if (found.length === 0) {
-                results.innerHTML = `<div style="padding:12px;color:var(--text-muted)">Không tìm thấy kết quả cho "${query}"</div>`;
+                results.innerHTML = `<div style="padding:12px;color:var(--text-muted)">Không tìm thấy kết quả cho "${safeQuery}"</div>`;
             } else {
                 results.innerHTML = found.map(place => {
                     const cat = CATEGORIES.find(c => c.id === place.category);
                     return `<a href="#/dia-diem/${place.id}/${place.slug}" style="display:flex;align-items:center;gap:12px;padding:10px;text-decoration:none;color:inherit;border-radius:8px;">
                         <div style="width:36px;height:36px;border-radius:8px;background:${cat ? cat.color : '#F4A261'};display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">${cat ? cat.icon : '📍'}</div>
-                        <div><div style="font-weight:600;font-size:0.9rem">${place.name}</div><div style="color:var(--text-muted);font-size:0.8rem">${place.subCategory} · ${place.rating.toFixed(1)} ★</div></div>
+                        <div><div style="font-weight:600;font-size:0.9rem">${escapeHtml(place.name)}</div><div style="color:var(--text-muted);font-size:0.8rem">${escapeHtml(place.subCategory)} · ${place.rating.toFixed(1)} ★</div></div>
                     </a>`;
                 }).join('') + `<a href="#/tim-kiem?q=${encodeURIComponent(query)}" style="display:block;padding:10px;text-align:center;color:var(--color-primary);font-weight:600;font-size:0.9rem;border-top:1px solid var(--border-color);margin-top:4px">Xem tất cả kết quả →</a>`;
             }
@@ -360,23 +527,23 @@ function initPageComponents() {
     updateFavCount();
     initMapsOnPage();
     initCarousels();
-    initFilters();
 }
 
 // ============================================
 // Maps
 // ============================================
 function initMapsOnPage() {
+    const categoryMapEl = document.querySelector('[data-category-map]');
+    if (categoryMapEl) {
+        initCategoryMap(categoryMapEl);
+    }
+
     document.querySelectorAll('[data-map]').forEach(mapEl => {
         const lat = parseFloat(mapEl.dataset.lat);
         const lng = parseFloat(mapEl.dataset.lng);
         const name = mapEl.dataset.name || '';
-        if (isNaN(lat) || isNaN(lng) || mapEl._leaflet_id) return;
-        const map = L.map(mapEl, { scrollWheelZoom: false }).setView([lat, lng], 15);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-        const icon = L.divIcon({ className: 'custom-map-marker', html: '<div class="map-marker-pin"><span>📍</span></div>', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40] });
-        L.marker([lat, lng], { icon }).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
-        setTimeout(() => map.invalidateSize(), 100);
+        if (isNaN(lat) || isNaN(lng)) return;
+        initPointMap(mapEl, lat, lng, name);
     });
 }
 
@@ -384,7 +551,8 @@ function initMapsOnPage() {
 // Carousel
 // ============================================
 function initCarousels() {
-    document.querySelectorAll('.carousel').forEach(carousel => {
+    document.querySelectorAll('.carousel:not([data-carousel-init])').forEach(carousel => {
+        carousel.dataset.carouselInit = 'true';
         const track = carousel.querySelector('.carousel__track');
         const prevBtn = carousel.querySelector('.carousel__prev');
         const nextBtn = carousel.querySelector('.carousel__next');
@@ -411,11 +579,39 @@ function initCarousels() {
 }
 
 // ============================================
-// Filters
+// Global delegated events (bind once)
 // ============================================
-function initFilters() {
-    const sortSelect = document.getElementById('sort-select');
-    sortSelect?.addEventListener('change', () => navigateTo(getRoute()));
+let globalEventsInitialized = false;
+
+function initGlobalDelegatedEvents() {
+    if (globalEventsInitialized) return;
+    globalEventsInitialized = true;
+
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#hero-search-btn')) {
+            const input = document.getElementById('hero-search-input');
+            const query = input?.value.trim();
+            if (query) {
+                window.location.hash = `#/tim-kiem?q=${encodeURIComponent(query)}`;
+            }
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        const target = e.target;
+        if (!(target instanceof HTMLInputElement)) return;
+
+        const query = target.value.trim();
+        if (!query) return;
+
+        if (target.id === 'hero-search-input' || target.id === 'page-search-input') {
+            window.location.hash = `#/tim-kiem?q=${encodeURIComponent(query)}`;
+        }
+        if (target.id === 'chatbot-input-field') {
+            window.sendChatMessage();
+        }
+    });
 }
 
 // ============================================
@@ -468,12 +664,21 @@ async function init() {
     // Pure hash routing
     window.addEventListener('hashchange', () => navigateTo(getRoute()));
     
+    initGlobalDelegatedEvents();
     initHeaderScroll();
     initSearch();
     initMobileMenu();
     initBackToTop();
+    registerServiceWorker();
     
     console.log('🐉 Thuồng Luồng Mini đã sẵn sàng!');
+}
+
+function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.warn('Service worker:', err.message);
+    });
 }
 
 // ============================================
@@ -500,7 +705,7 @@ function initChatbot() {
                     </div>
                 </div>
                 <div class="chatbot-input">
-                    <input type="text" id="chatbot-input-field" placeholder="Nhập câu hỏi của bạn..." onkeypress="if(event.key === 'Enter') window.sendChatMessage()">
+                    <input type="text" id="chatbot-input-field" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
                     <button onclick="window.sendChatMessage()" id="chatbot-send-btn"><i data-lucide="send"></i></button>
                 </div>
             </div>
@@ -548,9 +753,8 @@ window.sendChatMessage = async function() {
         
         if (response.ok && data.reply) {
             window.chatHistory.push({ role: 'assistant', content: data.reply });
-            appendMessage('ai', data.reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n\*/g, '<br>•').replace(/\n/g, '<br>'));
+            appendMessage('ai', data.reply, { formatMarkdown: true });
         } else if (data.error) {
-            // If backend returned a specific error (e.g. missing API key, Gemini error)
             appendMessage('ai', `⚠️ Lỗi hệ thống: ${data.error}`);
         } else {
             throw new Error('API failed');
@@ -584,10 +788,23 @@ window.sendChatMessage = async function() {
     }
 };
 
-function appendMessage(role, text) {
+function appendMessage(role, text, { formatMarkdown = false } = {}) {
     const messagesDiv = document.getElementById('chatbot-messages');
+    if (!messagesDiv) return;
     const time = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-    messagesDiv.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--${role}"><p>${text}</p><span class="chat-msg__time">${time}</span></div>`);
+    const wrap = document.createElement('div');
+    wrap.className = `chat-msg chat-msg--${role}`;
+    const p = document.createElement('p');
+    if (formatMarkdown && role === 'ai') {
+        p.innerHTML = formatChatReply(text);
+    } else {
+        p.textContent = text;
+    }
+    const timeEl = document.createElement('span');
+    timeEl.className = 'chat-msg__time';
+    timeEl.textContent = time;
+    wrap.append(p, timeEl);
+    messagesDiv.appendChild(wrap);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 

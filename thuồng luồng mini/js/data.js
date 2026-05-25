@@ -7,7 +7,7 @@
  *  File này chứa toàn bộ dữ liệu mock cho ứng dụng:
  *    • CATEGORIES   – Danh mục chính
  *    • SUB_CATEGORIES – Danh mục con
- *    • PLACES        – Danh sách địa điểm (28 địa điểm)
+ *    • PLACES        – Danh sách địa điểm (33 địa điểm)
  *    • Helper functions – Truy vấn & tìm kiếm
  */
 
@@ -399,563 +399,504 @@ const BASE_PLACES = [
     menu: [],
     reviews: []
   },
+
+  // ── ĐỊA ĐIỂM MỚI 2026 ──────────────────────────────────────────
   {
     id: 12,
     name: 'Phê La Tuyên Quang - Quang Trung',
+    slug: 'phe-la-tuyen-quang',
     category: 'an-uong',
-    subCategory: ['Cafe & Trà sữa'],
-    rating: 4.8,
-    reviewsCount: 320,
+    subCategory: 'Cafe & Trà sữa',
+    description: 'Thương hiệu ô long đặc sản Đà Lạt Phê La đã chính thức có mặt tại Tuyên Quang từ đầu năm 2026.',
+    fullDescription: 'Không gian rộng rãi, đậm chất cắm trại "Glamping", menu đa dạng từ Trà Ô Long Nhài Sữa, Ô Long Bơ, Ô Long Đào. Là điểm đến check-in cực hot của giới trẻ hiện nay.',
     address: '155 Quang Trung, P. Phan Thiết, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '45,000đ - 65,000đ',
-    openTime: '08:00',
-    closeTime: '23:00',
-    status: 'Đang mở cửa',
     phone: '0981 123 456',
-    mapLink: 'https://goo.gl/maps/phela-tuyen-quang',
-    lat: 21.8201,
-    lng: 105.2155,
-    description: 'Thương hiệu ô long đặc sản Đà Lạt Phê La đã chính thức có mặt tại Tuyên Quang từ đầu năm 2026. Không gian rộng rãi, đậm chất cắm trại "Glamping", menu đa dạng từ Trà Ô Long Nhài Sữa, Ô Long Bơ, Ô Long Đào. Là điểm đến check-in cực hot của giới trẻ hiện nay.',
-    features: ['Wifi miễn phí', 'Máy lạnh', 'Gửi xe miễn phí', 'Không gian Glamping', 'Takeaway'],
+    priceRange: '$$',
+    priceText: '45.000đ - 65.000đ',
+    rating: 4.8,
+    totalReviews: 320,
+    images: ['https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#2A9D8F', '#264653', '#F4A261'],
+    openHours: 'T2-CN: 08:00 - 23:00',
+    isOpen: true,
+    isFeatured: true,
+    isNew: true,
     tags: ['Trà Ô Long', 'Phê La', 'Check-in', 'Glamping', 'Trending 2026'],
-    menu: [],
+    amenities: ['Wifi miễn phí', 'Máy lạnh', 'Gửi xe miễn phí', 'Không gian Glamping', 'Takeaway'],
+    coordinates: { lat: 21.8201, lng: 105.2155 },
+    social: { facebook: '', zalo: '0981123456', instagram: '' },
+    menu: [
+      { name: 'Trà Ô Long Nhài Sữa', price: '55.000đ' },
+      { name: 'Ô Long Bơ', price: '60.000đ' },
+      { name: 'Ô Long Đào', price: '55.000đ' }
+    ],
     reviews: []
   },
   {
     id: 13,
     name: 'Katinat Saigon Kafe - Vincom Tuyên Quang',
+    slug: 'katinat-vincom-tuyen-quang',
     category: 'an-uong',
-    subCategory: ['Cafe & Trà sữa'],
-    rating: 4.7,
-    reviewsCount: 258,
-    address: 'Tầng 1, Vincom Plaza Tuyên Quang, 260 Quang Trung, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '45,000đ - 70,000đ',
-    openTime: '07:30',
-    closeTime: '22:30',
-    status: 'Đang mở cửa',
-    phone: '0981 234 567',
-    mapLink: 'https://goo.gl/maps/katinat-tuyen-quang',
-    lat: 21.8155,
-    lng: 105.2100,
-    description: 'Trải nghiệm cà phê phong cách đường phố Sài Gòn nhưng mang hơi thở hiện đại ngay tại Tuyên Quang. Quán nổi tiếng với Cà phê Sữa Tươi, Trà Đào Hồng Đài và thiết kế kiến trúc vòm cung độc đáo.',
-    features: ['Wifi miễn phí', 'Máy lạnh', 'View kính', 'Chỗ đậu ô tô'],
-    tags: ['Katinat', 'Cafe sang chảnh', 'Vincom'],
-    menu: [],
+    subCategory: 'Cafe & Trà sữa',
+    description: 'Trải nghiệm cà phê phong cách đường phố Sài Gòn nhưng giữa lòng Tuyên Quang.',
+    fullDescription: 'Katinat Saigon Kafe mang hơi thở Sài Thành vào từng tách cà phê. Không gian tối giản, phối màu trắng - xanh dương đặc trưng, phục vụ các dòng cà phê sữa đá, bạc xỉu và trà hoa quả tươi.',
+    address: 'Tầng 1, Vincom Tuyên Quang',
+    phone: '1900 633 66',
+    priceRange: '$$',
+    priceText: '35.000đ - 60.000đ',
+    rating: 4.6,
+    totalReviews: 280,
+    images: ['https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#264653', '#2A9D8F', '#E9C46A'],
+    openHours: 'T2-CN: 08:00 - 22:30',
+    isOpen: true,
+    isFeatured: true,
+    isNew: true,
+    tags: ['Cà phê Sài Gòn', 'Katinat', 'Vincom', 'Sang trọng', 'Trending 2026'],
+    amenities: ['Wifi miễn phí', 'Máy lạnh', 'Gửi xe Vincom', 'Takeaway', 'Thanh toán thẻ'],
+    coordinates: { lat: 21.8240, lng: 105.2165 },
+    social: { facebook: 'https://facebook.com/katinat.tuyenquang', zalo: '', instagram: '' },
+    menu: [
+      { name: 'Cà phê sữa đá', price: '35.000đ' },
+      { name: 'Bạc xỉu', price: '40.000đ' },
+      { name: 'Trà vải tươi', price: '50.000đ' }
+    ],
     reviews: []
   },
   {
     id: 14,
-    name: 'Haidilao Hot Pot - Tuyên Quang',
-    category: 'an-uong',
-    subCategory: ['Nhà hàng', 'Lẩu'],
-    rating: 4.9,
-    reviewsCount: 450,
-    address: 'Tầng 4, Vincom Plaza Tuyên Quang, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '250,000đ - 500,000đ',
-    openTime: '10:00',
-    closeTime: '23:30',
-    status: 'Đang mở cửa',
-    phone: '0207 3888 999',
-    mapLink: 'https://goo.gl/maps/haidilao-tuyen-quang',
-    lat: 21.8155,
-    lng: 105.2100,
-    description: 'Thương hiệu lẩu đình đám với dịch vụ 5 sao. Không chỉ thưởng thức nước lẩu cà chua, lẩu cay Tứ Xuyên trứ danh, bạn còn được làm nail, in ảnh, xem múa mì và xem biến diện (đổi mặt) miễn phí.',
-    features: ['Làm nail miễn phí', 'Múa mì', 'Khu vui chơi trẻ em', 'Ghế massage'],
-    tags: ['Haidilao', 'Lẩu', 'Dịch vụ 5 sao', 'Trending'],
+    name: 'Karaoke Sunny Tuyên Quang',
+    slug: 'karaoke-sunny-tq',
+    category: 'vui-choi',
+    subCategory: 'Karaoke',
+    description: 'Hệ thống âm thanh đỉnh cao, phòng hát sang trọng, phục vụ 24/7.',
+    fullDescription: 'Sunny là hệ thống karaoke cao cấp nhất Tuyên Quang với phòng hát cách âm chuẩn phòng thu, dàn âm thanh JBL nhập khẩu và màn hình LED 4K siêu nét. Có đầy đủ phòng VIP, phòng gia đình và phòng đôi lãng mạn.',
+    address: '88 Nguyễn Trãi, Phường Tân Quang, TP. Tuyên Quang',
+    phone: '0207 388 9999',
+    priceRange: '$$$',
+    priceText: '150.000đ - 500.000đ/giờ',
+    rating: 4.5,
+    totalReviews: 560,
+    images: ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#9B59B6', '#8E44AD', '#2C3E50'],
+    openHours: 'T2-CN: 09:00 - 06:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Karaoke', 'Âm thanh đỉnh', 'Phòng VIP', '24/7'],
+    amenities: ['Phòng cách âm', 'JBL', 'LED 4K', 'Phục vụ đồ uống', 'Gửi xe'],
+    coordinates: { lat: 21.8228, lng: 105.2170 },
+    social: { facebook: '', zalo: '02073889999', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 15,
-    name: 'Tổ hợp giải trí GenZ Center (Khu VR & Arcade mới)',
+    name: 'Billiards & Cafe Hoàng Gia',
+    slug: 'billiards-hoang-gia-tq',
     category: 'vui-choi',
-    subCategory: ['Khu vui chơi', 'Game Center'],
-    rating: 4.8,
-    reviewsCount: 180,
-    address: 'Khu đô thị Kim Phú, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '50,000đ - 200,000đ',
-    openTime: '09:00',
-    closeTime: '23:00',
-    status: 'Đang mở cửa',
-    phone: '0981 999 888',
-    mapLink: 'https://goo.gl/maps/genz-center',
-    lat: 21.8000,
-    lng: 105.2200,
-    description: 'Vừa khai trương tháng 4/2026, đây là khu vui chơi thực tế ảo (VR) lớn nhất miền núi phía Bắc. Trang bị hàng chục máy chơi game thùng (Arcade), máy gắp gấu, phòng nhảy Audition và khu bắn súng laser.',
-    features: ['Game VR', 'Gắp gấu', 'Phòng lạnh', 'Food court'],
-    tags: ['Giải trí', 'GenZ', 'Thực tế ảo', 'Mới mở 2026'],
+    subCategory: 'Billiards & Bowling',
+    description: 'Câu lạc bộ billiards chuyên nghiệp với bàn thi đấu chuẩn quốc tế.',
+    fullDescription: 'Hoàng Gia sở hữu 10 bàn billiards lỗ và 5 bàn snooker chuẩn thi đấu. Không gian rộng rãi, máy lạnh mát rượi, có quầy bar phục vụ đồ uống và đồ ăn nhẹ. Tổ chức giải đấu hàng tuần.',
+    address: '45 Lê Lợi, Phường Minh Xuân, TP. Tuyên Quang',
+    phone: '0973 456 789',
+    priceRange: '$$',
+    priceText: '50.000đ - 120.000đ/giờ',
+    rating: 4.4,
+    totalReviews: 340,
+    images: ['https://images.unsplash.com/photo-1529543544282-ea994074d807?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#2C3E50', '#34495E', '#E74C3C'],
+    openHours: 'T2-CN: 08:00 - 23:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Billiards', 'Snooker', 'Giải đấu', 'Cafe'],
+    amenities: ['Bàn thi đấu', 'Quầy bar', 'Máy lạnh', 'Wifi'],
+    coordinates: { lat: 21.8218, lng: 105.2148 },
+    social: { facebook: '', zalo: '0973456789', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 16,
-    name: 'Mixue - Bình Thuận Tuyên Quang',
-    category: 'an-uong',
-    subCategory: ['Bánh & Dessert', 'Cafe & Trà sữa'],
+    name: 'Khu Vui Chơi Trẻ Em Happy Zone',
+    slug: 'happy-zone-tq',
+    category: 'vui-choi',
+    subCategory: 'Khu vui chơi',
+    description: 'Khu vui chơi trong nhà lớn nhất Tuyên Quang cho bé từ 1-12 tuổi.',
+    fullDescription: 'Happy Zone là thiên đường giải trí cho trẻ em với khu nhà bóng khổng lồ, cầu trượt xoắn ốc, hồ bóng biển, khu leo núi trong nhà và góc sáng tạo. An toàn tuyệt đối với đệm lót và giám sát 24/7.',
+    address: 'Tầng 2, TTTM Vincom Tuyên Quang',
+    phone: '0988 234 567',
+    priceRange: '$$',
+    priceText: '50.000đ - 100.000đ/vé',
     rating: 4.6,
-    reviewsCount: 890,
-    address: '22 Bình Thuận, P. Tân Quang, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1570197781417-0a82375c9371?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1570197781417-0a82375c9371?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '10,000đ - 30,000đ',
-    openTime: '08:00',
-    closeTime: '23:00',
-    status: 'Đang mở cửa',
-    phone: '0981 444 555',
-    mapLink: 'https://goo.gl/maps/mixue-binh-thuan',
-    lat: 21.8210,
-    lng: 105.2150,
-    description: 'Thương hiệu kem tươi và trà sữa ngon - bổ - rẻ quen thuộc với kem ốc quế 10k, nước chanh giã tay 15k. Chi nhánh Bình Thuận luôn tấp nập học sinh sinh viên.',
-    features: ['Bán mang đi', 'Ngồi vỉa hè', 'Giá rẻ'],
-    tags: ['Mixue', 'Kem 10k', 'Bình dân'],
+    totalReviews: 420,
+    images: ['https://images.unsplash.com/photo-1596993100471-7ab3e14d4c0c?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#E74C3C', '#F39C12', '#3498DB'],
+    openHours: 'T2-CN: 08:30 - 21:30',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Trẻ em', 'Vui chơi', 'Gia đình', 'Trong nhà'],
+    amenities: ['Nhà bóng', 'Leo núi', 'Góc sáng tạo', 'Giám sát', 'Gửi xe'],
+    coordinates: { lat: 21.8243, lng: 105.2169 },
+    social: { facebook: '', zalo: '0988234567', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 17,
-    name: 'Cafe Muối Chú Long - Tuyên Quang',
-    category: 'an-uong',
-    subCategory: ['Cafe & Trà sữa'],
-    rating: 4.5,
-    reviewsCount: 310,
-    address: '88 Tân Trào, P. Phan Thiết, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '20,000đ - 35,000đ',
-    openTime: '06:30',
-    closeTime: '22:00',
-    status: 'Đang mở cửa',
-    phone: '0981 666 777',
-    mapLink: 'https://goo.gl/maps/cafe-muoi-chu-long',
-    lat: 21.8220,
-    lng: 105.2130,
-    description: 'Cơn sốt cafe muối trứ danh đã đổ bộ Tuyên Quang. Vị đắng nhẹ của cafe kết hợp với lớp kem mặn mặn béo ngậy tạo nên hương vị bùng nổ, dễ gây nghiện.',
-    features: ['Takeaway', 'Vỉa hè chill', 'Phục vụ nhanh'],
-    tags: ['Cà phê muối', 'Bắt trend'],
+    name: 'Game Center - G-Center Tuyên Quang',
+    slug: 'g-center-tq',
+    category: 'vui-choi',
+    subCategory: 'Game Center',
+    description: 'Trung tâm game hiện đại với máy PS5, PC gaming và khu VR trải nghiệm.',
+    fullDescription: 'G-Center là điểm đến của các game thủ Tuyên Quang với 20 dàn PC gaming cấu hình cao, 10 máy PS5, khu thực tế ảo VR và góc boardgame. Tổ chức giải đấu Liên Minh, Valorant hàng tháng.',
+    address: '67 Quang Trung, Phường Tân Quang, TP. Tuyên Quang',
+    phone: '0369 888 999',
+    priceRange: '$$',
+    priceText: '15.000đ - 50.000đ/giờ',
+    rating: 4.3,
+    totalReviews: 510,
+    images: ['https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#1A1A2E', '#16213E', '#E94560'],
+    openHours: 'T2-CN: 07:00 - 00:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Game', 'PS5', 'PC Gaming', 'VR', 'Giải đấu'],
+    amenities: ['PC Gaming', 'PS5', 'VR', 'Boardgame', 'Quầy bar'],
+    coordinates: { lat: 21.8212, lng: 105.2158 },
+    social: { facebook: 'https://facebook.com/gcenter.tq', zalo: '0369888999', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 18,
-    name: 'Rạp chiếu phim Lotte Cinema Tuyên Quang',
+    name: 'Lotte Cinema Tuyên Quang',
+    slug: 'lotte-cinema-tq-2',
     category: 'vui-choi',
-    subCategory: ['Rạp phim'],
-    rating: 4.8,
-    reviewsCount: 520,
-    address: 'Tầng 5, Vincom Plaza, 260 Quang Trung, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '60,000đ - 120,000đ',
-    openTime: '08:30',
-    closeTime: '23:30',
-    status: 'Đang mở cửa',
-    phone: '0207 3999 888',
-    mapLink: 'https://goo.gl/maps/lotte-cinema-tq',
-    lat: 21.8155,
-    lng: 105.2100,
-    description: 'Cụm rạp phim hiện đại chuẩn quốc tế. Hệ thống âm thanh Dolby Atmos, màn hình sắc nét và ghế ngồi thoải mái. Cập nhật liên tục các bom tấn mới nhất của 2026.',
-    features: ['Màn hình 3D', 'Ghế đôi (Sweetbox)', 'Phòng chờ sang trọng', 'Mua vé online'],
-    tags: ['Chiếu phim', 'Lotte', 'Vincom'],
+    subCategory: 'Rạp phim',
+    description: 'Cụm rạp Lotte Cinema tại TTTM Vincom Tuyên Quang.',
+    fullDescription: 'Lotte Cinema Tuyên Quang tọa lạc tại tầng 3 TTTM Vincom, với 5 phòng chiếu hiện đại, trang bị hệ thống âm thanh Dolby Atmos và ghế ngồi cao cấp.',
+    address: 'Tầng 3, TTTM Vincom Tuyên Quang',
+    phone: '1900 1234',
+    priceRange: '$$',
+    priceText: '55.000đ - 110.000đ/vé',
+    rating: 4.7,
+    totalReviews: 1450,
+    images: ['https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&q=80', 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80'],
+    imageColors: ['#E76F51', '#2B4B6F', '#1A2F45'],
+    openHours: 'T2-CN: 08:30 - 23:30',
+    isOpen: true,
+    isFeatured: false,
+    isNew: false,
+    tags: ['phim', 'bom tấn', 'vincom', 'giải trí'],
+    amenities: ['Ghế đôi', 'Bãi đỗ xe hầm', 'Máy lạnh'],
+    coordinates: { lat: 21.8242, lng: 105.2168 },
+    social: { facebook: 'https://facebook.com/lottecinematuyenquang', zalo: '', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 19,
-    name: 'Doolly Studio - Thuê Cổ Phục & Hanbok',
+    name: 'Phòng Trọ Sinh Viên - Khu Việt Mỹ',
+    slug: 'phong-tro-viet-my',
     category: 'trang-phuc',
-    subCategory: ['Thuê trang phục'],
-    rating: 4.9,
-    reviewsCount: 150,
-    address: 'Ngõ 15 Quang Trung, P. Phan Thiết, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '150,000đ - 300,000đ/ngày',
-    openTime: '08:00',
-    closeTime: '21:00',
-    status: 'Đang mở cửa',
-    phone: '0988 111 222',
-    mapLink: 'https://goo.gl/maps/doolly-studio',
-    lat: 21.8205,
-    lng: 105.2160,
-    description: 'Studio cho thuê trang phục lớn nhất Tuyên Quang hiện nay. Chuyên cung cấp các mẫu Việt Phục (Nhật Bình, Áo Tấc), Hanbok Hàn Quốc, Kimono Nhật Bản để phục vụ nhu cầu sống ảo của giới trẻ tại các địa điểm du lịch.',
-    features: ['Hỗ trợ trang điểm', 'Chụp ảnh sự kiện', 'Trang phục mới 100%'],
-    tags: ['Cổ phục', 'Sống ảo', 'Make-up'],
+    subCategory: 'Quần áo',
+    description: 'Cửa hàng thời trang second-hand chất lượng cao, giá rẻ cho sinh viên.',
+    fullDescription: 'Chuyên kinh doanh quần áo second-hand nhập từ Nhật, Hàn, Âu Mỹ. Hàng luôn được phân loại, giặt sạch và là phẳng. Có cả phụ kiện, giày dép và túi xách second-hand.',
+    address: 'Khu đô thị Việt Mỹ, Phường Phan Thiết, TP. Tuyên Quang',
+    phone: '0977 111 222',
+    priceRange: '$',
+    priceText: '20.000đ - 150.000đ',
+    rating: 4.4,
+    totalReviews: 180,
+    images: ['https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#F39C12', '#E67E22', '#2C3E50'],
+    openHours: 'T2-CN: 08:00 - 21:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Second-hand', 'Thời trang', 'Sinh viên', 'Giá rẻ'],
+    amenities: ['Thử đồ', 'Đổi trả 3 ngày', 'Giảm giá số lượng'],
+    coordinates: { lat: 21.8265, lng: 105.2170 },
+    social: { facebook: '', zalo: '0977111222', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 20,
-    name: 'Bò Tơ Quán Mộc - Chi nhánh Tuyên Quang',
+    name: 'Tiệm Bánh Ngọt Mochi Mochi',
+    slug: 'mochi-mochi-tq',
     category: 'an-uong',
-    subCategory: ['Nhà hàng', 'Quán ăn'],
+    subCategory: 'Bánh & Dessert',
+    description: 'Tiệm bánh Nhật Bản phong cách Kawaii, chuyên bánh mochi, dorayaki và trà đạo.',
+    fullDescription: 'Mochi Mochi mang hương vị Nhật Bản đến Tuyên Quang với các loại bánh mochi nhân đậu đỏ, kem tươi, trái cây; dorayaki nhân matcha; và bánh cheesecake Nhật siêu mềm mịn. Không gian decor theo phong cách Kawaii dễ thương.',
+    address: '23 Nguyễn Văn Cừ, Phường Minh Xuân, TP. Tuyên Quang',
+    phone: '0903 456 789',
+    priceRange: '$$',
+    priceText: '25.000đ - 80.000đ',
     rating: 4.7,
-    reviewsCount: 280,
-    address: 'Đường ven hồ Công viên Hoàng Hoa Thám, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1544025162-81111409f029?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1544025162-81111409f029?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '150,000đ - 250,000đ',
-    openTime: '10:00',
-    closeTime: '23:00',
-    status: 'Đang mở cửa',
-    phone: '0977 888 999',
-    mapLink: 'https://goo.gl/maps/bo-to-quan-moc',
-    lat: 21.8250,
-    lng: 105.2200,
-    description: 'Nhà hàng bò tơ thiết kế theo phong cách hoài cổ thập niên 80. Các món nổi bật: Bò tơ cuốn bánh tráng, Bê chao Mộc Châu, Lẩu đuôi bò. Thích hợp đi ăn gia đình, tụ tập công ty.',
-    features: ['Không gian hoài cổ', 'Phòng VIP riêng', 'Chỗ đỗ ô tô rộng', 'Ghế trẻ em'],
-    tags: ['Nhậu', 'Gia đình', 'Bò tơ'],
-    menu: [],
+    totalReviews: 290,
+    images: ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#FFB5C2', '#FF9AA2', '#FFDAC1'],
+    openHours: 'T2-CN: 08:00 - 21:30',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Bánh Nhật', 'Mochi', 'Dessert', 'Kawaii', 'Matcha'],
+    amenities: ['Wifi', 'Máy lạnh', 'Takeaway', 'Góc check-in'],
+    coordinates: { lat: 21.8222, lng: 105.2155 },
+    social: { facebook: 'https://facebook.com/mochimochi.tq', zalo: '0903456789', instagram: '' },
+    menu: [
+      { name: 'Mochi kem xoài', price: '35.000đ' },
+      { name: 'Dorayaki matcha', price: '30.000đ' },
+      { name: 'Cheesecake Nhật', price: '55.000đ' },
+      { name: 'Trà matcha latte', price: '45.000đ' }
+    ],
     reviews: []
   },
   {
     id: 21,
-    name: 'Tiệm Trà Chanh Chóp Chép (Ver 2026)',
+    name: 'Bar & Pub 1990',
+    slug: 'bar-1990-tq',
     category: 'an-uong',
-    subCategory: ['Cafe & Trà sữa', 'Ẩm thực đường phố'],
+    subCategory: 'Bar & Pub',
+    description: 'Quán bar phong cách retro, nhạc sống mỗi tối, điểm hẹn cuối tuần của giới trẻ.',
+    fullDescription: '1990 là quán bar mang phong cách retro những năm 90 với nội thất gỗ, đèn neon và bàn bi-a. Có nhạc sống acoustic vào tối thứ 6 và DJ vào cuối tuần. Menu đồ uống đa dạng từ cocktail, bia tươi đến rượu mạnh nhập khẩu.',
+    address: '56 Trần Hưng Đạo, Phường Minh Xuân, TP. Tuyên Quang',
+    phone: '0911 234 567',
+    priceRange: '$$$',
+    priceText: '100.000đ - 300.000đ',
     rating: 4.5,
-    reviewsCount: 420,
-    address: 'Khu vực Quảng trường Nguyễn Tất Thành, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '15,000đ - 45,000đ',
-    openTime: '18:00',
-    closeTime: '23:30',
-    status: 'Đang mở cửa',
-    phone: '0909 123 456',
-    mapLink: 'https://goo.gl/maps/tra-chanh-chop-chep',
-    lat: 21.8150,
-    lng: 105.2150,
-    description: 'Phiên bản nâng cấp 2026 với menu siêu xịn xò: Trà chanh giã tay sả tắc, trà dâu tằm kem cheese, cá viên chiên mắm tỏi. Nơi tụ tập đông đúc nhất vào mỗi buổi tối của thanh niên Tuyên Quang.',
-    features: ['Ngồi vỉa hè mát mẻ', 'Ăn vặt đa dạng', 'Mở khuya'],
-    tags: ['Trà chanh', 'Ăn vặt', 'Quảng trường'],
-    menu: [],
+    totalReviews: 380,
+    images: ['https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#2C3E50', '#E74C3C', '#F39C12'],
+    openHours: 'T2-CN: 17:00 - 02:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Bar', 'Pub', 'Nhạc sống', 'Cocktail', 'Đêm'],
+    amenities: ['Nhạc sống', 'DJ', 'Bia tươi', 'Bàn bi-a', 'Khu VIP'],
+    coordinates: { lat: 21.8245, lng: 105.2185 },
+    social: { facebook: 'https://facebook.com/bar1990.tq', zalo: '0911234567', instagram: '' },
+    menu: [
+      { name: 'Bia tươi (pint)', price: '40.000đ' },
+      { name: 'Cocktail Mojito', price: '80.000đ' },
+      { name: 'Whisky Johnnie Walker', price: '250.000đ' }
+    ],
     reviews: []
   },
   {
     id: 22,
-    name: 'Cửa hàng tiện lợi GS25 - Tuyên Quang',
+    name: 'Phở Bò Tuyên Quang - Gánh Hàng 1978',
+    slug: 'pho-bo-ganh-hang-1978',
     category: 'an-uong',
-    subCategory: ['Ẩm thực đường phố'],
-    rating: 4.4,
-    reviewsCount: 650,
-    address: 'Ngã tư Quang Trung - Bình Thuận, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1576082404396-d4f1cd3e658e?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1576082404396-d4f1cd3e658e?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '15,000đ - 80,000đ',
-    openTime: '00:00',
-    closeTime: '23:59',
-    status: 'Đang mở cửa',
-    phone: '1900 1234',
-    mapLink: 'https://goo.gl/maps/gs25-tq',
-    lat: 21.8180,
-    lng: 105.2140,
-    description: 'Cửa hàng tiện lợi Hàn Quốc mở cửa 24/7 đầu tiên tại Tuyên Quang. Nổi tiếng với Tteokbokki nấu tại chỗ, mì cay béo ngậy và các loại nước ép trái cây. Không gian có bàn ghế ngồi ăn uống tại chỗ mát mẻ.',
-    features: ['Mở cửa 24/7', 'Wifi miễn phí', 'Máy lạnh', 'Nấu ăn tại chỗ'],
-    tags: ['GS25', 'Tiện lợi', '24/7', 'Ăn đêm'],
-    menu: [],
+    subCategory: 'Ẩm thực đường phố',
+    description: 'Quán phở gia truyền hơn 40 năm, nước dùng xương ống ninh 12 tiếng.',
+    fullDescription: 'Gánh Hàng 1978 là quán phở lâu đời nhất Tuyên Quang còn giữ được hương vị truyền thống. Nước dùng được ninh từ xương ống bò và xương đuôi trong 12 tiếng, bánh phở làm thủ công, thịt bò tái chín mềm tan trong miệng.',
+    address: 'Góc đường Bình Thuận - Nguyễn Trãi, TP. Tuyên Quang',
+    phone: '',
+    priceRange: '$',
+    priceText: '30.000đ - 60.000đ',
+    rating: 4.9,
+    totalReviews: 1250,
+    images: ['https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#D4A373', '#8B4513', '#F4A261'],
+    openHours: 'T2-CN: 06:00 - 12:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Phở', 'Gia truyền', 'Sáng', 'Bò', 'Đặc sản'],
+    amenities: ['Chỗ ngồi vỉa hè', 'Takeaway'],
+    coordinates: { lat: 21.8238, lng: 105.2142 },
+    social: { facebook: '', zalo: '', instagram: '' },
+    menu: [
+      { name: 'Phở bò tái', price: '35.000đ' },
+      { name: 'Phở bò chín', price: '35.000đ' },
+      { name: 'Phở tái chín', price: '40.000đ' },
+      { name: 'Phở đặc biệt', price: '55.000đ' }
+    ],
     reviews: []
   },
   {
     id: 23,
-    name: 'Pizza 4P\'s - Khu shophouse Vincom',
+    name: 'Bún Cá Sông Lô - Cô Hoa',
+    slug: 'bun-ca-co-hoa',
     category: 'an-uong',
-    subCategory: ['Nhà hàng'],
-    rating: 4.9,
-    reviewsCount: 380,
-    address: 'Khu Shophouse, Vincom Plaza, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '200,000đ - 600,000đ',
-    openTime: '10:00',
-    closeTime: '22:30',
-    status: 'Đang mở cửa',
-    phone: '1900 6043',
-    mapLink: 'https://goo.gl/maps/pizza-4ps-tq',
-    lat: 21.8153,
-    lng: 105.2105,
-    description: 'Thương hiệu Pizza chuẩn Nhật Bản đình đám. Trải nghiệm Pizza nướng củi với phô mai Burrata làm thủ công tươi mới mỗi ngày. Không gian sang trọng, dịch vụ OMOTENASHI tận tâm.',
-    features: ['Nướng củi', 'Phòng lạnh', 'Dịch vụ 5 sao'],
-    tags: ['Pizza', 'Sang trọng', 'Pizza 4Ps', 'Dát vàng'],
-    menu: [],
+    subCategory: 'Ẩm thực đường phố',
+    description: 'Bún cá đặc sản Tuyên Quang, cá tươi sông Lô chiên giòn, nước dùng chua ngọt.',
+    fullDescription: 'Quán bún cá của cô Hoa đã có tiếng hơn 20 năm. Cá lăng, cá trắm sông Lô được chiên giòn rụm, nước dùng nấu từ xương cá và me chua thanh. Ăn kèm rau sống, giá đỗ và thì là thơm nức.',
+    address: '12 Bình Thuận, TP. Tuyên Quang',
+    phone: '',
+    priceRange: '$',
+    priceText: '25.000đ - 40.000đ',
+    rating: 4.7,
+    totalReviews: 890,
+    images: ['https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#E9C46A', '#F4A261', '#E76F51'],
+    openHours: 'T2-CN: 06:30 - 13:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Bún cá', 'Đặc sản', 'Sông Lô', 'Sáng'],
+    amenities: ['Chỗ ngồi', 'Takeaway'],
+    coordinates: { lat: 21.8235, lng: 105.2140 },
+    social: { facebook: '', zalo: '', instagram: '' },
+    menu: [
+      { name: 'Bún cá chiên giòn', price: '30.000đ' },
+      { name: 'Bún cá đặc biệt', price: '40.000đ' }
+    ],
     reviews: []
   },
   {
     id: 24,
-    name: 'Mì Cay Sasin - Chi nhánh Mới 2026',
-    category: 'an-uong',
-    subCategory: ['Quán ăn'],
+    name: 'Chợ Đêm Tuyên Quang',
+    slug: 'cho-dem-tuyen-quang',
+    category: 'vui-choi',
+    subCategory: 'Khu vui chơi',
+    description: 'Chợ đêm cuối tuần sầm uất với ẩm thực đường phố, hàng lưu niệm và văn nghệ.',
+    fullDescription: 'Chợ đêm Tuyên Quang họp vào tối thứ 7 và chủ nhật hàng tuần tại khu vực Quảng trường Nguyễn Tất Thành. Có hàng chục gian hàng ẩm thực đường phố, đồ lưu niệm, quần áo và các tiết mục văn nghệ đường phố.',
+    address: 'Quảng trường Nguyễn Tất Thành, TP. Tuyên Quang',
+    phone: '',
+    priceRange: '$',
+    priceText: 'Miễn phí vào cửa',
     rating: 4.5,
-    reviewsCount: 450,
-    address: 'Đường Phan Thiết, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '45,000đ - 70,000đ',
-    openTime: '08:00',
-    closeTime: '22:30',
-    status: 'Đang mở cửa',
-    phone: '0966 555 444',
-    mapLink: 'https://goo.gl/maps/sasin-tq',
-    lat: 21.8120,
-    lng: 105.2110,
-    description: 'Chi nhánh Sasin mới toanh rộng gấp đôi chi nhánh cũ. Thử thách mì cay 7 cấp độ phiên bản Hàn Quốc siêu cuốn, kèm kimbap chiên và takoyaki đậm vị.',
-    features: ['Máy lạnh', 'Thử thách 7 cấp độ', 'Bán mang về'],
-    tags: ['Mì cay', 'Hàn Quốc', 'Sinh viên'],
+    totalReviews: 670,
+    images: ['https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#E74C3C', '#F39C12', '#2C3E50'],
+    openHours: 'T7-CN: 18:00 - 23:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Chợ đêm', 'Ẩm thực', 'Văn nghệ', 'Cuối tuần'],
+    amenities: ['Ẩm thực đường phố', 'Hàng lưu niệm', 'Văn nghệ', 'Bãi đỗ xe'],
+    coordinates: { lat: 21.8218, lng: 105.2135 },
+    social: { facebook: '', zalo: '', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 25,
-    name: 'Khu câu cá giải trí sinh thái Sông Lô',
-    category: 'vui-choi',
-    subCategory: ['Khu vui chơi'],
-    rating: 4.6,
-    reviewsCount: 120,
-    address: 'Dọc bờ kè Sông Lô, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1520116468816-95b69f847357?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1520116468816-95b69f847357?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '100,000đ - 300,000đ',
-    openTime: '07:00',
-    closeTime: '20:00',
-    status: 'Đang mở cửa',
-    phone: '0912 345 678',
-    mapLink: 'https://goo.gl/maps/cau-ca-song-lo',
-    lat: 21.8100,
-    lng: 105.2250,
-    description: 'Địa điểm câu cá sinh thái cuối tuần siêu hot năm 2026. Có dịch vụ nướng cá ngay tại chòi, thích hợp cho các gia đình hoặc nhóm bạn nam đi nhậu, thư giãn cuối tuần.',
-    features: ['Cho thuê cần câu', 'Chòi nghỉ mát', 'Nướng BBQ', 'Bãi đỗ xe'],
-    tags: ['Câu cá', 'Dã ngoại', 'Cuối tuần'],
+    name: 'Homestay Bản Tày - Thượng Lâm',
+    slug: 'homestay-ban-tay-thuong-lam',
+    category: 'du-lich',
+    subCategory: 'Khách sạn & Homestay',
+    description: 'Homestay truyền thống người Tày giữa lòng Na Hang, trải nghiệm văn hóa bản địa.',
+    fullDescription: 'Nằm giữa thung lũng xanh mướt của huyện Lâm Bình, Homestay Bản Tày Thượng Lâm mang đến trải nghiệm ở cùng người dân tộc Tày. Nhà sàn gỗ truyền thống, ăn cơm lam, uống rượu ngô và tham gia múa hát Then.',
+    address: 'Thôn Thượng Lâm, xã Lâm Bình, huyện Na Hang, tỉnh Tuyên Quang',
+    phone: '0966 123 456',
+    priceRange: '$$',
+    priceText: '200.000đ - 500.000đ/đêm',
+    rating: 4.8,
+    totalReviews: 340,
+    images: ['https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#5A7D59', '#3E5C3D', '#C5A059'],
+    openHours: 'Nhận phòng 14:00 - Trả phòng 12:00',
+    isOpen: true,
+    isFeatured: false,
+    isNew: true,
+    tags: ['Homestay', 'Bản Tày', 'Văn hóa', 'Na Hang', 'Thiên nhiên'],
+    amenities: ['Nhà sàn', 'Ăn sáng', 'Cho thuê xe', 'Wifi', 'Điều hòa'],
+    coordinates: { lat: 22.35, lng: 105.39 },
+    social: { facebook: '', zalo: '0966123456', instagram: '' },
     menu: [],
     reviews: []
   },
   {
     id: 26,
-    name: 'Cheese Coffee - Cửa hàng flagship Tuyên Quang',
-    category: 'an-uong',
-    subCategory: ['Cafe & Trà sữa'],
-    rating: 4.8,
-    reviewsCount: 510,
-    address: 'Đại lộ Tân Trào, TP. Tuyên Quang',
-    image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80'],
-    priceRange: '49,000đ - 79,000đ',
-    openTime: '07:00',
-    closeTime: '23:00',
-    status: 'Đang mở cửa',
-    phone: '0207 222 333',
-    mapLink: 'https://goo.gl/maps/cheese-coffee',
-    lat: 21.8190,
-    lng: 105.2180,
-    description: 'Cheese Coffee với phong cách Industrial pha chút nghệ thuật phục hưng Châu Âu cực ngầu. Trà sữa nguyên lá kem phô mai béo ngậy làm mưa làm gió cộng đồng mạng năm 2026.',
-    features: ['Không gian rộng 3 tầng', 'Góc sống ảo cực chất', 'Wifi mạnh'],
-    tags: ['Cheese Coffee', 'Sống ảo', 'Trà sữa kem phô mai', 'Flagship'],
+    name: 'Khách Sạn Mường Thanh Tuyên Quang',
+    slug: 'muong-thanh-tuyen-quang',
+    category: 'du-lich',
+    subCategory: 'Khách sạn & Homestay',
+    description: 'Khách sạn 4 sao tiêu chuẩn quốc tế ngay trung tâm thành phố.',
+    fullDescription: 'Mường Thanh Tuyên Quang là khách sạn cao cấp nhất tỉnh với 120 phòng nghỉ tiêu chuẩn 4 sao. Có nhà hàng, hồ bơi, phòng gym, spa và trung tâm hội nghị sức chứa 500 người.',
+    address: 'Đường Trần Hưng Đạo, Phường Minh Xuân, TP. Tuyên Quang',
+    phone: '0207 388 8888',
+    priceRange: '$$$',
+    priceText: '800.000đ - 2.500.000đ/đêm',
+    rating: 4.6,
+    totalReviews: 780,
+    images: ['https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80'],
+    imageColors: ['#2C3E50', '#3498DB', '#BDC3C7'],
+    openHours: 'Nhận phòng 14:00 - Trả phòng 12:00',
+    isOpen: true,
+    isFeatured: true,
+    isNew: true,
+    tags: ['Khách sạn', '4 sao', 'Hồ bơi', 'Spa', 'Trung tâm'],
+    amenities: ['Hồ bơi', 'Spa', 'Gym', 'Nhà hàng', 'Hội nghị', 'Bãi đỗ xe'],
+    coordinates: { lat: 21.8240, lng: 105.2180 },
+    social: { facebook: 'https://facebook.com/muongthanh.tq', zalo: '02073888888', instagram: '' },
     menu: [],
     reviews: []
   }
 ];
 
+// ─── HỢP NHẤT DỮ LIỆU ───────────────────────────────────────
+const PLACES = [...BASE_PLACES, ...TOURISM_PLACES];
 
-// ─── HÀM TRUY VẤN & TÌM KIẾM ───────────────────────────────
-
-// Mảng gộp tất cả địa điểm (Sẽ được ghi đè bởi Firebase nếu có)
-export let PLACES = [...BASE_PLACES, ...TOURISM_PLACES];
-
-export function setPlaces(newPlaces) {
-    PLACES = newPlaces;
+// ─── HÀM TRUY VẤN ───────────────────────────────────────────
+function getPlacesByCategory(categoryId) {
+  return PLACES.filter(p => p.category === categoryId);
 }
 
-/**
- * Lấy danh sách địa điểm theo danh mục
- * @param {string} categoryId - ID danh mục (vd: 'an-uong', 'du-lich')
- * @returns {Array} Danh sách địa điểm thuộc danh mục
- */
-export function getPlacesByCategory(categoryId) {
-  return PLACES.filter(place => place.category === categoryId);
+function getPlaceById(id) {
+  return PLACES.find(p => p.id === id);
 }
 
-/**
- * Lấy thông tin địa điểm theo ID
- * @param {number} id - ID của địa điểm
- * @returns {Object|undefined} Thông tin địa điểm hoặc undefined
- */
-export function getPlaceById(id) {
-  return PLACES.find(place => place.id === id);
+function getPlaceBySlug(slug) {
+  return PLACES.find(p => p.slug === slug);
 }
 
-/**
- * Lấy thông tin địa điểm theo slug
- * @param {string} slug - Slug của địa điểm
- * @returns {Object|undefined} Thông tin địa điểm hoặc undefined
- */
-export function getPlaceBySlug(slug) {
-  return PLACES.find(place => place.slug === slug);
+function getFeaturedPlaces() {
+  return PLACES.filter(p => p.isFeatured);
 }
 
-/**
- * Lấy danh sách địa điểm nổi bật (isFeatured = true)
- * @returns {Array} Danh sách địa điểm nổi bật
- */
-export function getFeaturedPlaces() {
-  return PLACES.filter(place => place.isFeatured);
+function getNewPlaces() {
+  return PLACES.filter(p => p.isNew);
 }
 
-/**
- * Lấy danh sách địa điểm mới (isNew = true)
- * @returns {Array} Danh sách địa điểm mới
- */
-export function getNewPlaces() {
-  return PLACES.filter(place => place.isNew);
+function searchPlaces(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
+  return PLACES.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    p.tags.some(t => t.toLowerCase().includes(q)) ||
+    p.description.toLowerCase().includes(q) ||
+    p.address.toLowerCase().includes(q)
+  );
 }
 
-/**
- * Lấy danh sách địa điểm đánh giá cao nhất
- * @param {number} limit - Số lượng tối đa (mặc định: 8)
- * @returns {Array} Danh sách địa điểm sắp xếp theo rating giảm dần
- */
-export function getTopRatedPlaces(limit = 8) {
-  return [...PLACES]
-    .sort((a, b) => b.rating - a.rating || b.totalReviews - a.totalReviews)
-    .slice(0, limit);
+function getPlacesBySubCategory(categoryId, subCategory) {
+  return PLACES.filter(p => p.category === categoryId && p.subCategory === subCategory);
 }
 
-/**
- * Tìm kiếm địa điểm theo từ khóa
- * Tìm trong: tên, mô tả, địa chỉ, tags, danh mục con
- * @param {string} query - Từ khóa tìm kiếm
- * @returns {Array} Danh sách địa điểm phù hợp
- */
-export function searchPlaces(query) {
-  if (!query || !query.trim()) return [];
-
-  const normalizedQuery = query
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D');
-
-  /**
-   * Chuẩn hóa chuỗi tiếng Việt (bỏ dấu) để so sánh
-   * @param {string} str
-   * @returns {string}
-   */
-  function normalize(str) {
-    return str
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd')
-      .replace(/Đ/g, 'D');
-  }
-
-  return PLACES.filter(place => {
-    const searchableText = [
-      place.name,
-      place.description,
-      place.address,
-      place.subCategory,
-      ...place.tags
-    ].join(' ');
-
-    return normalize(searchableText).includes(normalizedQuery);
-  });
+function getTopRatedPlaces(limit = 10) {
+  return [...PLACES].sort((a, b) => b.rating - a.rating).slice(0, limit);
 }
 
-/**
- * Lấy danh sách địa điểm liên quan
- * Ưu tiên: cùng danh mục con → cùng danh mục → khác danh mục
- * @param {Object} place - Địa điểm gốc
- * @param {number} limit - Số lượng tối đa (mặc định: 4)
- * @returns {Array} Danh sách địa điểm liên quan
- */
-export function getRelatedPlaces(place, limit = 4) {
+function getRelatedPlaces(place, limit = 4) {
   if (!place) return [];
-
-  // Ưu tiên 1: Cùng danh mục con (loại trừ chính nó)
-  const sameSubCategory = PLACES.filter(
-    p => p.id !== place.id && p.subCategory === place.subCategory
-  );
-
-  // Ưu tiên 2: Cùng danh mục nhưng khác danh mục con
-  const sameCategory = PLACES.filter(
-    p => p.id !== place.id &&
-         p.category === place.category &&
-         p.subCategory !== place.subCategory
-  );
-
-  // Ưu tiên 3: Khác danh mục, đánh giá cao
-  const otherCategory = PLACES
-    .filter(p => p.id !== place.id && p.category !== place.category)
-    .sort((a, b) => b.rating - a.rating);
-
-  // Gộp kết quả theo thứ tự ưu tiên, loại bỏ trùng lặp
-  const combined = [...sameSubCategory, ...sameCategory, ...otherCategory];
-  const seen = new Set();
-  const unique = [];
-
-  for (const p of combined) {
-    if (!seen.has(p.id)) {
-      seen.add(p.id);
-      unique.push(p);
-    }
-    if (unique.length >= limit) break;
-  }
-
-  return unique;
+  return PLACES.filter(p =>
+    p.id !== place.id &&
+    (p.category === place.category || p.tags.some(t => place.tags?.includes(t)))
+  ).slice(0, limit);
 }
 
-/**
- * Lấy danh sách địa điểm theo danh mục con
- * @param {string} subCategory - Tên danh mục con (vd: 'Cafe & Trà sữa')
- * @returns {Array} Danh sách địa điểm
- */
-export function getPlacesBySubCategory(subCategory) {
-  return PLACES.filter(place => place.subCategory === subCategory);
-}
+// ─── EXPORT ──────────────────────────────────────────────────
+export {
+  CATEGORIES,
+  SUB_CATEGORIES,
+  PLACES,
+  getPlacesByCategory,
+  getPlaceById,
+  getPlaceBySlug,
+  getFeaturedPlaces,
+  getNewPlaces,
+  searchPlaces,
+  getPlacesBySubCategory,
+  getTopRatedPlaces,
+  getRelatedPlaces
+};
 
-/**
- * Lấy thống kê tổng quan
- * @returns {Object} { totalPlaces, totalReviews, avgRating, categoryCounts }
- */
-export function getStats() {
-  const totalPlaces = PLACES.length;
-  const totalReviews = PLACES.reduce((sum, p) => sum + (p.totalReviews || 0), 0);
-  const avgRating = totalPlaces > 0 ? (PLACES.reduce((sum, p) => sum + (p.rating || 0), 0) / totalPlaces).toFixed(1) : '0.0';
-
-  const categoryCounts = {};
-  for (const cat of CATEGORIES) {
-    categoryCounts[cat.id] = PLACES.filter(p => p.category === cat.id).length;
-  }
-
-  return { totalPlaces, totalReviews, avgRating: parseFloat(avgRating), categoryCounts };
-}
-
-/**
- * Lấy thông tin danh mục theo ID
- * @param {string} categoryId - ID danh mục
- * @returns {Object|undefined} Thông tin danh mục
- */
-export function getCategoryById(categoryId) {
-  return CATEGORIES.find(cat => cat.id === categoryId);
-}
-
-/**
- * Lấy danh sách danh mục con theo danh mục
- * @param {string} categoryId - ID danh mục
- * @returns {Array} Danh sách danh mục con
- */
-export function getSubCategories(categoryId) {
-  return SUB_CATEGORIES[categoryId] || [];
-}
-
-
-// ─── XUẤT DỮ LIỆU ──────────────────────────────────────────
-
-export { CATEGORIES, SUB_CATEGORIES };
