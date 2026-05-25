@@ -1,5 +1,5 @@
 import { getPlaceById, PLACES } from "@/lib/data";
-import { MapPin, Phone, Clock, CreditCard, Wifi, Coffee, Wind, Car, Users, Music } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import Link from "next/link";
 import ReviewSection from "@/components/ReviewSection";
 import CheckInButton from "@/components/CheckInButton";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MapPin, CheckCircle, Navigation } from "lucide-react";
+import { MapPin, CheckCircle } from "lucide-react";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { doc, getDoc, updateDoc, increment, setDoc } from "firebase/firestore";

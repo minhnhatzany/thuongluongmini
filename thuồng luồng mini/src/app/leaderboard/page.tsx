@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Trophy, Medal, Star, Flame } from "lucide-react";
+import { Trophy, Medal, Flame } from "lucide-react";
 import Link from "next/link";
 
 interface LeaderboardUser {
