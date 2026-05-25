@@ -7,10 +7,8 @@ import { usePathname } from "next/navigation";
 import AuthModal from "./AuthModal";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
-  const { lang, setLang, t } = useLanguage();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -68,32 +66,21 @@ export default function Header() {
           
           <nav className="nav" aria-label="Điều hướng chính">
             <ul className="nav__list">
-              <li className="nav__item"><Link href="/" className={`nav__link ${isActive("/")}`}>{t("nav.home")}</Link></li>
-              <li className="nav__item"><Link href="/danh-muc/an-uong" className={`nav__link ${isActive("/danh-muc/an-uong")}`}>{t("nav.places")}</Link></li>
-              <li className="nav__item"><Link href="/lo-trinh" className={`nav__link ${isActive("/lo-trinh")}`}>{t("nav.itinerary")}</Link></li>
-              <li className="nav__item"><Link href="/leaderboard" className={`nav__link ${isActive("/leaderboard")}`} style={{display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary)"}}>{t("nav.profile")}</Link></li>
+              <li className="nav__item"><Link href="/" className={`nav__link ${isActive("/")}`}>Trang chủ</Link></li>
+              <li className="nav__item"><Link href="/danh-muc/an-uong" className={`nav__link ${isActive("/danh-muc/an-uong")}`}>Ăn uống</Link></li>
+              <li className="nav__item"><Link href="/lo-trinh" className={`nav__link ${isActive("/lo-trinh")}`}>Lộ trình</Link></li>
+              <li className="nav__item"><Link href="/leaderboard" className={`nav__link ${isActive("/leaderboard")}`} style={{display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary)"}}>Bảng Xếp Hạng</Link></li>
             </ul>
           </nav>
           
           <div className="header__search" role="search">
             <div className="search-bar">
               <Search className="search-bar__icon" aria-hidden="true" size={18} />
-              <input type="text" className="search-bar__input" placeholder={t("home.search")} style={{paddingLeft: "3.5rem"}} />
+              <input type="text" className="search-bar__input" placeholder="Tìm quán ăn, cafe..." style={{paddingLeft: "3.5rem"}} />
             </div>
           </div>
           
           <div className="header__actions">
-            {/* Language Toggle */}
-            <select 
-              value={lang} 
-              onChange={(e) => setLang(e.target.value as any)}
-              style={{ background: "transparent", border: "1px solid var(--color-border)", borderRadius: "var(--radius-sm)", color: "var(--color-text)", padding: "4px", marginRight: "10px", cursor: "pointer", fontSize: "0.9rem" }}
-            >
-              <option value="vi">🇻🇳 VI</option>
-              <option value="en">🇬🇧 EN</option>
-              <option value="ko">🇰🇷 KO</option>
-            </select>
-
             {/* Dark Mode Toggle */}
             <button className="header__action-btn dark-mode-toggle" onClick={toggleDarkMode} aria-label="Chuyển sang chế độ tối" style={{marginRight: "10px"}}>
               {isDarkMode ? <Sun size={20} className="dark-mode-icon" /> : <Moon size={20} className="dark-mode-icon" />}
@@ -123,7 +110,7 @@ export default function Header() {
             ) : (
               <button onClick={() => setIsAuthModalOpen(true)} className="btn btn--outline btn--sm" aria-label="Đăng nhập hoặc đăng ký">
                 <User size={16} />
-                <span className="hide-on-mobile">{t("nav.login")}</span>
+                <span className="hide-on-mobile">Đăng nhập</span>
               </button>
             )}
           </div>
