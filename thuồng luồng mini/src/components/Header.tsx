@@ -68,20 +68,17 @@ export default function Header() {
           
           <nav className="nav" aria-label="Điều hướng chính">
             <ul className="nav__list">
-              <li className="nav__item"><Link href="/" className={`nav__link ${isActive("/")}`}>Trang chủ</Link></li>
-              <li className="nav__item"><Link href="/danh-muc/an-uong" className={`nav__link ${isActive("/danh-muc/an-uong")}`}>Ăn uống</Link></li>
-              <li className="nav__item"><Link href="/danh-muc/vui-choi" className={`nav__link ${isActive("/danh-muc/vui-choi")}`}>Vui chơi</Link></li>
-              <li className="nav__item"><Link href="/danh-muc/du-lich" className={`nav__link ${isActive("/danh-muc/du-lich")}`}>Du lịch</Link></li>
-              <li className="nav__item"><Link href="/danh-muc/trang-phuc" className={`nav__link ${isActive("/danh-muc/trang-phuc")}`}>Trang phục</Link></li>
-              <li className="nav__item"><Link href="/lo-trinh" className={`nav__link ${isActive("/lo-trinh")}`}>Lộ trình</Link></li>
-              <li className="nav__item"><Link href="/leaderboard" className={`nav__link ${isActive("/leaderboard")}`} style={{display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary)"}}>Bảng Xếp Hạng</Link></li>
+              <li className="nav__item"><Link href="/" className={`nav__link ${isActive("/")}`}>{t("nav.home")}</Link></li>
+              <li className="nav__item"><Link href="/danh-muc/an-uong" className={`nav__link ${isActive("/danh-muc/an-uong")}`}>{t("nav.places")}</Link></li>
+              <li className="nav__item"><Link href="/lo-trinh" className={`nav__link ${isActive("/lo-trinh")}`}>{t("nav.itinerary")}</Link></li>
+              <li className="nav__item"><Link href="/leaderboard" className={`nav__link ${isActive("/leaderboard")}`} style={{display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary)"}}>{t("nav.profile")}</Link></li>
             </ul>
           </nav>
           
           <div className="header__search" role="search">
             <div className="search-bar">
               <Search className="search-bar__icon" aria-hidden="true" size={18} />
-              <input type="text" className="search-bar__input" placeholder="Tìm quán ăn, cafe..." style={{paddingLeft: "3.5rem"}} />
+              <input type="text" className="search-bar__input" placeholder={t("home.search")} style={{paddingLeft: "3.5rem"}} />
             </div>
           </div>
           
@@ -126,7 +123,7 @@ export default function Header() {
             ) : (
               <button onClick={() => setIsAuthModalOpen(true)} className="btn btn--outline btn--sm" aria-label="Đăng nhập hoặc đăng ký">
                 <User size={16} />
-                <span className="hide-on-mobile">Đăng nhập</span>
+                <span className="hide-on-mobile">{t("nav.login")}</span>
               </button>
             )}
           </div>

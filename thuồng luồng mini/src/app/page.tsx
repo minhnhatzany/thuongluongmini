@@ -4,7 +4,10 @@ import { CATEGORIES, getFeaturedPlaces, getTopRatedPlaces, getNewPlaces, getPlac
 import { ITINERARIES } from "@/lib/itinerary-data";
 import PlaceCard from "@/components/PlaceCard";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function Home() {
+  const { t } = useLanguage();
   const featured = getFeaturedPlaces();
   const topRated = getTopRatedPlaces(8);
   const newPlaces = getNewPlaces(4);
@@ -28,9 +31,10 @@ export default function Home() {
         <div className="hero__bg"></div>
         <div className="hero__content container">
           <div className="hero__text animate-on-scroll">
-            <h1 className="hero__title">
-              Tuyên Quang, <br/> bạn muốn đi đâu?
-            </h1>
+            <h1 className="hero__title" dangerouslySetInnerHTML={{__html: t("home.hero.title")}} />
+            <p className="hero__subtitle" style={{marginTop: "10px", fontSize: "1.2rem", color: "white", opacity: 0.9}}>
+              {t("home.hero.desc")}
+            </p>
             
             <div className="hero__search">
               <div className="hero__tags">
@@ -43,7 +47,7 @@ export default function Home() {
               
               <div className="search-bar search-bar--lg" style={{marginTop: "16px"}}>
                 <Search className="search-bar__icon" size={18} />
-                <input type="text" className="search-bar__input" placeholder="Thử tìm 'Bún cá', 'Na Hang' hay 'Quán nhậu'..." style={{paddingLeft: "3.5rem"}} />
+                <input type="text" className="search-bar__input" placeholder={t("home.search")} style={{paddingLeft: "3.5rem"}} />
                 <button className="btn btn--primary" style={{position: "absolute", right: "6px", top: "6px", bottom: "6px", borderRadius: "var(--radius-full)", padding: "0 var(--space-6)", fontWeight: "var(--weight-bold)"}}>
                   Tìm kiếm
                 </button>
