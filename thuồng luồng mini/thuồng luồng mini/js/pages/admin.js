@@ -1,4 +1,5 @@
 import { PLACES, CATEGORIES } from '../data.js';
+import { escapeHtml } from '../utils.js';
 
 export function renderAdminPage() {
     if (!window.currentUser || !window.isAdmin) {
@@ -180,17 +181,18 @@ window.renderAdminTable = function() {
     places.sort((a, b) => a.id - b.id);
     
     places.forEach(place => {
+        const safeId = escapeHtml(String(place.id));
         html += `
         <tr>
-            <td>${place.id}</td>
+            <td>${safeId}</td>
             <td>
-                <div style="font-weight: 600; color: var(--text-main);">${place.name}</div>
+                <div style="font-weight: 600; color: var(--text-main);">${escapeHtml(place.name)}</div>
             </td>
-            <td><span class="badge" style="background: var(--color-primary); color: white; font-size: 0.8rem;">${place.category}</span></td>
-            <td><div style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${place.address}</div></td>
+            <td><span class="badge" style="background: var(--color-primary); color: white; font-size: 0.8rem;">${escapeHtml(place.category)}</span></td>
+            <td><div style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(place.address)}</div></td>
             <td>
-                <button class="btn btn--icon btn--sm" aria-label="Sửa" onclick="window.editPlace('${place.id}')"><i data-lucide="edit-2"></i></button>
-                <button class="btn btn--icon btn--sm" aria-label="Xóa" onclick="window.deletePlace('${place.id}')"><i data-lucide="trash-2"></i></button>
+                <button class="btn btn--icon btn--sm" aria-label="Sửa" onclick="window.editPlace('${safeId}')"><i data-lucide="edit-2"></i></button>
+                <button class="btn btn--icon btn--sm" aria-label="Xóa" onclick="window.deletePlace('${safeId}')"><i data-lucide="trash-2"></i></button>
             </td>
         </tr>
         `;
@@ -236,7 +238,8 @@ window.editPlace = function(id) {
 window.savePlace = async function(e) {
     e.preventDefault();
     
-    const id = document.getElementById('place-id').value || Date.now().toString(); // Use timestamp as ID for new places
+    const rawId = document.getElementById('place-id').value;
+    const id = rawId ? (Number.isNaN(Number(rawId)) ? rawId : Number(rawId)) : Date.now();
     const name = document.getElementById('place-name').value;
     const category = document.getElementById('place-category').value;
     const address = document.getElementById('place-address').value;
@@ -257,7 +260,7 @@ window.savePlace = async function(e) {
         description,
         openHours,
         priceText,
-        images: image ? [image] : []
+        images: image ? [image, ...(existingData.images?.slice(1) || [])] : (existingData.images?.slice(1) || [])
     };
     
     try {

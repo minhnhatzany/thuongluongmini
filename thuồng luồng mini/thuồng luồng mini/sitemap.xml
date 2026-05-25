@@ -1,28 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Trang chủ -->
   <url>
-    <loc>https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/</loc>
+    <loc>https://thuongluongmini.pages.dev/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Danh mục -->
   <url>
-    <loc>https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/danh-muc/an-uong</loc>
+    <loc>https://thuongluongmini.pages.dev/#/danh-muc/an-uong</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://thuongluongmini.pages.dev/#/danh-muc/vui-choi</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://thuongluongmini.pages.dev/#/danh-muc/du-lich</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://thuongluongmini.pages.dev/#/danh-muc/trang-phuc</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Trang chức năng -->
+  <url>
+    <loc>https://thuongluongmini.pages.dev/#/tim-kiem</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/danh-muc/vui-choi</loc>
+    <loc>https://thuongluongmini.pages.dev/#/lo-trinh</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/danh-muc/du-lich</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://thuongluongmini.pages.dev/#/yeu-thich</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/danh-muc/trang-phuc</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  
+  <!-- Địa điểm Ăn uống -->
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/1/royal-tuyen-quang</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/2/am-thuc-viet-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/3/moc-restaurant-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/4/nha-hang-dung-ca</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/5/min-max-bbq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/6/koi-and-you-coffee</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/7/laika-cafe-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/8/cielo-coffee</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/9/feline-cafe</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/12/banh-cuon-nong-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/13/che-4-mua-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/14/banh-mi-que-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/15/grill-house-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/16/hoang-sam-quan-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/17/beer-club-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  
+  <!-- Địa điểm Vui chơi -->
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/10/lotte-cinema-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/18/lotte-cinema-2-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/19/hoang-ha-karaoke-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/20/vinh-quang-karaoke-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/21/billiards-club-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/22/game-center-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  
+  <!-- Địa điểm Du lịch -->
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/23/na-hang-lake-tq</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/24/thac-ba-lake-tq</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/25/lam-binh-hotel-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/26/thanh-long-hotel-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/27/tan-trao-tq</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/28/lang-van-hoa-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/29/thac-mo-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/30/den-ha-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/31/banh-chung-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  
+  <!-- Địa điểm Trang phục -->
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/11/boho-chic-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/32/thoi-trang-xanh-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thuongluongmini.pages.dev/#/dia-diem/33/ao-dai-tq</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

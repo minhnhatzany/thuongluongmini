@@ -8,6 +8,7 @@ import {
     signOut, 
     onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { loadFavoritesFromCloud, mergeFavoriteLists, saveFavoritesToCloud } from './favorites-sync.js';
 
 // Global user state
 window.currentUser = null;
@@ -15,9 +16,12 @@ window.isAdmin = false;
 
 // Admin email configured by user
 const ADMIN_EMAIL = 'minhnhatzany@gmail.com';
+let authInitialized = false;
 
 export function initAuth() {
-    // Listen for auth state changes
+    if (authInitialized) return;
+    authInitialized = true;
+
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             window.currentUser = user;
@@ -39,6 +43,8 @@ export function initAuth() {
             }
             
             updateAuthUI(user);
+            await syncUserFavorites(user.uid);
+            if (window.onUserLoggedIn) window.onUserLoggedIn(user);
         } else {
             window.currentUser = null;
             window.isAdmin = false;
@@ -89,6 +95,21 @@ window.logOut = async () => {
     }
 };
 
+
+async function syncUserFavorites(uid) {
+    try {
+        const local = JSON.parse(localStorage.getItem('tlm_favorites') || '[]');
+        const cloud = await loadFavoritesFromCloud(uid);
+        const merged = cloud === null ? local : mergeFavoriteLists(local, cloud);
+        localStorage.setItem('tlm_favorites', JSON.stringify(merged));
+        if (window.tlmApplyFavorites) window.tlmApplyFavorites(merged);
+        if (cloud !== null && merged.length !== cloud.length) {
+            await saveFavoritesToCloud(uid, merged);
+        }
+    } catch (e) {
+        console.warn('Sync favorites:', e.message);
+    }
+}
 
 function updateAuthUI(user) {
     const authBtn = document.getElementById('header-auth-btn');

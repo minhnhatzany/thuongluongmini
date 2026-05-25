@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
-Sitemap: https://thuongluongmini.thuclinhxhatrungvuong.workers.dev/sitemap.xml
+Disallow: /#/admin
+Disallow: /#/ho-so
+
+Sitemap: https://thuongluongmini.pages.dev/sitemap.xml
+
+# Optimize crawl budget
+Crawl-delay: 1

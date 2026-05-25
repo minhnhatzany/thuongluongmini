@@ -75,13 +75,21 @@ export function renderCategoryPage(categoryId) {
                             <button class="filter-bar__view-btn" data-view="list" onclick="window.setView('list', this)" aria-label="Danh sách">
                                 <i data-lucide="list"></i>
                             </button>
+                            <button class="filter-bar__view-btn" data-view="map" onclick="window.setView('map', this)" aria-label="Bản đồ">
+                                <i data-lucide="map"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Results -->
-                <div class="venue-grid" id="venue-grid">
-                    ${places.map(place => createPlaceCard(place)).join('')}
+                <!-- Results container -->
+                <div id="results-container">
+                    <div class="venue-grid" id="venue-grid">
+                        ${places.map(place => createPlaceCard(place)).join('')}
+                    </div>
+
+                    <!-- Map Container -->
+                    <div class="map-container" id="category-map" style="display: none;"></div>
                 </div>
 
                 ${places.length === 0 ? `
@@ -91,26 +99,6 @@ export function renderCategoryPage(categoryId) {
                         <p class="empty-state__text">Danh mục này sẽ sớm được cập nhật!</p>
                     </div>
                 ` : ''}
-
-                <!-- Map View -->
-                <div class="category-map-section animate-on-scroll">
-                    <h3 class="category-map-section__title">
-                        <i data-lucide="map"></i>
-                        Xem trên bản đồ
-                    </h3>
-                    <div class="category-map" id="category-map" 
-                         data-category-map="${categoryId}"
-                         data-places='${JSON.stringify(places.map(p => ({
-                            id: p.id,
-                            name: p.name,
-                            slug: p.slug,
-                            lat: p.coordinates.lat,
-                            lng: p.coordinates.lng,
-                            rating: p.rating,
-                            subCategory: p.subCategory
-                         })))}'
-                    ></div>
-                </div>
             </div>
         </div>
     `;
@@ -138,17 +126,61 @@ window.sortPlaces = function(sortBy) {
     applyFilters();
 };
 
-window.setView = function(view, btnEl) {
+window.setView = async function(view, btnEl) {
     currentView = view;
     const grid = document.getElementById('venue-grid');
+    const mapContainer = document.getElementById('category-map');
+    const resultsContainer = document.getElementById('results-container');
     
     document.querySelectorAll('.filter-bar__view-btn').forEach(b => b.classList.remove('active'));
     btnEl.classList.add('active');
     
-    if (grid) {
-        grid.classList.toggle('venue-grid--list', view === 'list');
+    if (view === 'map') {
+        grid.style.display = 'none';
+        mapContainer.style.display = 'block';
+        
+        // Dynamically import and initialize map
+        try {
+            const { initMap } = await import('../map.js');
+            // Get current filtered places
+            const currentPlaces = getFilteredPlaces();
+            initMap('category-map', currentPlaces);
+        } catch (err) {
+            console.error('Lỗi khi tải bản đồ:', err);
+        }
+    } else {
+        grid.style.display = view === 'list' ? 'flex' : 'grid'; // Simplified
+        mapContainer.style.display = 'none';
+        if (grid) {
+            grid.classList.toggle('venue-grid--list', view === 'list');
+        }
     }
 };
+
+function getFilteredPlaces() {
+    const hash = window.location.hash;
+    const catMatch = hash.match(/#\/danh-muc\/([a-z-]+)/);
+    if (!catMatch) return [];
+    
+    let places = getPlacesByCategory(catMatch[1]);
+    
+    if (currentSubCat !== 'all') {
+        places = places.filter(p => p.subCategory === currentSubCat);
+    }
+    
+    switch (currentSort) {
+        case 'rating': places.sort((a, b) => b.rating - a.rating); break;
+        case 'name': places.sort((a, b) => a.name.localeCompare(b.name, 'vi')); break;
+        case 'reviews': places.sort((a, b) => b.totalReviews - a.totalReviews); break;
+        default:
+            places.sort((a, b) => {
+                if (a.isFeatured && !b.isFeatured) return -1;
+                if (!a.isFeatured && b.isFeatured) return 1;
+                return b.rating - a.rating;
+            });
+    }
+    return places;
+}
 
 function applyFilters() {
     const cards = document.querySelectorAll('#venue-grid .card');
@@ -206,64 +238,12 @@ function applyFilters() {
         // Re-init icons
         if (window.lucide) window.lucide.createIcons();
     }
-}
 
-// Initialize category map after DOM update
-const mapObserver = new MutationObserver(() => {
-    const mapEl = document.querySelector('[data-category-map]');
-    if (mapEl && !mapEl._leaflet_id) {
-        initCategoryMap(mapEl);
-    }
-});
-
-if (typeof document !== 'undefined') {
-    mapObserver.observe(document.body, { childList: true, subtree: true });
-}
-
-function initCategoryMap(mapEl) {
-    try {
-        const placesData = JSON.parse(mapEl.dataset.places || '[]');
-        if (placesData.length === 0) return;
-        
-        // Center on first place or Tuyên Quang center
-        const centerLat = placesData.reduce((s, p) => s + p.lat, 0) / placesData.length;
-        const centerLng = placesData.reduce((s, p) => s + p.lng, 0) / placesData.length;
-        
-        const map = L.map(mapEl, {
-            scrollWheelZoom: false
-        }).setView([centerLat, centerLng], 13);
-        
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-        
-        placesData.forEach(p => {
-            const icon = L.divIcon({
-                className: 'custom-map-marker',
-                html: `<div class="map-marker-pin"><span>📍</span></div>`,
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -30]
-            });
-            
-            L.marker([p.lat, p.lng], { icon }).addTo(map)
-                .bindPopup(`
-                    <div class="map-popup">
-                        <strong>${p.name}</strong><br>
-                        <span>${p.subCategory} · ${p.rating.toFixed(1)} ★</span><br>
-                        <a href="#/dia-diem/${p.id}/${p.slug}">Xem chi tiết →</a>
-                    </div>
-                `);
-        });
-        
-        // Fit bounds
-        if (placesData.length > 1) {
-            const bounds = L.latLngBounds(placesData.map(p => [p.lat, p.lng]));
-            map.fitBounds(bounds, { padding: [30, 30] });
-        }
-        
-        setTimeout(() => map.invalidateSize(), 200);
-    } catch (e) {
-        console.error('Map init error:', e);
+    // Update map markers if in map view
+    if (currentView === 'map') {
+        import('../map.js').then(({ addMarkers }) => {
+            addMarkers(places);
+        }).catch(err => console.error('Map not loaded yet', err));
     }
 }
+

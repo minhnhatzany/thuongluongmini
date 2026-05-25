@@ -3,7 +3,7 @@
 // ============================================
 
 import { CATEGORIES, searchPlaces } from '../data.js';
-import { createPlaceCard } from '../utils.js';
+import { createPlaceCard, escapeHtml, adjustColor } from '../utils.js';
 
 export function renderSearchPage(query = '') {
     const results = query ? searchPlaces(query) : [];
@@ -106,33 +106,6 @@ export function renderSearchPage(query = '') {
         </div>
     `;
 }
-
-// ============================================
-// Helper Functions
-// ============================================
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
-function adjustColor(hex, amount) {
-    const num = parseInt(hex.replace('#', ''), 16);
-    const r = Math.min(255, Math.max(0, (num >> 16) + amount));
-    const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
-    const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
-    return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
-}
-
-// Search input handler
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.id === 'page-search-input') {
-        const query = e.target.value.trim();
-        if (query) {
-            window.location.hash = `#/tim-kiem?q=${encodeURIComponent(query)}`;
-        }
-    }
-});
 
 // Filter search results by category
 window.filterSearchResults = function(catId, btnEl) {
