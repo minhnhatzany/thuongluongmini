@@ -211,7 +211,7 @@ export default function ReviewSection({ placeId }: { placeId: number }) {
             <div key={idx} className="card" style={{padding: "var(--space-4)", marginBottom: "var(--space-4)"}}>
               <div style={{display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
                 {rev.authorId ? (
-                  <Link href={`/user/${rev.authorId}`} style={{display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "inherit"}}>
+                  <Link href={`/user?id=${rev.authorId}`} style={{display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "inherit"}}>
                     {rev.authorPhoto ? (
                       <img src={rev.authorPhoto} alt={rev.author} style={{width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover"}} />
                     ) : (

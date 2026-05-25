@@ -4,18 +4,22 @@ import { useState, useEffect } from "react";
 import { doc, getDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Trophy, Star, MapPin, Award, User } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function UserProfilePage({ params }: { params: any }) {
+function UserProfileContent() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const [user, setUser] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
-      // Vì params trong Client Component của Next.js 15+ là một Promise, 
-      // ta có thể sử dụng trực tiếp nếu Next.js < 15, nhưng an toàn nhất là dùng React.use() hoặc await.
-      // Tuy nhiên đây là trang đơn giản, ta truy cập params.id
-      const id = typeof params.then === 'function' ? (await params).id : params.id;
+      if (!id) {
+        setLoading(false);
+        return;
+      }
       
       try {
         const userRef = doc(db, "users", id);
@@ -50,7 +54,7 @@ export default function UserProfilePage({ params }: { params: any }) {
       }
     }
     loadData();
-  }, [params]);
+  }, [id]);
 
   if (loading) {
     return <div className="page-container" style={{padding: "100px", textAlign: "center"}}><span className="spinner"></span></div>;
@@ -117,5 +121,13 @@ export default function UserProfilePage({ params }: { params: any }) {
         )}
       </div>
     </div>
+  );
+}
+
+export default function UserProfilePage() {
+  return (
+    <Suspense fallback={<div className="page-container" style={{padding: "100px", textAlign: "center"}}><span className="spinner"></span></div>}>
+      <UserProfileContent />
+    </Suspense>
   );
 }

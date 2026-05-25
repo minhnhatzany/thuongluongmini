@@ -92,7 +92,7 @@ export default function LeaderboardPage() {
                   }}
                   className="leaderboard-item"
                 >
-                  <Link href={`/user/${user.id}`} style={{ display: "flex", flex: 1, alignItems: "center", textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+                  <Link href={`/user?id=${user.id}`} style={{ display: "flex", flex: 1, alignItems: "center", textDecoration: "none", color: "inherit", cursor: "pointer" }}>
                     <div style={{ width: "40px", display: "flex", justifyContent: "center", marginRight: "10px" }}>
                       {getRankIcon(index)}
                     </div>
