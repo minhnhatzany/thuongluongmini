@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { auth, db, storage } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, User, updateProfile } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { PLACES, getPlaceById } from "@/lib/data";
 import PlaceCard from "@/components/PlaceCard";
 import { LogOut, Heart, Star, Award, Settings, Camera, Upload } from "lucide-react";
@@ -71,37 +70,56 @@ export default function ProfilePage() {
     try {
       setUploading(true);
       
-      // Upload file to Firebase Storage
-      const storageRef = ref(storage, `avatars/${user.uid}_${Date.now()}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      // Convert image to Base64 (Resize and Compress to bypass Storage billing requirements)
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = async () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 150;
+          const MAX_HEIGHT = 150;
+          let width = img.width;
+          let height = img.height;
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Can add progress bar here if needed
-        },
-        (error) => {
-          console.error("Error uploading avatar:", error);
-          alert("Lỗi khi tải ảnh lên. Vui lòng thử lại!");
-          setUploading(false);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
           
-          // Update Auth Profile
-          await updateProfile(user, {
-            photoURL: downloadURL
-          });
-          
-          // Update Firestore Document
-          const userRef = doc(db, 'users', user.uid);
-          await updateDoc(userRef, { photoURL: downloadURL });
-          
-          // Update local state by forcing a reload of the user object
-          setUser({ ...user, photoURL: downloadURL } as User);
-          setUploading(false);
-        }
-      );
+          // Compress as JPEG 70% quality
+          const base64String = canvas.toDataURL('image/jpeg', 0.7);
+
+          try {
+            // Update Auth Profile
+            await updateProfile(user, { photoURL: base64String });
+            
+            // Update Firestore Document
+            const userRef = doc(db, 'users', user.uid);
+            await updateDoc(userRef, { photoURL: base64String });
+            
+            // Update local state
+            setUser({ ...user, photoURL: base64String } as User);
+          } catch (err) {
+            console.error("Error updating avatar to Firestore:", err);
+            alert("Lỗi khi cập nhật ảnh đại diện. Vui lòng thử lại!");
+          } finally {
+            setUploading(false);
+          }
+        };
+      };
     } catch (error) {
       console.error("Error updating avatar:", error);
       alert("Đã xảy ra lỗi. Vui lòng thử lại!");
