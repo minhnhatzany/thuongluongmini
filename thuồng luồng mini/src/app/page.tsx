@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Search, Globe, Utensils, Music, Camera, Bed, ArrowRight, Wand2 } from "lucide-react";
 import { CATEGORIES, getFeaturedPlaces, getTopRatedPlaces, getNewPlaces, getPlacesByTimeOfDay } from "@/lib/data";
