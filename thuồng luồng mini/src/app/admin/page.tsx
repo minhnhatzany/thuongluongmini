@@ -7,6 +7,7 @@ import { collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore"
 import { PLACES, CATEGORIES, SUB_CATEGORIES } from "@/lib/data";
 import { useRouter } from "next/navigation";
 import { Save, RefreshCw, UploadCloud, Trash2, Plus, ArrowRight } from "lucide-react";
+import AdminDashboard from "@/components/AdminDashboard";
 
 const ADMIN_EMAILS = ["minhnhatzany@gmail.com", "minhnhat@gmail.com", "admin@thuongluongmini.com"];
 
@@ -17,6 +18,7 @@ export default function AdminPage() {
   const [isMigrating, setIsMigrating] = useState(false);
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployHook, setDeployHook] = useState("");
+  const [activeTab, setActiveTab] = useState("places");
   
   // Form State
   const [showForm, setShowForm] = useState(false);
@@ -228,7 +230,24 @@ export default function AdminPage() {
 
         {/* Main Content */}
         <div className="card" style={{ padding: "var(--space-5)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-4)" }}>
+          <div style={{ display: "flex", borderBottom: "1px solid var(--color-border)", marginBottom: "var(--space-5)" }}>
+            <button 
+              onClick={() => setActiveTab("places")} 
+              style={{ padding: "10px 20px", background: "none", border: "none", borderBottom: activeTab === "places" ? "3px solid var(--color-primary)" : "3px solid transparent", fontWeight: activeTab === "places" ? "bold" : "normal", cursor: "pointer", fontSize: "1.1rem", color: activeTab === "places" ? "var(--color-primary)" : "var(--color-text-secondary)" }}
+            >
+              Quản lý Địa điểm
+            </button>
+            <button 
+              onClick={() => setActiveTab("dashboard")} 
+              style={{ padding: "10px 20px", background: "none", border: "none", borderBottom: activeTab === "dashboard" ? "3px solid var(--color-primary)" : "3px solid transparent", fontWeight: activeTab === "dashboard" ? "bold" : "normal", cursor: "pointer", fontSize: "1.1rem", color: activeTab === "dashboard" ? "var(--color-primary)" : "var(--color-text-secondary)" }}
+            >
+              Thống kê (Dashboard)
+            </button>
+          </div>
+
+          {activeTab === "places" ? (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-4)" }}>
             <h2 style={{ fontSize: "1.5rem", display: "flex", alignItems: "center", gap: "10px" }}>
               Danh sách địa điểm <span className="badge badge--primary">{places.length}</span>
             </h2>
@@ -345,6 +364,10 @@ export default function AdminPage() {
               </tbody>
             </table>
           </div>
+            </>
+          ) : (
+            <AdminDashboard placesCount={places.length} />
+          )}
         </div>
 
       </div>

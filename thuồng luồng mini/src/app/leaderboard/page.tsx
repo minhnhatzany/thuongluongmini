@@ -92,29 +92,31 @@ export default function LeaderboardPage() {
                   }}
                   className="leaderboard-item"
                 >
-                  <div style={{ width: "40px", display: "flex", justifyContent: "center", marginRight: "10px" }}>
-                    {getRankIcon(index)}
-                  </div>
-                  
-                  <div style={{ marginRight: "15px" }}>
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt={user.displayName} style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", border: index < 3 ? "2px solid var(--color-primary)" : "none" }} />
-                    ) : (
-                      <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "var(--color-primary)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1.2rem" }}>
-                        {user.displayName.charAt(0).toUpperCase()}
+                  <Link href={`/user/${user.id}`} style={{ display: "flex", flex: 1, alignItems: "center", textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+                    <div style={{ width: "40px", display: "flex", justifyContent: "center", marginRight: "10px" }}>
+                      {getRankIcon(index)}
+                    </div>
+                    
+                    <div style={{ marginRight: "15px" }}>
+                      {user.photoURL ? (
+                        <img src={user.photoURL} alt={user.displayName} style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", border: index < 3 ? "2px solid var(--color-primary)" : "none" }} />
+                      ) : (
+                        <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "var(--color-primary)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1.2rem" }}>
+                          {user.displayName.charAt(0).toUpperCase()}
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: "bold", fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "5px" }}>
+                        {user.displayName}
+                        {index === 0 && <span title="Quán Quân" style={{ fontSize: "1rem" }}>👑</span>}
                       </div>
-                    )}
-                  </div>
-                  
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: "bold", fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "5px" }}>
-                      {user.displayName}
-                      {index === 0 && <span title="Quán Quân" style={{ fontSize: "1rem" }}>👑</span>}
+                      <div style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)" }}>
+                        Cấp {user.level} Thổ Địa
+                      </div>
                     </div>
-                    <div style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)" }}>
-                      Cấp {user.level} Thổ Địa
-                    </div>
-                  </div>
+                  </Link>
                   
                   <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "var(--color-primary-dark)", fontWeight: 800, fontSize: "1.2rem" }}>
                     {user.xp} <span style={{ fontSize: "0.8rem" }}>XP</span>

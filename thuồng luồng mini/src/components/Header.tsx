@@ -7,8 +7,10 @@ import { usePathname } from "next/navigation";
 import AuthModal from "./AuthModal";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
+  const { lang, setLang, t } = useLanguage();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -84,6 +86,17 @@ export default function Header() {
           </div>
           
           <div className="header__actions">
+            {/* Language Toggle */}
+            <select 
+              value={lang} 
+              onChange={(e) => setLang(e.target.value as any)}
+              style={{ background: "transparent", border: "1px solid var(--color-border)", borderRadius: "var(--radius-sm)", color: "var(--color-text)", padding: "4px", marginRight: "10px", cursor: "pointer", fontSize: "0.9rem" }}
+            >
+              <option value="vi">🇻🇳 VI</option>
+              <option value="en">🇬🇧 EN</option>
+              <option value="ko">🇰🇷 KO</option>
+            </select>
+
             {/* Dark Mode Toggle */}
             <button className="header__action-btn dark-mode-toggle" onClick={toggleDarkMode} aria-label="Chuyển sang chế độ tối" style={{marginRight: "10px"}}>
               {isDarkMode ? <Sun size={20} className="dark-mode-icon" /> : <Moon size={20} className="dark-mode-icon" />}

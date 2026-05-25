@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import SyncManager from "@/components/SyncManager";
 import Chatbot from "@/components/Chatbot";
+import { Providers } from "@/components/Providers";
+import PushNotificationManager from "@/components/PushNotificationManager";
 
 const nunito = Nunito({
   subsets: ["vietnamese", "latin"],
@@ -62,16 +64,19 @@ export default function RootLayout({
         }} />
       </head>
       <body>
-        <div id="app">
-          <SyncManager />
-          <Header />
-          <main className="page-container" id="main-content" style={{ minHeight: "80vh", paddingTop: "var(--header-height)" }} role="main">
-            {children}
-          </main>
-          <Footer />
-          <MobileNav />
-          <Chatbot />
-        </div>
+        <Providers>
+          <div id="app">
+            <SyncManager />
+            <Header />
+            <main className="page-container" id="main-content" style={{ minHeight: "80vh", paddingTop: "var(--header-height)" }} role="main">
+              {children}
+            </main>
+            <Footer />
+            <MobileNav />
+            <Chatbot />
+            <PushNotificationManager />
+          </div>
+        </Providers>
       </body>
     </html>
   );

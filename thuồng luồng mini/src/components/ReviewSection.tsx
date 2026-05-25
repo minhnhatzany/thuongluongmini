@@ -5,6 +5,8 @@ import { Camera, Send, Star, User } from "lucide-react";
 import { auth, db } from "@/lib/firebase";
 import { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, doc, updateDoc, increment } from "firebase/firestore";
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
+import ReviewInteractions from "./ReviewInteractions";
+import Link from "next/link";
 
 export default function ReviewSection({ placeId }: { placeId: number }) {
   const [user, setUser] = useState<FirebaseUser | null>(null);
@@ -106,7 +108,8 @@ export default function ReviewSection({ placeId }: { placeId: number }) {
         images,
         createdAt: new Date().toISOString(),
         author: user.displayName || user.email?.split('@')[0] || "Người dùng",
-        authorPhoto: user.photoURL || ""
+        authorPhoto: user.photoURL || "",
+        authorId: user.uid
       };
 
       await addDoc(collection(db, "reviews"), newReview);
@@ -207,21 +210,39 @@ export default function ReviewSection({ placeId }: { placeId: number }) {
           reviews.map((rev, idx) => (
             <div key={idx} className="card" style={{padding: "var(--space-4)", marginBottom: "var(--space-4)"}}>
               <div style={{display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
-                <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
-                  {rev.authorPhoto ? (
-                    <img src={rev.authorPhoto} alt={rev.author} style={{width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover"}} />
-                  ) : (
-                    <div style={{width: "36px", height: "36px", background: "var(--color-bg-secondary)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                      <User size={20} color="var(--color-text-secondary)" />
+                {rev.authorId ? (
+                  <Link href={`/user/${rev.authorId}`} style={{display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "inherit"}}>
+                    {rev.authorPhoto ? (
+                      <img src={rev.authorPhoto} alt={rev.author} style={{width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover"}} />
+                    ) : (
+                      <div style={{width: "36px", height: "36px", background: "var(--color-bg-secondary)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <User size={20} color="var(--color-text-secondary)" />
+                      </div>
+                    )}
+                    <div>
+                      <h4 style={{margin: 0, fontSize: "0.95rem"}}>{rev.author}</h4>
+                      <div style={{display: "flex", gap: "2px", color: "var(--color-warning)"}}>
+                        {[1,2,3,4,5].map((star) => <Star key={star} size={12} fill={star <= rev.rating ? "currentColor" : "none"} />)}
+                      </div>
                     </div>
-                  )}
-                  <div>
-                    <h4 style={{margin: 0, fontSize: "0.95rem"}}>{rev.author}</h4>
-                    <div style={{display: "flex", gap: "2px", color: "var(--color-warning)"}}>
-                      {[1,2,3,4,5].map((star) => <Star key={star} size={12} fill={star <= rev.rating ? "currentColor" : "none"} />)}
+                  </Link>
+                ) : (
+                  <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                    {rev.authorPhoto ? (
+                      <img src={rev.authorPhoto} alt={rev.author} style={{width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover"}} />
+                    ) : (
+                      <div style={{width: "36px", height: "36px", background: "var(--color-bg-secondary)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <User size={20} color="var(--color-text-secondary)" />
+                      </div>
+                    )}
+                    <div>
+                      <h4 style={{margin: 0, fontSize: "0.95rem"}}>{rev.author}</h4>
+                      <div style={{display: "flex", gap: "2px", color: "var(--color-warning)"}}>
+                        {[1,2,3,4,5].map((star) => <Star key={star} size={12} fill={star <= rev.rating ? "currentColor" : "none"} />)}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
                 <span style={{fontSize: "0.8rem", color: "var(--color-text-tertiary)"}}>
                   {new Date(rev.createdAt).toLocaleDateString('vi-VN')}
                 </span>
@@ -234,6 +255,8 @@ export default function ReviewSection({ placeId }: { placeId: number }) {
                   ))}
                 </div>
               )}
+              
+              <ReviewInteractions reviewId={rev.id} initialLikes={rev.likes || []} />
             </div>
           ))
         )}

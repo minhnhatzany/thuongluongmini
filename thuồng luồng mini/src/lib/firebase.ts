@@ -23,4 +23,15 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
 
-export { db, storage, auth, app };
+let messaging: any = null;
+if (typeof window !== "undefined") {
+  import("firebase/messaging").then(({ getMessaging, isSupported }) => {
+    isSupported().then((supported) => {
+      if (supported) {
+        messaging = getMessaging(app);
+      }
+    });
+  });
+}
+
+export { db, storage, auth, app, messaging };

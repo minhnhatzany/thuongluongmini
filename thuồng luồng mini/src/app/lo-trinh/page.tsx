@@ -1,6 +1,7 @@
 import { ITINERARIES } from "@/lib/itinerary-data";
 import Link from "next/link";
 import { Clock, Map, Wallet, ArrowRight } from "lucide-react";
+import AIItineraryForm from "@/components/AIItineraryForm";
 
 export const metadata = {
   title: "Lộ trình du lịch - Thuồng Luồng Mini",
@@ -15,6 +16,10 @@ export default function ItineraryListPage() {
         <p style={{color: "var(--color-text-secondary)", marginBottom: "var(--space-6)"}}>
           Không biết đi đâu? Hãy để Thuồng Luồng lên lịch trình giúp bạn!
         </p>
+
+        <AIItineraryForm />
+
+        <h2 style={{fontSize: "1.5rem", marginBottom: "var(--space-4)", marginTop: "var(--space-6)"}}>Lộ trình phổ biến</h2>
 
         <div className="places-grid">
           {ITINERARIES.map((it: any) => (
