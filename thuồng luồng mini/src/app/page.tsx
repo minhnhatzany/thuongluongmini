@@ -141,7 +141,7 @@ export default function Home() {
             ))}
           </div>
           <div style={{textAlign: "center"}}>
-            <Link href="/tao-lo-trinh" className="btn btn--primary btn--lg animate-on-scroll" style={{borderRadius: "var(--radius-full)", boxShadow: "var(--shadow-md)"}}>
+            <Link href="/lo-trinh" className="btn btn--primary btn--lg animate-on-scroll" style={{borderRadius: "var(--radius-full)", boxShadow: "var(--shadow-md)"}}>
               <Wand2 size={18} style={{marginRight: 8}} /> Trải nghiệm Tạo Lịch Trình Tự Động
             </Link>
           </div>
