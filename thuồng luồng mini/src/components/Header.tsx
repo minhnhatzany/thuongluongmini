@@ -156,6 +156,10 @@ export default function Header() {
           <div className="mobile-menu-divider"></div>
           
           <div className="mobile-menu-actions">
+            <button onClick={toggleDarkMode} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px", width: "100%", background: "transparent", border: "none", color: "var(--color-text)", cursor: "pointer", textAlign: "left", marginBottom: "5px" }}>
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <span>{isDarkMode ? "Chế độ sáng" : "Chế độ tối"}</span>
+            </button>
             <PushNotificationManager />
             
             {user && (

@@ -1856,3 +1856,64 @@ input.search-bar__input:not(:placeholder-shown) ~ .search-bar__clear { display: 
     margin-top: auto;
     padding-bottom: var(--space-8);
 }
+
+/* ========================================================================
+   MOBILE COMPACT CARDS
+   ======================================================================== */
+@media (max-width: 768px) {
+    /* Make vertical grids use horizontal cards */
+    .places-grid, .search-results {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--space-3) !important;
+    }
+    
+    .places-grid .card, .search-results .card {
+        flex-direction: row !important;
+        align-items: stretch !important;
+        padding: 0 !important;
+        min-height: 100px !important;
+    }
+    
+    .places-grid .card__image-wrapper, .search-results .card__image-wrapper {
+        width: 110px !important;
+        min-width: 110px !important;
+        height: auto !important;
+        aspect-ratio: 1/1 !important;
+        margin: var(--space-2) !important;
+        border-radius: var(--radius-md) !important;
+    }
+    
+    .places-grid .card__content, .search-results .card__content {
+        padding: var(--space-2) !important;
+        padding-left: 0 !important;
+        gap: var(--space-1) !important;
+        justify-content: center !important;
+    }
+    
+    .places-grid .card__title, .search-results .card__title {
+        font-size: var(--text-base) !important;
+        -webkit-line-clamp: 2 !important;
+        margin-bottom: 2px !important;
+    }
+    
+    .places-grid .card__footer, .search-results .card__footer {
+        padding: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Make standard scroller cards more compact */
+    .scroller .card__image-wrapper {
+        aspect-ratio: 16/9 !important;
+    }
+    .scroller .card__title {
+        font-size: var(--text-base) !important;
+    }
+    .scroller .card__content {
+        padding: var(--space-3) !important;
+        gap: var(--space-1) !important;
+    }
+    .scroller .card__footer {
+        padding: 0 var(--space-3) var(--space-3) !important;
+    }
+}
