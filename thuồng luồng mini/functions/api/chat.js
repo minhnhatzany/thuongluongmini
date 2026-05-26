@@ -25,8 +25,8 @@ export async function onRequestPost(context) {
       Dưới đây là câu hỏi của khách:
     `;
 
-    // 4. Gọi Google Gemini API
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    // 4. Gọi Google Gemini API (dùng v1 stable endpoint cho gemini-1.5-flash)
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     
     const response = await fetch(geminiUrl, {
       method: 'POST',
