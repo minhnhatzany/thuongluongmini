@@ -63,7 +63,7 @@ export default function PushNotificationManager() {
   if (permission === "granted" || permission === "denied") return null;
 
   return (
-    <div style={{ position: "fixed", bottom: "80px", left: "20px", right: "20px", background: "var(--color-bg)", padding: "15px", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.1)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid var(--color-border)" }}>
+    <div className="push-prompt" style={{ position: "fixed", bottom: "80px", left: "20px", right: "20px", background: "var(--color-bg)", padding: "15px", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.1)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid var(--color-border)", transition: "bottom 0.3s" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <div style={{ background: "var(--color-primary-light)", padding: "10px", borderRadius: "50%", color: "var(--color-primary)" }}>
           <Bell size={20} />

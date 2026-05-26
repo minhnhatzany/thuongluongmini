@@ -24,23 +24,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thuongluongmini-v2.pages.dev"),
   title: "Thuồng Luồng Mini - Khám phá Tuyên Quang",
   description: "Nền tảng review địa phương số 1 Tuyên Quang: quán ăn, cafe, điểm đi, lộ trình cho khách trong và ngoài tỉnh.",
   keywords: "Tuyên Quang, review, ăn uống, du lịch, Na Hang, Thác Bà, lộ trình, ẩm thực Tuyên Quang",
   openGraph: {
     title: "Thuồng Luồng Mini - Review & Khám phá Tuyên Quang",
     description: "Nền tảng review địa phương số 1 Tuyên Quang: quán ăn, cafe, điểm đi, lộ trình cho khách trong và ngoài tỉnh.",
-    url: "https://thuongluongmini.pages.dev",
+    url: "https://thuongluongmini-v2.pages.dev",
     siteName: "Thuồng Luồng Mini",
     images: [
       {
-        url: "https://thuongluongmini.pages.dev/assets/logo.jpg",
+        url: "/assets/logo.jpg",
         width: 512,
         height: 512,
+        alt: "Thuồng Luồng Mini Logo"
       },
     ],
     locale: "vi_VN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Thuồng Luồng Mini - Review & Khám phá Tuyên Quang",
+    description: "Nền tảng review địa phương số 1 Tuyên Quang.",
+    images: ["/assets/logo.jpg"],
   },
 };
 

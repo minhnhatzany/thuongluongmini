@@ -1756,3 +1756,34 @@ input.search-bar__input:not(:placeholder-shown) ~ .search-bar__clear { display: 
 .custom-map-popup .leaflet-popup-tip-container {
     display: none;
 }
+
+/* ========================================================================
+   MOBILE UX OPTIMIZATIONS
+   ======================================================================== */
+@media (max-width: 768px) {
+    /* Header optimizations */
+    .header__logo-text {
+        display: none !important;
+    }
+    .header__actions {
+        gap: 5px;
+    }
+    
+    /* Hero optimizations */
+    .hero {
+        min-height: auto !important;
+    }
+    .hero__content {
+        padding-top: calc(var(--space-8) + var(--header-height)) !important;
+        padding-bottom: var(--space-8) !important;
+    }
+    .hero__title {
+        font-size: var(--text-3xl) !important;
+    }
+    
+    /* Push Notification Prompt */
+    .push-prompt {
+        bottom: 90px !important;
+        padding: 10px !important;
+    }
+}

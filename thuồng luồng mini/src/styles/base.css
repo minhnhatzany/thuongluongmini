@@ -210,6 +210,10 @@ input:disabled, textarea:disabled, select:disabled { background-color: var(--col
 .d-none { display: none; } .d-block { display: block; } .d-inline { display: inline; } .d-inline-block { display: inline-block; }
 .d-flex { display: flex; } .d-inline-flex { display: inline-flex; } .d-grid { display: grid; }
 
+@media (max-width: 768px) {
+  .hide-on-mobile { display: none !important; }
+}
+
 .flex-row { flex-direction: row; } .flex-col { flex-direction: column; } .flex-wrap { flex-wrap: wrap; } .flex-nowrap { flex-wrap: nowrap; }
 .flex-1 { flex: 1 1 0%; } .flex-auto { flex: 1 1 auto; } .flex-none { flex: none; }
 .items-start { align-items: flex-start; } .items-center { align-items: center; } .items-end { align-items: flex-end; }
