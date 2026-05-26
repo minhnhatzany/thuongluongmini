@@ -210,8 +210,17 @@ export default function Chatbot() {
       
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 768px) {
-          .chatbot-trigger { bottom: 20px !important; }
-          .chatbot-window { bottom: 20px !important; }
+          .chatbot-trigger { bottom: 20px !important; right: 20px !important; }
+          .chatbot-window { 
+            bottom: 0 !important; 
+            right: 0 !important; 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            height: 100dvh !important; /* Dùng dvh cho mobile web */
+            max-height: 100dvh !important;
+            max-width: 100vw !important;
+            border-radius: 0 !important;
+          }
         }
         @media (min-width: 769px) {
           .chatbot-trigger { bottom: 30px !important; right: 30px !important; }
