@@ -5,6 +5,11 @@ import { Search, Filter, SlidersHorizontal, MapPin } from "lucide-react";
 import { PLACES, CATEGORIES } from "@/lib/data";
 import PlaceCard from "@/components/PlaceCard";
 
+export const metadata = {
+  title: "Tìm Kiếm Địa Điểm Tuyên Quang",
+  description: "Tìm quán ăn ngon, điểm vui chơi, du lịch Tuyên Quang. Lọc theo danh mục, giá cả. Review từ Thuồng Luồng Mini.",
+};
+
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [filteredPlaces, setFilteredPlaces] = useState(PLACES);

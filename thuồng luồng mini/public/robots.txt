@@ -1,0 +1,21 @@
+# Robots.txt - Thuồng Luồng Mini
+# https://thuongluongmini-v2.pages.dev
+
+User-agent: *
+Allow: /
+
+# Cho phép Google crawl toàn bộ
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Chặn các đường dẫn không cần index
+Disallow: /admin
+Disallow: /api/
+Disallow: /_next/
+Disallow: /profile
+
+# Sitemap
+Sitemap: https://thuongluongmini-v2.pages.dev/sitemap.xml

@@ -4,8 +4,13 @@ import { Clock, Map, Wallet, ArrowRight } from "lucide-react";
 import AIItineraryForm from "@/components/AIItineraryForm";
 
 export const metadata = {
-  title: "Lộ trình du lịch - Thuồng Luồng Mini",
-  description: "Các lộ trình du lịch Tuyên Quang tự động được tối ưu",
+  title: "Lộ Trình Du Lịch Tuyên Quang - Na Hang, Thác Bà, Lâm Bình",
+  description: "Gợi ý lộ trình du lịch Tuyên Quang 1 ngày, 2 ngày, 3 ngày. Khám phá Na Hang, Hồ Thác Bà, Lâm Bình, Núi Dùm. Lập lịch thông minh với AI.",
+  alternates: { canonical: "https://thuongluongmini-v2.pages.dev/lo-trinh" },
+  openGraph: {
+    title: "Lộ Trình Du Lịch Tuyên Quang - Thuồng Luồng Mini",
+    description: "Gợi ý lộ trình du lịch Tuyên Quang 1-3 ngày. Lập kế hoạch thông minh với AI Thuồng Luồng Mini.",
+  },
 };
 
 export default function ItineraryListPage() {

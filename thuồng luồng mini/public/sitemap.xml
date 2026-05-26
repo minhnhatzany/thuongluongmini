@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Trang chủ -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Tìm kiếm -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/tim-kiem</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Danh mục Ăn uống -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/danh-muc/an-uong</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Danh mục Vui chơi -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/danh-muc/vui-choi</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Danh mục Du lịch -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/danh-muc/du-lich</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Danh mục Lưu trú -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/danh-muc/luu-tru</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Danh mục Trang phục -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/danh-muc/trang-phuc</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Lộ trình -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/lo-trinh</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bảng xếp hạng -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/leaderboard</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Yêu thích -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/yeu-thich</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Bản đồ -->
+  <url>
+    <loc>https://thuongluongmini-v2.pages.dev/ban-do</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
