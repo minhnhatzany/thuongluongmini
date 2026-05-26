@@ -3,11 +3,9 @@ import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import MobileNav from "@/components/MobileNav";
 import SyncManager from "@/components/SyncManager";
 import Chatbot from "@/components/Chatbot";
 import { Providers } from "@/components/Providers";
-import PushNotificationManager from "@/components/PushNotificationManager";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -87,9 +85,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <MobileNav />
             <Chatbot />
-            <PushNotificationManager />
           </div>
         </Providers>
       </body>

@@ -262,7 +262,7 @@
   /* --- Sizes --- */
   --header-height:          4rem;
   --header-height-mobile:   3.5rem;
-  --mobile-nav-height:      3.5rem;
+  --mobile-nav-height:      0px;
   --sidebar-width:          18rem;
   --icon-sm:                1rem;
   --icon-md:                1.25rem;

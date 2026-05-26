@@ -210,8 +210,8 @@ export default function Chatbot() {
       
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 768px) {
-          .chatbot-trigger { bottom: 180px !important; }
-          .chatbot-window { bottom: 80px !important; }
+          .chatbot-trigger { bottom: 20px !important; }
+          .chatbot-window { bottom: 20px !important; }
         }
         @media (min-width: 769px) {
           .chatbot-trigger { bottom: 30px !important; right: 30px !important; }

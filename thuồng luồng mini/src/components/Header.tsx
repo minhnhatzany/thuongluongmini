@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Search, X, Moon, Sun, User, Shield, LogOut, Menu } from "lucide-react";
+import { Search, X, Moon, Sun, User, Shield, LogOut, Menu, Home, Compass, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import AuthModal from "./AuthModal";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
+import PushNotificationManager from "./PushNotificationManager";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -51,6 +52,7 @@ export default function Header() {
 
   const handleLogout = () => {
     signOut(auth);
+    setIsMobileMenuOpen(false);
   };
 
   const isActive = (path: string) => pathname === path ? "active" : "";
@@ -59,10 +61,20 @@ export default function Header() {
     <>
       <header className="header" id="main-header" role="banner">
         <div className="header__inner container">
-          <Link href="/" className="header__logo" aria-label="Về trang chủ Thuồng Luồng Mini">
-            <img src="/assets/logo.jpg" alt="Thuồng Luồng Mini" className="header__logo-img" width={40} height={40} />
-            <span className="header__logo-text">Thuồng Luồng Mini</span>
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <button 
+              className="mobile-menu-toggle d-none" 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              style={{ background: "none", border: "none", color: "var(--color-text)", cursor: "pointer", padding: "5px" }}
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            <Link href="/" className="header__logo" aria-label="Về trang chủ Thuồng Luồng Mini" onClick={() => setIsMobileMenuOpen(false)}>
+              <img src="/assets/logo.jpg" alt="Thuồng Luồng Mini" className="header__logo-img" width={40} height={40} />
+              <span className="header__logo-text">Thuồng Luồng Mini</span>
+            </Link>
+          </div>
           
           <nav className="nav" aria-label="Điều hướng chính">
             <ul className="nav__list">
@@ -103,7 +115,7 @@ export default function Header() {
                   )}
                   <span className="hide-on-mobile" style={{fontWeight: 600}}>{(user.displayName || user.email || "").split("@")[0]}</span>
                 </Link>
-                <button onClick={handleLogout} className="btn btn--outline btn--sm" style={{padding: "5px", borderColor: "var(--color-border-dark)"}} aria-label="Đăng xuất">
+                <button onClick={handleLogout} className="btn btn--outline btn--sm hide-on-mobile" style={{padding: "5px", borderColor: "var(--color-border-dark)"}} aria-label="Đăng xuất">
                   <LogOut size={16} />
                 </button>
               </div>
@@ -116,6 +128,45 @@ export default function Header() {
           </div>
         </div>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'active' : ''}`}>
+        <div className="mobile-menu-content">
+          <nav className="mobile-menu-nav">
+            <Link href="/" className={`mobile-menu-link ${isActive("/")}`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Home size={20} /> Trang chủ
+            </Link>
+            <Link href="/danh-muc/an-uong" className={`mobile-menu-link ${isActive("/danh-muc/an-uong")}`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Compass size={20} /> Khám phá
+            </Link>
+            <Link href="/tim-kiem" className={`mobile-menu-link ${isActive("/tim-kiem")}`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Search size={20} /> Tìm kiếm
+            </Link>
+            <Link href="/yeu-thich" className={`mobile-menu-link ${isActive("/yeu-thich")}`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Heart size={20} /> Yêu thích
+            </Link>
+            <Link href="/lo-trinh" className={`mobile-menu-link ${isActive("/lo-trinh")}`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Compass size={20} /> Lộ trình
+            </Link>
+            <Link href="/leaderboard" className={`mobile-menu-link ${isActive("/leaderboard")}`} onClick={() => setIsMobileMenuOpen(false)} style={{ color: "var(--color-primary)" }}>
+              Bảng Xếp Hạng
+            </Link>
+          </nav>
+          
+          <div className="mobile-menu-divider"></div>
+          
+          <div className="mobile-menu-actions">
+            <PushNotificationManager />
+            
+            {user && (
+              <button onClick={handleLogout} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px", width: "100%", background: "transparent", border: "none", color: "var(--color-danger)", cursor: "pointer", textAlign: "left", marginTop: "10px" }}>
+                <LogOut size={20} />
+                <span>Đăng xuất</span>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
 
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </>
