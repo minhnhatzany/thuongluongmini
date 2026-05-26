@@ -146,8 +146,7 @@ export default function Header() {
           left: 0,
           width: "82vw",
           maxWidth: "320px",
-          height: "100dvh",
-          height: "100vh",
+          height: "100vh", /* Fallback to 100vh */
           background: "var(--color-bg)",
           zIndex: 89,
           transform: isMobileMenuOpen ? "translateX(0)" : "translateX(-105%)",
