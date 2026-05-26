@@ -65,6 +65,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${outfit.variable} ${inter.variable}`}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
         <meta name="theme-color" content="#F4A261" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)" />
         <link rel="manifest" href="/manifest.json" />
@@ -73,11 +74,7 @@ export default function RootLayout({
           __html: `
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  console.log('ServiceWorker registration successful');
-                }, function(err) {
-                  console.log('ServiceWorker registration failed: ', err);
-                });
+                navigator.serviceWorker.register('/sw.js');
               });
             }
           `
