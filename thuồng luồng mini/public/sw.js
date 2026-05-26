@@ -1,11 +1,12 @@
-const CACHE_NAME = 'tlm-cache-v1';
+const CACHE_NAME = 'tlm-cache-v2'; // Cập nhật version để xóa cache cũ
 const urlsToCache = [
-  '/',
   '/assets/logo.jpg',
   '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
+  // Buộc Service Worker mới kích hoạt ngay lập tức
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -14,15 +15,32 @@ self.addEventListener('install', event => {
   );
 });
 
+self.addEventListener('activate', event => {
+  // Xóa tất cả các cache cũ để tránh bị kẹt giao diện cũ
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
 self.addEventListener('fetch', event => {
+  // Bỏ qua caching cho các API và Next.js data
+  if (event.request.url.includes('/api/') || event.request.url.includes('/_next/')) {
+    return;
+  }
+
+  // Chiến lược: Network First, Fallback to Cache
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+    fetch(event.request).catch(() => {
+      return caches.match(event.request);
+    })
   );
 });
 
