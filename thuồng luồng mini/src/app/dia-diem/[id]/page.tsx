@@ -40,8 +40,40 @@ export default async function PlaceDetail(props: any) {
 
   const gradientColors = place.imageColors || ['#F4A261', '#E76F51'];
   
+  // Create JSON-LD schema for SEO
+  const schemaType = place.categoryId === 'an-uong' ? 'Restaurant' : 'TouristAttraction';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    name: place.name,
+    image: place.images && place.images.length > 0 ? place.images[0] : 'https://thuongluongmini-v2.pages.dev/assets/logo.jpg',
+    description: place.description,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: place.address,
+      addressLocality: 'Tuyên Quang',
+      addressRegion: 'Tuyên Quang',
+      addressCountry: 'VN'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: place.latitude || 21.8231,
+      longitude: place.longitude || 105.2179
+    },
+    url: `https://thuongluongmini-v2.pages.dev/dia-diem/${place.id}`,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: place.rating || 5,
+      reviewCount: place.reviews || 1
+    }
+  };
+
   return (
     <div className="page-container detail-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="detail-hero">
         <div className="detail-hero__image-container" style={{background: `linear-gradient(135deg, ${gradientColors[0]}, ${gradientColors[1] || gradientColors[0]})`}}>
           {place.images && place.images.length > 0 && (
